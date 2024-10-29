@@ -1,10 +1,59 @@
 cmake_minimum_required(VERSION 3.29)
-project(Ecosystem_Simulation)
+project(Ecosystem_Simulation LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
+
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
+
+include(FetchContent)
+FetchContent_Declare(SFML
+        GIT_REPOSITORY https://github.com/SFML/SFML.git
+        GIT_TAG 2.6.1
+        GIT_SHALLOW ON
+        EXCLUDE_FROM_ALL
+        SYSTEM)
+FetchContent_MakeAvailable(SFML)
 
 include_directories(.)
 
 add_executable(Ecosystem_Simulation
-        main.cpp
-        main.h)
+        Utilities/Container.cpp
+        Utilities/Container.h
+        Utilities/Renderer.cpp
+        Utilities/Statistics.h
+        Utilities/Statistics.cpp
+        General/Tile.h
+        General/Tile.cpp
+        General/SimulationManager.h
+        General/main.cpp
+        General/SimulationManager.cpp
+        General/Grid.cpp
+        Simulation/Animal.cpp
+        Simulation/BreedingAnimal.h
+        Simulation/FleeingAnimal.h
+        Simulation/GrassResource.h
+        Simulation/HidingAnimal.h
+        Simulation/IBrain.h
+        Simulation/MeatResource.h
+        Simulation/Resource.cpp
+        Simulation/BreedingAnimal.cpp
+        Simulation/FleeingAnimal.cpp
+        Simulation/GrassResource.cpp
+        Simulation/HidingAnimal.cpp
+        Simulation/MeatResource.cpp
+        Simulation/SimpleBrain.cpp
+        Simulation/StealthyAnimal.cpp
+        Utilities/Tests.cpp
+)
+
+target_link_libraries(Ecosystem_Simulation PRIVATE sfml-graphics sfml-system sfml-window)
+target_compile_features(Ecosystem_Simulation PRIVATE cxx_std_17)
+
+if(WIN32)
+    add_custom_command(
+            TARGET Ecosystem_Simulation
+            COMMENT "Copy OpenAL DLL"
+            PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy ${SFML_SOURCE_DIR}/extlibs/bin/$<IF:$<EQUAL:${CMAKE_SIZEOF_VOID_P},8>,x64,x86>/openal32.dll $<TARGET_FILE_DIR:Ecosystem_Simulation>
+            VERBATIM)
+endif()
