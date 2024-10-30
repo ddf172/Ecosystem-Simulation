@@ -31,5 +31,8 @@
 *.out
 *.app
 
-cmake-build-debug
-build
+# CMake files
+cmake-build-debug/
+
+# Clion files
+.idea/
