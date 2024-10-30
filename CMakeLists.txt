@@ -21,6 +21,7 @@ add_executable(Ecosystem_Simulation
         Utilities/Container.cpp
         Utilities/Container.h
         Utilities/Renderer.cpp
+        Utilities/Renderer.h
         Utilities/Statistics.h
         Utilities/Statistics.cpp
         General/Tile.h

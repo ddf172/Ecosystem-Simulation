@@ -2,11 +2,12 @@
 // Created by ddf on 28.10.2024.
 //
 
-#include <iostream>
 #include <Utilities/Renderer.h>
+#include <Utilities/Tests.cpp>
 
 int main() {
     Utilities::Renderer renderer = Utilities::Renderer();
     renderer.RenderTestCircle();
+    Utilities::TestGenerateRandomMapAndPrint(10, 10);
     return 0;
 }
