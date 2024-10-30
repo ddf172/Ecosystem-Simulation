@@ -30,21 +30,13 @@ add_executable(Ecosystem_Simulation
         General/SimulationManager.cpp
         General/Grid.cpp
         Simulation/Animal.cpp
-        Simulation/BreedingAnimal.h
-        Simulation/FleeingAnimal.h
         Simulation/GrassResource.h
-        Simulation/HidingAnimal.h
-        Simulation/IBrain.h
         Simulation/MeatResource.h
         Simulation/Resource.cpp
-        Simulation/BreedingAnimal.cpp
-        Simulation/FleeingAnimal.cpp
         Simulation/GrassResource.cpp
-        Simulation/HidingAnimal.cpp
         Simulation/MeatResource.cpp
-        Simulation/SimpleBrain.cpp
-        Simulation/StealthyAnimal.cpp
         Utilities/Tests.cpp
+        Simulation/ResourceTypeEnum.h
 )
 
 target_link_libraries(Ecosystem_Simulation PRIVATE sfml-graphics sfml-system sfml-window)

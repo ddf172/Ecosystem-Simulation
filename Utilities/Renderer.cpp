@@ -25,3 +25,7 @@ void Renderer::RenderTestCircle() {
         window.display();
     }
 }
+
+void Renderer::RenderGrid(Grid& grid) {
+}
+

@@ -4,11 +4,18 @@
 
 #ifndef GRASSRESOURCE_H
 #define GRASSRESOURCE_H
+#include "Resource.h"
 
 
-
-class GrassResource {
-
+class GrassResource: public Resource {
+private:
+    // If currentRegrowTime == maxRegrowTime then grass is ready to be eaten
+    int currentRegrowTime;
+    int maxRegrowTime;
+public:
+    GrassResource(int energyValue, int maxRegrowTime);
+    Resource* GetResource() override;
+    ~GrassResource();
 };
 
 

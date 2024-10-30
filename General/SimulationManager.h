@@ -5,10 +5,14 @@
 #ifndef SIMULATIONMANAGER_H
 #define SIMULATIONMANAGER_H
 
+#include "Grid.h"
 
 
 class SimulationManager {
-
+private:
+    Grid *grid;
+    public:
+        void ManageTurn();
 };
 
 

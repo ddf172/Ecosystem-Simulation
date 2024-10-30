@@ -4,11 +4,16 @@
 
 #ifndef MEATRESOURCE_H
 #define MEATRESOURCE_H
+#include "Resource.h"
 
 
-
-class MeatResource {
-
+class MeatResource: public Resource {
+private:
+    int amountLeft;
+public:
+    MeatResource(int energyValue, int amount);
+    Resource* GetResource() override;
+    ~MeatResource();
 };
 
 

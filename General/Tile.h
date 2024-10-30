@@ -4,13 +4,26 @@
 
 #ifndef TILE_H
 #define TILE_H
-
+#include <vector>
+#include "Simulation/Animal.h"
+#include "Simulation/Resource.h"
 
 
 class Tile {
-
+private:
+    int posX;
+    int posY;
+    std::vector<Animal*> animalsOnTile;
+    Resource* resourceOnTile;
+public:
+    Tile(int posX, int posY, Resource* initialResource);
+    std::vector<Animal*> getAnimalsOnTile();
+    void AddAnimalOnTile(Animal* animal);
+    void RemoveAnimalOnTile(Animal* animal);
+    Resource* getResourceOnTile();
+    void SetResourceOnTile(Resource* resource);
+    int GetPosX();
+    int GetPosY();
 };
-
-
 
 #endif //TILE_H

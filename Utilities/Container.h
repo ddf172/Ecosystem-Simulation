@@ -4,11 +4,13 @@
 
 #ifndef CONTAINER_H
 #define CONTAINER_H
-#include <stdio.h>
+
+#include <vector>
 
 namespace Utilities {
-    class Container {
-
+    template <class T> class Container {
+    public:
+        std::vector<T> data;
     };
 }
 
