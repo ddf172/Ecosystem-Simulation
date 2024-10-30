@@ -3,7 +3,6 @@
 //
 #ifndef ANIMAL_H
 #define ANIMAL_H
-#include "IBrain.h"
 
 
 class Animal {

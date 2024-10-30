@@ -18,10 +18,12 @@ FetchContent_MakeAvailable(SFML)
 include_directories(.)
 
 add_executable(Ecosystem_Simulation
+        General/Grid.cpp
+        General/Grid.h
         Utilities/Container.cpp
         Utilities/Container.h
-        Utilities/Renderer.cpp
         Utilities/Renderer.h
+        Utilities/Renderer.cpp
         Utilities/Statistics.h
         Utilities/Statistics.cpp
         General/Tile.h
@@ -29,10 +31,11 @@ add_executable(Ecosystem_Simulation
         General/SimulationManager.h
         General/main.cpp
         General/SimulationManager.cpp
-        General/Grid.cpp
+        Simulation/Animal.h
         Simulation/Animal.cpp
         Simulation/GrassResource.h
         Simulation/MeatResource.h
+        Simulation/Resource.h
         Simulation/Resource.cpp
         Simulation/GrassResource.cpp
         Simulation/MeatResource.cpp
