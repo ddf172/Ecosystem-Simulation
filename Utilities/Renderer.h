@@ -4,8 +4,7 @@
 #ifndef RENDERER_H
 #define RENDERER_H
 
-#include "General/Grid.h"
-
+class Grid;
 
 namespace Utilities {
     class Renderer {

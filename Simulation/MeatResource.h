@@ -12,7 +12,6 @@ private:
     int amountLeft;
 public:
     MeatResource(int energyValue, int amount);
-    Resource* GetResource() override;
     ~MeatResource();
 };
 

@@ -2,8 +2,8 @@
 // Created by ddf on 28.10.2024.
 //
 
-#include <iostream>
 #include <Utilities/Renderer.h>
+#include "Utilities/Tests.h"
 
 int main() {
     Utilities::Renderer renderer = Utilities::Renderer();

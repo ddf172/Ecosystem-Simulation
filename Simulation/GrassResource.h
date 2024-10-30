@@ -14,7 +14,6 @@ private:
     int maxRegrowTime;
 public:
     GrassResource(int energyValue, int maxRegrowTime);
-    Resource* GetResource() override;
     ~GrassResource();
 };
 

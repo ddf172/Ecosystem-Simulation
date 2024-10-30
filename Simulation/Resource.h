@@ -11,7 +11,10 @@ protected:
     ResourceType type;
     int energyValue;
 public:
-    virtual Resource* GetResource() = 0;
+    void TakeResource();
+    ResourceType GetType() {
+        return type;
+    }
 };
 
 #endif //RESOURCE_H
