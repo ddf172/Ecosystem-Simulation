@@ -20,9 +20,9 @@ Grid::Grid(int width, int height, GenType genType) {
         }
     }
     if (genType == RANDOM) {
-        RandomGrassGeneration();
+        randomGrassGeneration();
     } else if (genType == PERLIN) {
-        PerlinNoiseGrassGeneration();
+        perlinNoiseGrassGeneration();
     }
 }
 
@@ -34,7 +34,29 @@ int Grid::getHeight() const{
     return this->height;
 }
 
-void Grid::RandomGrassGeneration() {
+bool Grid::isInBounds(int x, int y) const {
+    return x >= 0 && x < this->width && y >= 0 && y < this->height;
+}
+
+std::vector<Tile> Grid::getSurroundingTiles(int centerX, int centerY, int range) {
+    // Check if the input is valid
+    if (range < 0) {
+        throw std::invalid_argument("Radius cannot be negative");
+    }
+    if (!isInBounds(centerX, centerY)) {
+        throw std::invalid_argument("Center is out of bounds");
+    }
+
+    std::vector<Tile> surroundingTiles;
+    for (int i = std::max(centerX - range, 0); i <= std::min(centerX + range, this->getWidth() - 1); i++) {
+        for (int j = std::max(centerY - range, 0); j <= std::min(centerY + range, this->getHeight() - 1); j++) {
+            surroundingTiles.push_back(this->tiles[i][j]);
+        }
+    }
+    return surroundingTiles;
+}
+
+void Grid::randomGrassGeneration() {
     std::random_device rd;
     std::mt19937 gen(rd());
     std::bernoulli_distribution distribution(0.3);
@@ -50,12 +72,12 @@ void Grid::RandomGrassGeneration() {
     }
 }
 
-void Grid::PerlinNoiseGrassGeneration() {
+void Grid::perlinNoiseGrassGeneration() {
 
 }
 
 
-void Grid::PrintGrid() {
+void Grid::printGrid() {
     for (int i = 0; i < this->height; i++) {
         for (int j = 0; j < this->width; j++) {
             if (tiles[i][j].GetResourceOnTile()->GetType() == GRASS) {
@@ -68,7 +90,7 @@ void Grid::PrintGrid() {
     }
 }
 
-void Grid::ClearGrid() {
+void Grid::clearGrid() {
     for (int i = 0; i < this->height; i++) {
         for (int j = 0; j < this->width; j++) {
             delete tiles[i][j].GetResourceOnTile();

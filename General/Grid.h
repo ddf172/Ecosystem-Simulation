@@ -16,8 +16,15 @@ private:
     int height;
     std::vector<std::vector<Tile>> tiles;
 
-    void RandomGrassGeneration();
-    void PerlinNoiseGrassGeneration();
+    /**
+    * @brief Function that checks if the given coordinates are in bounds of the grid.
+    * @param x X coordinate on grid.
+    * @param y Y coordinate on grid.
+    * @return True if the coordinates are in bounds, false otherwise.
+    */
+    bool isInBounds(int x, int y) const;
+    void randomGrassGeneration();
+    void perlinNoiseGrassGeneration();
 
 public:
     enum GenType {
@@ -31,11 +38,21 @@ public:
     */
     Grid(int width, int height, GenType genType);
     friend class Utilities::Renderer;
-    std::vector<Tile> GetSurroundingTiles(int centerX, int centerY, int radius);
     int getWidth() const;
     int getHeight() const;
-    void ClearGrid();
-    void PrintGrid();
+
+    /**
+     * @brief Function that returns tiles in the radius around the given coordinates.
+     *
+     * Function uses the manhattan distance to determine if the tile is in the range.
+     * @param centerX
+     * @param centerY
+     * @param range
+     * @return vector of tiles in the range.
+     */
+    std::vector<Tile> getSurroundingTiles(int centerX, int centerY, int range);
+    void clearGrid();
+    void printGrid();
 };
 
 
