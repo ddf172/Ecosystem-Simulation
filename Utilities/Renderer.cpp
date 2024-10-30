@@ -26,6 +26,3 @@ void Renderer::RenderTestCircle() {
     }
 }
 
-void Renderer::RenderGrid(Grid& grid) {
-}
-

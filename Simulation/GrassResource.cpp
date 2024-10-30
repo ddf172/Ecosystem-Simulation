@@ -3,3 +3,11 @@
 //
 
 #include "GrassResource.h"
+
+GrassResource::GrassResource(int energyValue, int maxRegrowTime) {
+    this->currentRegrowTime = maxRegrowTime;
+    this->energyValue = energyValue;
+    this->maxRegrowTime = maxRegrowTime;
+    this->type = GRASS;
+}
+

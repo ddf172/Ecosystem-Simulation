@@ -3,11 +3,10 @@
 //
 
 #include <Utilities/Renderer.h>
-#include <Utilities/Tests.cpp>
+#include "Utilities/Tests.h"
 
 int main() {
     Utilities::Renderer renderer = Utilities::Renderer();
     renderer.RenderTestCircle();
-    Utilities::TestGenerateRandomMapAndPrint(10, 10);
     return 0;
 }

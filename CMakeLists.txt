@@ -39,7 +39,7 @@ add_executable(Ecosystem_Simulation
         Simulation/Resource.cpp
         Simulation/GrassResource.cpp
         Simulation/MeatResource.cpp
-        Utilities/Tests.cpp
+        Utilities/Tests.h
         Simulation/ResourceTypeEnum.h
 )
 

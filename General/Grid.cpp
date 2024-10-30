@@ -16,7 +16,7 @@ Grid::Grid(int width, int height, GenType genType) {
     for (int i = 0; i < height; i++) {
         this->tiles.push_back(std::vector<Tile>());
         for (int j = 0; j < width; j++) {
-            this->tiles[i].push_back(Tile(i, j, nullptr));
+            this->tiles[i].push_back(Tile(i, j));
         }
     }
     if (genType == RANDOM) {
@@ -58,7 +58,7 @@ void Grid::PerlinNoiseGrassGeneration() {
 void Grid::PrintGrid() {
     for (int i = 0; i < this->height; i++) {
         for (int j = 0; j < this->width; j++) {
-            if (tiles[i][j].getResourceOnTile()->GetType() == GRASS) {
+            if (tiles[i][j].GetResourceOnTile()->GetType() == GRASS) {
                 std::cout << "W";
             } else {
                 std::cout << "-";
@@ -71,9 +71,7 @@ void Grid::PrintGrid() {
 void Grid::ClearGrid() {
     for (int i = 0; i < this->height; i++) {
         for (int j = 0; j < this->width; j++) {
-            delete tiles[i][j].getResourceOnTile();
+            delete tiles[i][j].GetResourceOnTile();
         }
     }
 }
-
-
