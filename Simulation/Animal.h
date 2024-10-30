@@ -19,24 +19,30 @@ private:
     int sightRange;
 public:
     Animal(int id, int startX, int startY, int speed, int maxEnergy, int sightRange);
-    int GetX();
-    int GetY();
+    int getX();
+    int getY();
     /**
     *   Move to the destination coordinates
     */
-    virtual void Move(int desX, int desY);
+    virtual void move(int desX, int desY);
     /**
      *  Animal eats resource on the current tile
      */
-    virtual void Eat();
+    virtual void eat();
     /**
     *  Animal breeds with animal on the current tile if possible
     */
-    virtual void Breed();
+    virtual void breed();
     /**
     *  Animal attacks other animal on the current tile if possible
     */
-    virtual void Attack();
+    virtual void attack();
+
+    /**
+     * @brief Function that calculates energy loss of the animal based on chosen action and statistics of the animal.
+     * @return energy loss of the animal.
+     */
+    virtual int calculateEnergyLoss();
 };
 
 
