@@ -3,3 +3,7 @@
 //
 
 #include "Resource.h"
+
+ResourceType Resource::getType() {
+    return type;
+}
