@@ -26,7 +26,6 @@ private:
     bool isInBounds(int x, int y) const;
     void randomGrassGeneration();
     void perlinNoiseGrassGeneration();
-    std::vector<Tile> getSurroundingTiles(int centerX, int centerY, int range);
 
 public:
     enum GenType {
@@ -43,7 +42,13 @@ public:
     friend class EnvironmentHandler;
     int getWidth() const;
     int getHeight() const;
-
+    /**
+     * @brief Function that returns tile at the given coordinates.
+     * @param x
+     * @param y
+     * @return Tile
+     */
+    Tile getTile(int x, int y);
     /**
      * @brief Function that returns tiles in the radius around the given coordinates.
      *
@@ -53,6 +58,9 @@ public:
      * @param range
      * @return vector of tiles in the range.
      */
+    std::vector<Tile> getSurroundingTiles(int centerX, int centerY, int range);
+    bool canReach(int x1, int y1, int x2, int y2, int numberOfMoves);
+    bool canReach(Tile t1, Tile t2, int numberOfMoves);
     void clearGrid();
     void printGrid();
 };
