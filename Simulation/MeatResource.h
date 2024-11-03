@@ -11,6 +11,7 @@ class MeatResource: public Resource {
 private:
     int amountLeft;
 public:
+    int eatResource() override;
     MeatResource(int energyValue, int amount);
     ~MeatResource();
 };

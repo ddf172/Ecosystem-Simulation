@@ -18,12 +18,12 @@ private:
 public:
     Tile(int posX, int posY);
     std::vector<Animal*> getAnimalsOnTile();
-    void AddAnimalOnTile(Animal* animal);
-    void RemoveAnimalOnTile(Animal* animal);
-    Resource* GetResourceOnTile();
-    void SetResourceOnTile(Resource* resource);
-    int GetPosX();
-    int GetPosY();
+    void addAnimalOnTile(Animal* animal);
+    void removeAnimalOnTile(Animal* animal);
+    Resource* getResourceOnTile();
+    void setResourceOnTile(Resource* resource);
+    int getPosX();
+    int getPosY();
 };
 
 #endif //TILE_H
