@@ -3,6 +3,7 @@
 //
 #ifndef ANIMAL_H
 #define ANIMAL_H
+#include "General/EnvironmentHandler.h"
 
 
 class Animal {
@@ -22,11 +23,21 @@ private:
     int currentEnergy;
     int maxEnergy;
     int sightRange;
+    int strength;
     AnimalType type;
+    EnvironmentHandler* envHandler;
 public:
-    Animal(int id, int startX, int startY, int speed, int maxEnergy, int sightRange, AnimalType type);
+    Animal(int id, int startX, int startY, int speed, int maxEnergy, int sightRange, int strength, AnimalType type, EnvironmentHandler environment_handler);
     int getX();
     int getY();
+
+    /* COMMENT FROM PIT: Mysle ze bedzie git, jezeli zrobimy ten pomysl ze kazdy animal ma 2 dostepne akcje
+     * i teraz -> move() - moze byc tylko w pierwszej akcji
+     * eat() -> moze byc tylko w pierwszej akcji i druga wtedy przemija (ze jedzenie zajmuje cala ture)
+     * attack() -> moze byc w pierwszej i drugiej, np. najpierw move potem attack
+     * breed() -> moze byc w pierwszej i drugiej np. najpierw move potem breed
+     */
+    virtual void chooseAction();
     /**
     *   Move to the destination coordinates
     */
