@@ -7,6 +7,6 @@
 
 int main() {
     Utilities::Renderer renderer = Utilities::Renderer();
-    renderer.RenderTestCircle();
+    renderer.renderTestCircle();
     return 0;
 }

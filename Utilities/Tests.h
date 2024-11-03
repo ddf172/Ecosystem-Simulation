@@ -7,10 +7,10 @@
 #ifndef TESTS_H
 #define TESTS_H
 
-void TestGenerateRandomMapAndPrint(int width, int height) {
+void testGenerateRandomMapAndPrint(int width, int height) {
     Grid grid = Grid(width, height, Grid::GenType::RANDOM);
-    grid.PrintGrid();
-    grid.ClearGrid();
+    grid.printGrid();
+    grid.clearGrid();
 }
 
 #endif //TESTS_H
