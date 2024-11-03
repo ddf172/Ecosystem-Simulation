@@ -8,6 +8,7 @@
 #include "Tile.h"
 #include "Utilities/Renderer.h"
 #include <vector>
+#include "EnvironmentHandler.h"
 
 
 class Grid {
@@ -25,6 +26,7 @@ private:
     bool isInBounds(int x, int y) const;
     void randomGrassGeneration();
     void perlinNoiseGrassGeneration();
+    std::vector<Tile> getSurroundingTiles(int centerX, int centerY, int range);
 
 public:
     enum GenType {
@@ -38,6 +40,7 @@ public:
     */
     Grid(int width, int height, GenType genType);
     friend class Utilities::Renderer;
+    friend class EnvironmentHandler;
     int getWidth() const;
     int getHeight() const;
 
@@ -50,7 +53,6 @@ public:
      * @param range
      * @return vector of tiles in the range.
      */
-    std::vector<Tile> getSurroundingTiles(int centerX, int centerY, int range);
     void clearGrid();
     void printGrid();
 };

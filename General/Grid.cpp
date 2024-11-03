@@ -66,7 +66,7 @@ void Grid::randomGrassGeneration() {
             int randNum = distribution(gen);
             if (randNum == 1) {
                 Resource* newGrass = new GrassResource(30, 3);
-                tiles[i][j].SetResourceOnTile(newGrass);
+                this->tiles[i][j].setResourceOnTile(newGrass);
             }
         }
     }
@@ -80,7 +80,7 @@ void Grid::perlinNoiseGrassGeneration() {
 void Grid::printGrid() {
     for (int i = 0; i < this->height; i++) {
         for (int j = 0; j < this->width; j++) {
-            if (tiles[i][j].GetResourceOnTile()->GetType() == GRASS) {
+            if (this->tiles[i][j].getResourceOnTile()->getType() == GRASS) {
                 std::cout << "W";
             } else {
                 std::cout << "-";
@@ -93,7 +93,7 @@ void Grid::printGrid() {
 void Grid::clearGrid() {
     for (int i = 0; i < this->height; i++) {
         for (int j = 0; j < this->width; j++) {
-            delete tiles[i][j].GetResourceOnTile();
+            delete this->tiles[i][j].getResourceOnTile();
         }
     }
 }

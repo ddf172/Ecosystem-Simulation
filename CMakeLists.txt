@@ -41,6 +41,14 @@ add_executable(Ecosystem_Simulation
         Simulation/MeatResource.cpp
         Utilities/Tests.h
         Simulation/ResourceTypeEnum.h
+        Simulation/HerbivoreAnimal.cpp
+        Simulation/HerbivoreAnimal.h
+        Simulation/CarnivoreAnimal.cpp
+        Simulation/CarnivoreAnimal.h
+        Simulation/OmnivoreAnimal.cpp
+        Simulation/OmnivoreAnimal.h
+        General/EnvironmentHandler.cpp
+        General/EnvironmentHandler.h
 )
 
 target_link_libraries(Ecosystem_Simulation PRIVATE sfml-graphics sfml-system sfml-window)
