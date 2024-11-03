@@ -9,6 +9,11 @@ class Animal {
 // Current uncommented code is for testing until
 // sensible solution to Animal code structure is implemented
 private:
+    enum AnimalType {
+        HERBIVORE,
+        CARNIVORE,
+        OMNIVORE
+    };
     // I think id will be useful
     int id;
     int posX;
@@ -17,8 +22,9 @@ private:
     int currentEnergy;
     int maxEnergy;
     int sightRange;
+    AnimalType type;
 public:
-    Animal(int id, int startX, int startY, int speed, int maxEnergy, int sightRange);
+    Animal(int id, int startX, int startY, int speed, int maxEnergy, int sightRange, AnimalType type);
     int getX();
     int getY();
     /**
