@@ -56,6 +56,24 @@ std::vector<Tile> Grid::getSurroundingTiles(int centerX, int centerY, int range)
     return surroundingTiles;
 }
 
+Tile Grid::getTile(int x, int y) {
+    if (!isInBounds(x, y)) {
+        throw std::invalid_argument("Coordinates out of bounds");
+    }
+    return this->tiles[x][y];
+}
+
+bool Grid::canReach(int x1, int y1, int x2, int y2, int numberOfMoves) {
+    if (!isInBounds(x1, y1) || !isInBounds(x2, y2)) {
+        return false;
+    }
+    return abs(x1 - x2) + abs(y1 - y2) <= numberOfMoves;
+}
+
+bool Grid::canReach(Tile t1, Tile t2, int numberOfMoves) {
+    return canReach(t1.getPosX(), t1.getPosY(), t2.getPosX(), t2.getPosY(), numberOfMoves);
+}
+
 void Grid::randomGrassGeneration() {
     std::random_device rd;
     std::mt19937 gen(rd());
