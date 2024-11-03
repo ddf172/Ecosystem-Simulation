@@ -9,8 +9,8 @@ class Grid;
 namespace Utilities {
     class Renderer {
     public:
-        void RenderTestCircle();
-        void RenderGrid(Grid& grid);
+        void renderTestCircle();
+        void renderGrid(Grid& grid);
     };
 };
 
