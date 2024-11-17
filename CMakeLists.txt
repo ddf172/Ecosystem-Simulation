@@ -51,6 +51,8 @@ add_executable(Ecosystem_Simulation
         General/EnvironmentHandler.h
         Utilities/Utilities.h
         Utilities/Utilities.cpp
+        Simulation/Actions/Action.h
+        Simulation/Actions/Action.cpp
         Simulation/Actions/ActionTypeEnum.h
 )
 
