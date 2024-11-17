@@ -40,11 +40,11 @@ std::vector<Animal *> Tile::getAnimalsOnTile() {
     return this->animalsOnTile;
 }
 
-int Tile::getPosX() {
+int Tile::getX() const {
     return this->posX;
 }
 
-int Tile::getPosY() {
+int Tile::getY() const {
     return this->posY;
 }
 

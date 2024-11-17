@@ -5,9 +5,10 @@
 #ifndef TILE_H
 #define TILE_H
 #include <vector>
-#include "Simulation/Animal.h"
+#include "Simulation/Animals/Animal.h"
 #include "Simulation/Resource.h"
 
+class Animal;
 
 class Tile {
 private:
@@ -22,8 +23,8 @@ public:
     void removeAnimalOnTile(Animal* animal);
     Resource* getResourceOnTile();
     void setResourceOnTile(Resource* resource);
-    int getPosX();
-    int getPosY();
+    int getX() const;
+    int getY() const;
 };
 
 #endif //TILE_H

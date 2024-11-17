@@ -5,10 +5,15 @@
 #define ANIMAL_H
 
 
+#include <vector>
+#include "General/Tile.h"
+
+class Tile;
+
 class Animal {
 // Current uncommented code is for testing until
 // sensible solution to Animal code structure is implemented
-private:
+protected:
     enum AnimalType {
         HERBIVORE,
         CARNIVORE,
@@ -35,7 +40,7 @@ public:
      * attack() -> moze byc w pierwszej i drugiej, np. najpierw move potem attack
      * breed() -> moze byc w pierwszej i drugiej np. najpierw move potem breed
      */
-    virtual void chooseAction() = 0;
+    virtual void chooseAction(std::vector<Tile*>) = 0;
     /**
     *   Move to the destination coordinates
     */

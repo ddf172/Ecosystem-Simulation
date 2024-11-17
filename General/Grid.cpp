@@ -38,7 +38,7 @@ bool Grid::isInBounds(int x, int y) const {
     return x >= 0 && x < this->width && y >= 0 && y < this->height;
 }
 
-std::vector<Tile> Grid::getSurroundingTiles(int centerX, int centerY, int range) {
+std::vector<Tile*> Grid::getSurroundingTiles(int centerX, int centerY, int range) {
     // Check if the input is valid
     if (range < 0) {
         throw std::invalid_argument("Radius cannot be negative");
@@ -47,31 +47,20 @@ std::vector<Tile> Grid::getSurroundingTiles(int centerX, int centerY, int range)
         throw std::invalid_argument("Center is out of bounds");
     }
 
-    std::vector<Tile> surroundingTiles;
+    std::vector<Tile*> surroundingTiles;
     for (int i = std::max(centerX - range, 0); i <= std::min(centerX + range, this->getWidth() - 1); i++) {
         for (int j = std::max(centerY - range, 0); j <= std::min(centerY + range, this->getHeight() - 1); j++) {
-            surroundingTiles.push_back(this->tiles[i][j]);
+            surroundingTiles.push_back(&this->tiles[i][j]);
         }
     }
     return surroundingTiles;
 }
 
-Tile Grid::getTile(int x, int y) {
+Tile* Grid::getTile(int x, int y) {
     if (!isInBounds(x, y)) {
         throw std::invalid_argument("Coordinates out of bounds");
     }
-    return this->tiles[x][y];
-}
-
-bool Grid::canReach(int x1, int y1, int x2, int y2, int numberOfMoves) {
-    if (!isInBounds(x1, y1) || !isInBounds(x2, y2)) {
-        return false;
-    }
-    return abs(x1 - x2) + abs(y1 - y2) <= numberOfMoves;
-}
-
-bool Grid::canReach(Tile t1, Tile t2, int numberOfMoves) {
-    return canReach(t1.getPosX(), t1.getPosY(), t2.getPosX(), t2.getPosY(), numberOfMoves);
+    return &this->tiles[x][y];
 }
 
 void Grid::randomGrassGeneration() {

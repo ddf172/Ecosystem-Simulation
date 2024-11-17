@@ -48,19 +48,17 @@ public:
      * @param y
      * @return Tile
      */
-    Tile getTile(int x, int y);
+    Tile* getTile(int x, int y);
     /**
-     * @brief Function that returns tiles in the radius around the given coordinates.
+     * @brief Function that returns tile addresses in the radius around the given coordinates.
      *
      * Function uses the manhattan distance to determine if the tile is in the range.
      * @param centerX
      * @param centerY
      * @param range
-     * @return vector of tiles in the range.
+     * @return vector of tile addresses in the range.
      */
-    std::vector<Tile> getSurroundingTiles(int centerX, int centerY, int range);
-    bool canReach(int x1, int y1, int x2, int y2, int numberOfMoves);
-    bool canReach(Tile t1, Tile t2, int numberOfMoves);
+    std::vector<Tile*> getSurroundingTiles(int centerX, int centerY, int range);
     void clearGrid();
     void printGrid();
 };
