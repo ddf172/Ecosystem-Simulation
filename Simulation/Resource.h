@@ -11,7 +11,8 @@ protected:
     ResourceType type;
     int energyValue;
 public:
-    virtual int eatResource();
+    virtual ~Resource() = default;
+    virtual int eatResource() = 0;
     ResourceType getType();
 };
 

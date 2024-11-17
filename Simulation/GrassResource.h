@@ -13,10 +13,10 @@ private:
     int currentRegrowCooldown;
     int maxRegrowCooldown;
 public:
+    GrassResource(int energyValue1, ResourceType type, int energyValue, int maxRegrowCooldown);
+    ~GrassResource();
     void decrementRegrowCooldown();
     int eatResource() override;
-    GrassResource(int energyValue, int maxRegrowCooldown);
-    ~GrassResource();
 };
 
 #endif //GRASSRESOURCE_H

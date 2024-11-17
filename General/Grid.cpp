@@ -83,7 +83,7 @@ void Grid::randomGrassGeneration() {
         for (int j = 0; j < this->width; j++) {
             int randNum = distribution(gen);
             if (randNum == 1) {
-                Resource* newGrass = new GrassResource(30, 3);
+                Resource* newGrass = new GrassResource(0, GRASS, 30, 3);
                 this->tiles[i][j].setResourceOnTile(newGrass);
             }
         }

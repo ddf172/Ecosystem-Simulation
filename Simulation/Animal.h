@@ -3,7 +3,6 @@
 //
 #ifndef ANIMAL_H
 #define ANIMAL_H
-#include "General/EnvironmentHandler.h"
 
 
 class Animal {
@@ -25,9 +24,8 @@ private:
     int sightRange;
     int strength;
     AnimalType type;
-    EnvironmentHandler* envHandler;
 public:
-    Animal(int id, int startX, int startY, int speed, int maxEnergy, int sightRange, int strength, AnimalType type, EnvironmentHandler environment_handler);
+    Animal(int id, int startX, int startY, int speed, int maxEnergy, int sightRange, int strength, AnimalType type);
     int getX();
     int getY();
 
@@ -37,7 +35,7 @@ public:
      * attack() -> moze byc w pierwszej i drugiej, np. najpierw move potem attack
      * breed() -> moze byc w pierwszej i drugiej np. najpierw move potem breed
      */
-    virtual void chooseAction();
+    virtual void chooseAction() = 0;
     /**
     *   Move to the destination coordinates
     */
@@ -45,21 +43,21 @@ public:
     /**
      *  Animal eats resource on the current tile
      */
-    virtual void eat();
+    // virtual void eat();
     /**
     *  Animal breeds with animal on the current tile if possible
     */
-    virtual void breed();
+    // virtual void breed();
     /**
     *  Animal attacks other animal on the current tile if possible
     */
-    virtual void attack();
+    // virtual void attack();
 
     /**
      * @brief Function that calculates energy loss of the animal based on chosen action and statistics of the animal.
      * @return energy loss of the animal.
      */
-    virtual int calculateEnergyLoss();
+    // virtual int calculateEnergyLoss();
 };
 
 

@@ -12,7 +12,7 @@ private:
     int amountLeft;
 public:
     int eatResource() override;
-    MeatResource(int energyValue, int amount);
+    MeatResource(int energyValue1, ResourceType type, int energyValue, int amount);
     ~MeatResource();
 };
 

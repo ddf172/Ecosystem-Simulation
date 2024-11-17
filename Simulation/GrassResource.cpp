@@ -6,12 +6,14 @@
 
 
 
-GrassResource::GrassResource(int energyValue, int maxRegrowCooldown) {
+GrassResource::GrassResource(int energyValue1, ResourceType type, int energyValue, int maxRegrowCooldown) {
     this->currentRegrowCooldown = 0;
     this->energyValue = energyValue;
     this->maxRegrowCooldown = maxRegrowCooldown;
     this->type = GRASS;
 }
+
+GrassResource::~GrassResource() = default;
 
 int GrassResource::eatResource() {
     if (this->type == GRASS) {
