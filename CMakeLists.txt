@@ -54,6 +54,8 @@ add_executable(Ecosystem_Simulation
         Simulation/Actions/Action.h
         Simulation/Actions/Action.cpp
         Simulation/Actions/ActionTypeEnum.h
+        Simulation/Actions/ActionMove.cpp
+        Simulation/Actions/ActionMove.h
 )
 
 target_link_libraries(Ecosystem_Simulation PRIVATE sfml-graphics sfml-system sfml-window)
