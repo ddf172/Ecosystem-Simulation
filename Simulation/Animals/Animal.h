@@ -7,6 +7,7 @@
 
 #include <vector>
 #include "General/Tile.h"
+#include "Simulation/Actions/Action.h"
 
 class Tile;
 
@@ -40,7 +41,7 @@ public:
      * attack() -> moze byc w pierwszej i drugiej, np. najpierw move potem attack
      * breed() -> moze byc w pierwszej i drugiej np. najpierw move potem breed
      */
-    virtual void chooseAction(std::vector<Tile*>) = 0;
+    virtual Action* chooseAction(std::vector<Tile*>) = 0;
     /**
     *   Move to the destination coordinates
     */
