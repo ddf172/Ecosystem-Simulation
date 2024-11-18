@@ -8,7 +8,6 @@
 enum ResourceType {
     GRASS,
     MEAT,
-    EMPTY_GRASS, // When grass hasn't fully grown
     EMPTY
 };
 

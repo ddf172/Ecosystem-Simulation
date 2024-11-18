@@ -6,32 +6,10 @@
 
 
 
-GrassResource::GrassResource(int energyValue1, ResourceType type, int energyValue, int maxRegrowCooldown) {
-    this->currentRegrowCooldown = 0;
-    this->energyValue = energyValue;
-    this->maxRegrowCooldown = maxRegrowCooldown;
-    this->type = GRASS;
+GrassResource::GrassResource(int amount, int energyValue, int regrowAmount, int regrowCooldown)
+: Resource(GRASS, amount, energyValue) {
+    this->regrowAmount = regrowAmount;
+    this->regrowCooldown = regrowCooldown;
 }
 
 GrassResource::~GrassResource() = default;
-
-int GrassResource::eatResource() {
-    if (this->type == GRASS) {
-        currentRegrowCooldown = maxRegrowCooldown;
-        this->type = EMPTY_GRASS;
-        return energyValue;
-    }
-    return 0;
-}
-
-void GrassResource::decrementRegrowCooldown() {
-    this->currentRegrowCooldown--;
-    if (currentRegrowCooldown <= 0) {
-        this->currentRegrowCooldown = 0;
-        this->type = GRASS;
-    } else {
-        this->type = EMPTY_GRASS;
-    }
-}
-
-

@@ -9,11 +9,17 @@
 class Resource {
 protected:
     ResourceType type;
+    int amount;
+    // increase in energy value that the single amount gives
     int energyValue;
 public:
+    Resource(ResourceType type, int amount, int energyValue);
     virtual ~Resource() = default;
-    virtual int eatResource() = 0;
     ResourceType getType();
+    int getAmount() const;
+    int getEnergyValue() const;
+    void setAmount(int amount);
+    void setEnergyValue(int energyValue);
 };
 
 #endif //RESOURCE_H

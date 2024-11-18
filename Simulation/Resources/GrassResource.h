@@ -9,14 +9,11 @@
 
 class GrassResource: public Resource {
 private:
-    // If currentRegrowCooldown == 0 then grass is ready to be eaten
-    int currentRegrowCooldown;
-    int maxRegrowCooldown;
+    int regrowCooldown;
+    int regrowAmount;
 public:
-    GrassResource(int energyValue1, ResourceType type, int energyValue, int maxRegrowCooldown);
+    GrassResource(int amount, int energyValue, int regrowAmount, int regrowCooldown);
     ~GrassResource();
-    void decrementRegrowCooldown();
-    int eatResource() override;
 };
 
 #endif //GRASSRESOURCE_H
