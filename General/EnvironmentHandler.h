@@ -15,7 +15,7 @@ private:
  Grid* grid;
 public:
  EnvironmentHandler(Grid* grid);
- std::vector<Tile*> getSurroundingTiles(int centerX, int centerY, int range);
+ std::vector<Tile*>* getSurroundingTiles(int centerX, int centerY, int range);
 };
 
 

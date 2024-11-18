@@ -38,7 +38,7 @@ bool Grid::isInBounds(int x, int y) const {
     return x >= 0 && x < this->width && y >= 0 && y < this->height;
 }
 
-std::vector<Tile*> Grid::getSurroundingTiles(int centerX, int centerY, int range) {
+std::vector<Tile*>* Grid::getSurroundingTiles(int centerX, int centerY, int range) {
     // Check if the input is valid
     if (range < 0) {
         throw std::invalid_argument("Radius cannot be negative");
@@ -47,10 +47,10 @@ std::vector<Tile*> Grid::getSurroundingTiles(int centerX, int centerY, int range
         throw std::invalid_argument("Center is out of bounds");
     }
 
-    std::vector<Tile*> surroundingTiles;
+    auto* surroundingTiles = new std::vector<Tile*>();
     for (int i = std::max(centerX - range, 0); i <= std::min(centerX + range, this->getWidth() - 1); i++) {
         for (int j = std::max(centerY - range, 0); j <= std::min(centerY + range, this->getHeight() - 1); j++) {
-            surroundingTiles.push_back(&this->tiles[i][j]);
+            surroundingTiles->push_back(&this->tiles[i][j]);
         }
     }
     return surroundingTiles;
