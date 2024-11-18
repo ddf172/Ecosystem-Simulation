@@ -7,7 +7,8 @@
 
 #include <vector>
 #include "Animal.h"
-#include "General/Tile.h"
+#include "Simulation/Actions/ActionMove.h"
+#include "Simulation/Actions/ActionEat.h"
 #include "Utilities/Utilities.h"
 
 
@@ -16,7 +17,9 @@ class HerbivoreAnimal: public Animal {
 
     HerbivoreAnimal(int id, int startX, int startY, int speed, int maxEnergy, int sightRange, int strength);
 
-    void chooseAction(std::vector<Tile*>) override;
+    Action* chooseMoveToNearestTileWithFood(std::vector<Tile*>* surroundingTiles);
+
+    Action* chooseAction(std::vector<Tile*>* surroundingTiles);
 };
 
 
