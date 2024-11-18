@@ -15,11 +15,15 @@ Action* HerbivoreAnimal::chooseEatAction(Tile *currentTile) {
 }
 
 Action* HerbivoreAnimal::chooseMoveActionToNearestTileWithFood(std::vector<Tile*>* surroundingTiles) {
+    // Find the closest tile with food
     std::pair<Tile*, int> closestTileWithFood = {nullptr, 100000};
     for (Tile* tile : *surroundingTiles) {
         Resource* resource = tile->getResourceOnTile();
+
         if (resource != nullptr && resource->getType() == ResourceType::GRASS) {
             int distance = calculateDistance(this->getX(), this->getY(), tile->getX(), tile->getY());
+
+            // If the animal can reach the tile and the tile is closer than the previous closest tile
             if (canReach(this->getX(), this->getY(), tile->getX(), tile->getY(), this->speed)
                 && distance < closestTileWithFood.second) {
                 closestTileWithFood = {tile, distance};
@@ -34,9 +38,9 @@ Action* HerbivoreAnimal::chooseMoveActionToNearestTileWithFood(std::vector<Tile*
 }
 
 Action* HerbivoreAnimal::chooseAction(std::vector<Tile*>* surroundingTiles) {
-    // Test version of chooseAction
-    // Herbivore will move to the nearest tile with food if currentEnergy is less than 50% of maxEnergy
-    // find tile on which animal stays
+
+    Action* action = nullptr;
+
     Tile* currentTile = nullptr;
     for (Tile* tile : *surroundingTiles) {
         if (tile->getX() == this->getX() && tile->getY() == this->getY()) {
@@ -45,13 +49,11 @@ Action* HerbivoreAnimal::chooseAction(std::vector<Tile*>* surroundingTiles) {
         }
     }
 
-    if (currentTile == nullptr) {
-        return new ActionMove(this->getX(), this->getY());
-    }
-
-    Action* action = chooseEatAction(currentTile);
-    if (action != nullptr){
-        return action;
+    if (currentTile != nullptr) {
+        action = chooseEatAction(currentTile);
+        if (action != nullptr){
+            return action;
+        }
     }
 
 
@@ -62,5 +64,6 @@ Action* HerbivoreAnimal::chooseAction(std::vector<Tile*>* surroundingTiles) {
         }
     }
 
+    // If no action was chosen, return move to the current position so basically do nothing
     return new ActionMove(this->getX(), this->getY());
 }

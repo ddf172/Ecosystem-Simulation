@@ -11,12 +11,12 @@
 
 class ActionEat : public Action {
 private:
-    int number;
+    int amount;
     ResourceType resourceType;
 
 public:
     ActionEat(int number, ResourceType resourceType);
-    int getNumber() const;
+    int getAmount() const;
     ResourceType getResourceType();
 };
 

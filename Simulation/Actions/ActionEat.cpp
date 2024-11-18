@@ -4,13 +4,13 @@
 
 #include "ActionEat.h"
 
-ActionEat::ActionEat(int number, ResourceType resourceType) : Action(EAT) {
-    this->number = number;
+ActionEat::ActionEat(int amount, ResourceType resourceType) : Action(EAT) {
+    this->amount = amount;
     this->resourceType = resourceType;
 }
 
-int ActionEat::getNumber() const {
-    return this->number;
+int ActionEat::getAmount() const {
+    return this->amount;
 }
 
 ResourceType ActionEat::getResourceType() {
