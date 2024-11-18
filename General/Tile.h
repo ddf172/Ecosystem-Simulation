@@ -6,7 +6,7 @@
 #define TILE_H
 #include <vector>
 #include "Simulation/Animals/Animal.h"
-#include "Simulation/Resource.h"
+#include "Simulation/Resources/Resource.h"
 
 class Animal;
 

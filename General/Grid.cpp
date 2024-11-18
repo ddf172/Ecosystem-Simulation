@@ -7,7 +7,7 @@
 #include <iostream>
 #include <vector>
 #include <random>
-#include "Simulation/GrassResource.h"
+#include "Simulation/Resources/GrassResource.h"
 
 
 Grid::Grid(int width, int height, GenType genType) {

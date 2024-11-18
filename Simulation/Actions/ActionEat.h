@@ -5,7 +5,7 @@
 #ifndef ECOSYSTEM_SIMULATION_ACTIONEAT_H
 #define ECOSYSTEM_SIMULATION_ACTIONEAT_H
 
-#include "Simulation/Resource.h"
+#include "Simulation/Resources/Resource.h"
 #include "Action.h"
 
 
