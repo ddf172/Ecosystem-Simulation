@@ -13,3 +13,19 @@ GrassResource::GrassResource(int amount, int energyValue, int regrowAmount, int 
 }
 
 GrassResource::~GrassResource() = default;
+
+int GrassResource::getRegrowCooldown() const {
+    return regrowCooldown;
+}
+
+int GrassResource::getRegrowAmount() const {
+    return regrowAmount;
+}
+
+void GrassResource::setRegrowCooldown(int newRegrowCooldown) {
+    this->regrowCooldown = newRegrowCooldown;
+}
+
+void GrassResource::setRegrowAmount(int newRegrowAmount) {
+    this->regrowAmount = newRegrowAmount;
+}
