@@ -17,7 +17,9 @@ class HerbivoreAnimal: public Animal {
 
     HerbivoreAnimal(int id, int startX, int startY, int speed, int maxEnergy, int sightRange, int strength);
 
-    Action* chooseMoveToNearestTileWithFood(std::vector<Tile*>* surroundingTiles);
+    Action* chooseEatAction(Tile* currentTile);
+
+    Action* chooseMoveActionToNearestTileWithFood(std::vector<Tile*>* surroundingTiles);
 
     Action* chooseAction(std::vector<Tile*>* surroundingTiles);
 };

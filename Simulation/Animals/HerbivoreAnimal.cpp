@@ -5,7 +5,16 @@ HerbivoreAnimal::HerbivoreAnimal(int id, int startX, int startY, int speed, int 
         : Animal(id, startX, startY, speed, maxEnergy, sightRange, strength, AnimalType::HERBIVORE) {
 }
 
-Action* HerbivoreAnimal::chooseMoveToNearestTileWithFood(std::vector<Tile*>* surroundingTiles) {
+Action* HerbivoreAnimal::chooseEatAction(Tile *currentTile) {
+    Resource* resourceOnTile = currentTile->getResourceOnTile();
+    if (resourceOnTile != nullptr && resourceOnTile->getType() == ResourceType::GRASS) {
+        int amountToEat = std::min(resourceOnTile->getAmount(), this->maxEnergy - this->currentEnergy);
+        return new ActionEat(amountToEat, ResourceType::GRASS);
+    }
+    return nullptr;
+}
+
+Action* HerbivoreAnimal::chooseMoveActionToNearestTileWithFood(std::vector<Tile*>* surroundingTiles) {
     std::pair<Tile*, int> closestTileWithFood = {nullptr, 100000};
     for (Tile* tile : *surroundingTiles) {
         Resource* resource = tile->getResourceOnTile();
@@ -36,8 +45,18 @@ Action* HerbivoreAnimal::chooseAction(std::vector<Tile*>* surroundingTiles) {
         }
     }
 
+    if (currentTile == nullptr) {
+        return new ActionMove(this->getX(), this->getY());
+    }
+
+    Action* action = chooseEatAction(currentTile);
+    if (action != nullptr){
+        return action;
+    }
+
+
     if (currentEnergy < maxEnergy / 2) {
-        Action* action = chooseMoveToNearestTileWithFood(surroundingTiles);
+        action = chooseMoveActionToNearestTileWithFood(surroundingTiles);
         if (action != nullptr) {
             return action;
         }
