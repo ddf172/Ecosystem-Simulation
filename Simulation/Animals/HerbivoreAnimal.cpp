@@ -8,7 +8,7 @@ HerbivoreAnimal::HerbivoreAnimal(int id, int startX, int startY, int speed, int 
 Action* HerbivoreAnimal::chooseEatAction(Tile *currentTile) {
     Resource* resourceOnTile = currentTile->getResourceOnTile();
     if (resourceOnTile != nullptr && resourceOnTile->getType() == ResourceType::GRASS) {
-        int amountToEat = std::min(resourceOnTile->getAmount(), this->maxEnergy - this->currentEnergy);
+        int amountToEat = std::min(resourceOnTile->getAmount(), this->getMaxEnergy() - this->getCurrentEnergy());
         return new ActionEat(amountToEat, ResourceType::GRASS);
     }
     return nullptr;
@@ -24,7 +24,7 @@ Action* HerbivoreAnimal::chooseMoveActionToNearestTileWithFood(std::vector<Tile*
             int distance = calculateDistance(this->getX(), this->getY(), tile->getX(), tile->getY());
 
             // If the animal can reach the tile and the tile is closer than the previous closest tile
-            if (canReach(this->getX(), this->getY(), tile->getX(), tile->getY(), this->speed)
+            if (canReach(this->getX(), this->getY(), tile->getX(), tile->getY(), this->getSpeed())
                 && distance < closestTileWithFood.second) {
                 closestTileWithFood = {tile, distance};
             }
