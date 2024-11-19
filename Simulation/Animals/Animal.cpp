@@ -28,3 +28,7 @@ void Animal::move(int desX, int desY) {
     posX = desX;
     posY = desY;
 }
+
+void Animal::eat(int increase) {
+    currentEnergy += std::min(increase, maxEnergy);
+}

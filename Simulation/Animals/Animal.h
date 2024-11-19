@@ -49,7 +49,7 @@ public:
     /**
      *  Animal eats resource on the current tile
      */
-    // virtual void eat();
+    virtual void eat(int increase);
     /**
     *  Animal breeds with animal on the current tile if possible
     */
