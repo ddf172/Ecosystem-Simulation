@@ -8,6 +8,7 @@
 #include <vector>
 #include "General/Tile.h"
 #include "Simulation/Actions/Action.h"
+#include "AnimalTypeEnum.h"
 
 class Tile;
 
@@ -15,11 +16,6 @@ class Animal {
 // Current uncommented code is for testing until
 // sensible solution to Animal code structure is implemented
 protected:
-    enum AnimalType {
-        HERBIVORE,
-        CARNIVORE,
-        OMNIVORE
-    };
     // I think id will be useful
     int id;
     int posX;
@@ -32,8 +28,13 @@ protected:
     AnimalType type;
 public:
     Animal(int id, int startX, int startY, int speed, int maxEnergy, int sightRange, int strength, AnimalType type);
-    int getX();
-    int getY();
+    int getX() const;
+    int getY() const;
+    int getCurrentEnergy() const;
+    int getMaxEnergy() const;
+    int getSpeed() const;
+    int getSightRange() const;
+    AnimalType getType();
 
     /* COMMENT FROM PIT: Mysle ze bedzie git, jezeli zrobimy ten pomysl ze kazdy animal ma 2 dostepne akcje
      * i teraz -> move() - moze byc tylko w pierwszej akcji

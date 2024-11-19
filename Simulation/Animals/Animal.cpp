@@ -16,12 +16,32 @@ Animal::Animal(int id, int startX, int startY, int speed, int maxEnergy, int sig
     this->type = type;
 }
 
-int Animal::getX() {
+int Animal::getX() const {
     return posX;
 }
 
-int Animal::getY() {
+int Animal::getY() const {
     return posY;
+}
+
+int Animal::getCurrentEnergy() const {
+    return currentEnergy;
+}
+
+int Animal::getMaxEnergy() const {
+    return maxEnergy;
+}
+
+int Animal::getSightRange() const {
+    return sightRange;
+}
+
+int Animal::getSpeed() const {
+    return speed;
+}
+
+AnimalType Animal::getType() {
+    return type;
 }
 
 void Animal::move(int desX, int desY) {
