@@ -7,6 +7,7 @@
 class Grid;
 
 namespace Utilities {
+
     class Renderer {
     public:
         void renderTestCircle();
