@@ -3,12 +3,40 @@
 //
 
 #include <Utilities/Renderer.h>
+#include <random>
 
 #include "Grid.h"
+#include "Simulation/Animals/HerbivoreAnimal.h"
+
+int getRandomNumber() {
+    std::random_device rd; // Seed for the random number engine
+    std::mt19937 gen(rd()); // Mersenne Twister random number engine
+    std::uniform_int_distribution<int> dist(0, 4); // Range: 0 to 4
+    return dist(gen);
+}
 
 int main() {
     Utilities::Renderer renderer = Utilities::Renderer();
-    Grid grid(40, 20, Grid::RANDOM);
+    Grid grid(20, 20, Grid::RANDOM);
+
+    for(int i = 0; i < grid.getHeight(); i++) {
+        for(int j = 0; i < grid.getWidth(); j++) {
+            int n = getRandomNumber();
+            switch (n) {
+                case 0:
+                    grid.getTile(j, i)->addAnimalOnTile(new HerbivoreAnimal(0, j, i, 0, 0, 0, 0));
+                    break;
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    break;
+            }
+        }
+    }
     renderer.renderGrid(grid);
     return 0;
 }

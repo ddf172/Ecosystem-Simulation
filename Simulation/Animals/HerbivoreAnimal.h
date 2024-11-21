@@ -14,7 +14,7 @@
 
 
 class HerbivoreAnimal: public Animal {
-
+public:
     HerbivoreAnimal(int id, int startX, int startY, int speed, int maxEnergy, int sightRange, int strength);
 
     Action* chooseEatAction(Tile* currentTile);
@@ -22,6 +22,8 @@ class HerbivoreAnimal: public Animal {
     Action* chooseMoveActionToNearestTileWithFood(std::vector<Tile*>* surroundingTiles);
 
     Action* chooseAction(std::vector<Tile*>* surroundingTiles);
+
+    ~HerbivoreAnimal();
 };
 
 
