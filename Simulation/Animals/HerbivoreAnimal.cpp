@@ -67,3 +67,7 @@ Action* HerbivoreAnimal::chooseAction(std::vector<Tile*>* surroundingTiles) {
     // If no action was chosen, return move to the current position so basically do nothing
     return new ActionMove(this->getX(), this->getY());
 }
+
+HerbivoreAnimal::~HerbivoreAnimal() {
+
+}

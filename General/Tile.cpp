@@ -5,17 +5,22 @@
 #include "Tile.h"
 
 #include <algorithm>
+#include <iostream>
 
 void Tile::setResourceOnTile(Resource* resource) {
     resourceOnTile = resource;
 }
 
 Resource* Tile::getResourceOnTile() {
+    if (this->resourceOnTile == nullptr) {
+        return nullptr;
+    }
     ResourceType type = resourceOnTile->getType();
     if (type == EMPTY) {
         delete resourceOnTile;
+        return nullptr;
     }
-    return nullptr;
+    return resourceOnTile;
 }
 
 Tile::Tile(int posX, int posY) {
