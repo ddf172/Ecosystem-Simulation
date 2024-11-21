@@ -3,6 +3,8 @@
 //
 
 #include "Renderer.h"
+
+#include <iostream>
 #include <SFML/Graphics.hpp>
 #include "wtypes.h"
 #include "General/Grid.h"
@@ -27,6 +29,23 @@ void Renderer::renderTestCircle() {
         window.display();
     }
 }
+
+sf::Color getTileColor(Tile* tile) {
+    Resource* resource = tile->getResourceOnTile();
+    if (resource == nullptr) {
+        return sf::Color::Black;
+    }
+
+    switch (resource->getType()) {
+        case GRASS:
+            return sf::Color::Green;
+        case MEAT:
+            return sf::Color::Red;
+        case EMPTY:
+            return sf::Color::Black;
+    }
+}
+
 
 void Renderer::renderGrid(Grid& grid) {
     HWND desktop = GetDesktopWindow();
@@ -56,10 +75,32 @@ void Renderer::renderGrid(Grid& grid) {
             for (int j = 0; j < grid.getWidth(); j++) {
                 sf::RectangleShape cell(sf::Vector2f(tileSize, tileSize));
                 cell.setPosition(j * tileSize, i * tileSize);
-                cell.setFillColor(sf::Color::Black);
+                cell.setFillColor(getTileColor(grid.getTile(j, i)));
                 cell.setOutlineThickness(1);
                 cell.setOutlineColor(sf::Color(128, 128, 128));
 
+                std::vector<Animal*> animalsOnTile = grid.getTile(j, i)->getAnimalsOnTile();
+                for (Animal* animal : animalsOnTile) {
+
+                    if (animal->getType() == CARNIVORE) {
+                        sf::CircleShape circle(tileSize * 0.2f);
+                        circle.setFillColor(sf::Color::Yellow);
+                        circle.setPosition(j * tileSize + tileSize * 0.4f, i * tileSize + tileSize * 0.1f);
+                        window.draw(circle);
+
+                    } else if (animal->getType() == HERBIVORE) {
+                        sf::CircleShape circle(tileSize * 0.2f);
+                        circle.setFillColor(sf::Color::Cyan);
+                        circle.setPosition(j * tileSize + tileSize * 0.1f, i * tileSize + tileSize * 0.9f);
+                        window.draw(circle);
+
+                    } else if (animal->getType() == OMNIVORE) {
+                        sf::CircleShape circle(tileSize * 0.2f);
+                        circle.setFillColor(sf::Color::Magenta);
+                        circle.setPosition(j * tileSize + tileSize * 0.8f, i * tileSize + tileSize * 0.9f);
+                        window.draw(circle);
+                    }
+                }
                 window.draw(cell);
             }
         }

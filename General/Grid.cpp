@@ -60,7 +60,7 @@ Tile* Grid::getTile(int x, int y) {
     if (!isInBounds(x, y)) {
         throw std::invalid_argument("Coordinates out of bounds");
     }
-    return &this->tiles[x][y];
+    return &this->tiles[y][x];
 }
 
 void Grid::randomGrassGeneration() {
