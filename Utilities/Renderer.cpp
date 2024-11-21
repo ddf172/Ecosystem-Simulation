@@ -78,30 +78,40 @@ void Renderer::renderGrid(Grid& grid) {
                 cell.setFillColor(getTileColor(grid.getTile(j, i)));
                 cell.setOutlineThickness(1);
                 cell.setOutlineColor(sf::Color(128, 128, 128));
+                window.draw(cell);
 
                 std::vector<Animal*> animalsOnTile = grid.getTile(j, i)->getAnimalsOnTile();
+                bool herbFlag = false;
+                bool carnFlag = false;
+                bool omniFlag = false;
                 for (Animal* animal : animalsOnTile) {
+                    if (animal->getType() == HERBIVORE) herbFlag = true;
+                    else if (animal->getType() == CARNIVORE) carnFlag = true;
+                    else if (animal->getType() == OMNIVORE) omniFlag = true;
 
-                    if (animal->getType() == CARNIVORE) {
-                        sf::CircleShape circle(tileSize * 0.2f);
-                        circle.setFillColor(sf::Color::Yellow);
-                        circle.setPosition(j * tileSize + tileSize * 0.4f, i * tileSize + tileSize * 0.1f);
-                        window.draw(circle);
-
-                    } else if (animal->getType() == HERBIVORE) {
-                        sf::CircleShape circle(tileSize * 0.2f);
-                        circle.setFillColor(sf::Color::Cyan);
-                        circle.setPosition(j * tileSize + tileSize * 0.1f, i * tileSize + tileSize * 0.9f);
-                        window.draw(circle);
-
-                    } else if (animal->getType() == OMNIVORE) {
-                        sf::CircleShape circle(tileSize * 0.2f);
-                        circle.setFillColor(sf::Color::Magenta);
-                        circle.setPosition(j * tileSize + tileSize * 0.8f, i * tileSize + tileSize * 0.9f);
-                        window.draw(circle);
-                    }
                 }
-                window.draw(cell);
+
+                if (herbFlag) {
+                    sf::CircleShape circle(tileSize * 0.2f);
+                    circle.setFillColor(sf::Color::Yellow);
+                    circle.setPosition(j * tileSize + tileSize * 0.3f, i * tileSize + tileSize * 0.05f);
+                    window.draw(circle);
+
+                }
+                if (carnFlag) {
+                    sf::CircleShape circle(tileSize * 0.2f);
+                    circle.setFillColor(sf::Color::Cyan);
+                    circle.setPosition(j * tileSize + tileSize * 0.05f, i * tileSize + tileSize * 0.55f);
+                    window.draw(circle);
+
+                }
+                if (omniFlag) {
+                    sf::CircleShape circle(tileSize * 0.2f);
+                    circle.setFillColor(sf::Color::Magenta);
+                    circle.setPosition(j * tileSize + tileSize * 0.55f, i * tileSize + tileSize * 0.55f);
+                    window.draw(circle);
+                }
+
             }
         }
 

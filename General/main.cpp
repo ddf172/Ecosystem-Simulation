@@ -8,6 +8,7 @@
 #include "Grid.h"
 #include "Simulation/Animals/HerbivoreAnimal.h"
 
+// Created purely to test rendering
 int getRandomNumber() {
     std::random_device rd; // Seed for the random number engine
     std::mt19937 gen(rd()); // Mersenne Twister random number engine
@@ -20,19 +21,11 @@ int main() {
     Grid grid(20, 20, Grid::RANDOM);
 
     for(int i = 0; i < grid.getHeight(); i++) {
-        for(int j = 0; i < grid.getWidth(); j++) {
+        for(int j = 0; j < grid.getWidth(); j++) {
             int n = getRandomNumber();
             switch (n) {
                 case 0:
                     grid.getTile(j, i)->addAnimalOnTile(new HerbivoreAnimal(0, j, i, 0, 0, 0, 0));
-                    break;
-                case 1:
-                    break;
-                case 2:
-                    break;
-                case 3:
-                    break;
-                case 4:
                     break;
             }
         }
