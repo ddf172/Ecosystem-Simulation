@@ -7,26 +7,18 @@
 #include <algorithm>
 #include <iostream>
 
-void Tile::setResourceOnTile(Resource* resource) {
-    resourceOnTile = resource;
+void Tile::addResourceOnTile(Resource* resource) {
+    this->resourcesOnTile.push_back(resource);
 }
 
-Resource* Tile::getResourceOnTile() {
-    if (this->resourceOnTile == nullptr) {
-        return nullptr;
-    }
-    ResourceType type = resourceOnTile->getType();
-    if (type == EMPTY) {
-        delete resourceOnTile;
-        return nullptr;
-    }
-    return resourceOnTile;
+std::vector<Resource*> Tile::getResourcesOnTile() {
+    return this->resourcesOnTile;
 }
 
 Tile::Tile(int posX, int posY) {
     this->posX = posX;
     this->posY = posY;
-    this->resourceOnTile = nullptr;
+    this->resourcesOnTile = std::vector<Resource*>();
     this->animalsOnTile = std::vector<Animal*>();
 }
 

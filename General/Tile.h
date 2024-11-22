@@ -15,14 +15,14 @@ private:
     int posX;
     int posY;
     std::vector<Animal*> animalsOnTile;
-    Resource* resourceOnTile;
+    std::vector<Resource*> resourcesOnTile;
 public:
     Tile(int posX, int posY);
     std::vector<Animal*> getAnimalsOnTile();
     void addAnimalOnTile(Animal* animal);
     void removeAnimalOnTile(Animal* animal);
-    Resource* getResourceOnTile();
-    void setResourceOnTile(Resource* resource);
+    std::vector<Resource*> getResourcesOnTile();
+    void addResourceOnTile(Resource* resource);
     int getX() const;
     int getY() const;
 };

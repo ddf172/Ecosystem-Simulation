@@ -58,7 +58,7 @@ public:
      * @param range
      * @return vector of tile addresses in the range.
      */
-    std::vector<Tile*>* getSurroundingTiles(int centerX, int centerY, int range);
+    std::vector<Tile*> getSurroundingTiles(int centerX, int centerY, int range);
     void clearGrid();
     void printGrid();
 };
