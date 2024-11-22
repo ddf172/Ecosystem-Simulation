@@ -19,9 +19,9 @@ public:
 
     Action* chooseEatAction(Tile* currentTile);
 
-    Action* chooseMoveActionToNearestTileWithFood(std::vector<Tile*>* surroundingTiles);
+    Action* chooseMoveActionToNearestTileWithFood(std::vector<Tile*> &surroundingTiles);
 
-    Action* chooseAction(std::vector<Tile*>* surroundingTiles);
+    Action* chooseAction(std::vector<Tile*> &surroundingTiles);
 
     ~HerbivoreAnimal();
 };
