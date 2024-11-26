@@ -8,6 +8,8 @@
 #include <cmath>
 #include <General/Tile.h>
 
+class Tile;
+
 bool canReach(int x1, int y1, int x2, int y2, int numberOfMoves);
 
 bool canReach(const Tile& t1, const Tile& t2, int numberOfMoves);
