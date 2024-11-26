@@ -47,10 +47,10 @@ std::vector<Tile*> Grid::getSurroundingTiles(int centerX, int centerY, int range
         throw std::invalid_argument("Center is out of bounds");
     }
 
-    auto* surroundingTiles = new std::vector<Tile*>();
+    auto surroundingTiles = std::vector<Tile*>();
     for (int i = std::max(centerX - range, 0); i <= std::min(centerX + range, this->getWidth() - 1); i++) {
         for (int j = std::max(centerY - range, 0); j <= std::min(centerY + range, this->getHeight() - 1); j++) {
-            surroundingTiles->push_back(&this->tiles[i][j]);
+            surroundingTiles.push_back(&this->tiles[i][j]);
         }
     }
     return surroundingTiles;
@@ -73,7 +73,7 @@ void Grid::randomGrassGeneration() {
             int randNum = distribution(gen);
             if (randNum == 1) {
                 Resource* newGrass = new GrassResource(0, GRASS, 30, 3);
-                this->tiles[i][j].setResourceOnTile(newGrass);
+                this->tiles[i][j].addResourceOnTile(newGrass);
             }
         }
     }
@@ -84,23 +84,15 @@ void Grid::perlinNoiseGrassGeneration() {
 }
 
 
-void Grid::printGrid() {
-    for (int i = 0; i < this->height; i++) {
-        for (int j = 0; j < this->width; j++) {
-            if (this->tiles[i][j].getResourceOnTile()->getType() == GRASS) {
-                std::cout << "W";
-            } else {
-                std::cout << "-";
-            }
-        }
-        std::cout << std::endl;
-    }
-}
 
 void Grid::clearGrid() {
     for (int i = 0; i < this->height; i++) {
         for (int j = 0; j < this->width; j++) {
-            delete this->tiles[i][j].getResourceOnTile();
+            std::vector<Resource*> resources = this->tiles[i][j].getResourcesOnTile();
+            for(Resource* resource : resources) {
+                delete resource;
+            }
+            delete this->getTile(i, j);
         }
     }
 }

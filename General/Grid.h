@@ -60,7 +60,6 @@ public:
      */
     std::vector<Tile*> getSurroundingTiles(int centerX, int centerY, int range);
     void clearGrid();
-    void printGrid();
 };
 
 

@@ -45,7 +45,7 @@ Action* HerbivoreAnimal::chooseMoveActionToNearestTileWithFood(std::vector<Tile*
     return nullptr;
 }
 
-Action* HerbivoreAnimal::chooseAction(std::vector<Tile*> &surroundingTiles) {
+Action* HerbivoreAnimal::chooseAction(std::vector<Tile*> &surroundingTiles){
 
     Action* action = nullptr;
 

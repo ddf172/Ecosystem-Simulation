@@ -31,19 +31,25 @@ void Renderer::renderTestCircle() {
 }
 
 sf::Color getTileColor(Tile* tile) {
-    Resource* resource = tile->getResourceOnTile();
-    if (resource == nullptr) {
+    std::vector<Resource*> resources = tile->getResourcesOnTile();
+    if (resources.empty()) {
         return sf::Color::Black;
     }
-
-    switch (resource->getType()) {
-        case GRASS:
-            return sf::Color::Green;
-        case MEAT:
-            return sf::Color::Red;
-        case EMPTY:
-            return sf::Color::Black;
+    bool hasGrass = false;
+    bool hasMeat = false;
+    for(Resource* resource : resources) {
+        if (resource->getType() == GRASS) {
+            hasGrass = true;
+        }
+        if (resource->getType() == MEAT) {
+            hasMeat = true;
+        }
     }
+
+    if (hasGrass && hasMeat) return sf::Color(255, 192, 203);
+    if (hasGrass) return sf::Color::Green;
+    if(hasMeat) return sf::Color::Red;
+    return sf::Color::Black;
 }
 
 
