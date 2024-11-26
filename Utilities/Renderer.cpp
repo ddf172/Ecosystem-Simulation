@@ -6,8 +6,15 @@
 
 #include <iostream>
 #include <SFML/Graphics.hpp>
-#include "wtypes.h"
 #include "General/Grid.h"
+
+#ifdef _WIN32
+    #include <wtypes.h> // Windows-specific header
+#elif defined(__linux__)
+    #include <X11/Xlib.h> // Linux-specific header
+#else
+    #error "Unsupported platform"
+#endif
 
 using namespace Utilities;
 
@@ -54,12 +61,23 @@ sf::Color getTileColor(Tile* tile) {
 
 
 void Renderer::renderGrid(Grid& grid) {
-    HWND desktop = GetDesktopWindow();
-    RECT desktopRect;
-    GetWindowRect(desktop, &desktopRect);
 
-    float height = desktopRect.bottom * 0.8;
-    float width = desktopRect.right * 0.8;
+    float width = 0;
+    float height = 0;
+
+    #ifdef _WIN32
+        HWND desktop = GetDesktopWindow();
+        RECT desktopRect;
+        GetWindowRect(desktop, &desktopRect);
+
+        height = desktopRect.bottom * 0.8;
+        width = desktopRect.right * 0.8;
+    #elif defined(__linux__)
+        Display* d = XOpenDisplay(NULL);
+        Screen*  s = DefaultScreenOfDisplay(d);
+        width = s->width;
+        height = s->height;
+    #endif
 
     float maxTileHeight = height / grid.getHeight();
     float maxTileWidth = (width * 0.8) / grid.getWidth();
