@@ -53,6 +53,22 @@ void Animal::eat(int increase) {
     currentEnergy += std::min(increase, maxEnergy);
 }
 
-Animal::~Animal() {
+Animal::~Animal() = default;
 
+int Animal::calculateEnergyLoss(Action *action) {
+    switch (action->getType()) {
+        case ActionType::NONE:
+            return 0;
+        case ActionType::MOVE:{
+            auto* moveAction = dynamic_cast<ActionMove*>(action);
+            return int(calculateDistance(posX, posY, moveAction->getX(), moveAction->getY()));
+
+        }
+        case ActionType::EAT:{
+            auto* eatAction = dynamic_cast<ActionEat*>(action);
+            return int(eatAction->getAmount() * 0.1);
+        }
+        default:
+            return 0;
+    }
 }

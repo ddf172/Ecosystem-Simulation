@@ -9,6 +9,10 @@
 #include "General/Tile.h"
 #include "Simulation/Actions/Action.h"
 #include "AnimalTypeEnum.h"
+#include "Simulation/Actions/ActionTypeEnum.h"
+#include "Simulation/Actions/ActionMove.h"
+#include "Simulation/Actions/ActionEat.h"
+#include "Utilities/Utilities.h"
 
 class Tile;
 
@@ -64,7 +68,7 @@ public:
      * @brief Function that calculates energy loss of the animal based on chosen action and statistics of the animal.
      * @return energy loss of the animal.
      */
-    // virtual int calculateEnergyLoss();
+    virtual int calculateEnergyLoss(Action *action);
 
     ~Animal();
 };
