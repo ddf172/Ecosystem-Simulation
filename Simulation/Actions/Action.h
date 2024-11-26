@@ -9,12 +9,12 @@
 
 class Action {
 protected:
-    actionType type;
+    ActionType type;
 
 public:
-    Action(actionType type);
+    Action(ActionType type);
     virtual ~Action() = default;
-    actionType getType();
+    ActionType getType();
 };
 
 

@@ -4,10 +4,10 @@
 
 #include "Action.h"
 
-Action::Action(actionType type) {
+Action::Action(ActionType type) {
     this->type = type;
 }
 
-actionType Action::getType() {
+ActionType Action::getType() {
     return this->type;
 }
