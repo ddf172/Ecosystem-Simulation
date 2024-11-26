@@ -72,3 +72,23 @@ int Animal::calculateEnergyLoss(Action *action) {
             return 0;
     }
 }
+
+void Animal::executeAction(Action *action) {
+    switch (action->getType()) {
+        case ActionType::NONE:
+            break;
+        case ActionType::MOVE:{
+            auto* moveAction = dynamic_cast<ActionMove*>(action);
+            move(moveAction->getX(), moveAction->getY());
+            break;
+        }
+        case ActionType::EAT:{
+            auto* eatAction = dynamic_cast<ActionEat*>(action);
+            eat(eatAction->getAmount());
+            break;
+        }
+        default:
+            break;
+    }
+    currentEnergy -= calculateEnergyLoss(action);
+}

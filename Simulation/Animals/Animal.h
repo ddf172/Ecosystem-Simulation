@@ -46,7 +46,7 @@ public:
      * attack() -> moze byc w pierwszej i drugiej, np. najpierw move potem attack
      * breed() -> moze byc w pierwszej i drugiej np. najpierw move potem breed
      */
-    virtual Action* chooseAction(std::vector<Tile*>* surroundingTiles) = 0;
+    virtual Action* chooseAction(std::vector<Tile*>& surroundingTiles) = 0;
     /**
     *   Move to the destination coordinates
     */
@@ -68,7 +68,14 @@ public:
      * @brief Function that calculates energy loss of the animal based on chosen action and statistics of the animal.
      * @return energy loss of the animal.
      */
+
     virtual int calculateEnergyLoss(Action *action);
+
+    /**
+     * @brief Function that executes the action chosen by the animal it handles all logic needed.
+     * @param action - action to be executed
+     */
+    virtual void executeAction(Action *action);
 
     ~Animal();
 };
