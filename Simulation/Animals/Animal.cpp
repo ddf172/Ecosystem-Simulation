@@ -61,12 +61,15 @@ int Animal::calculateEnergyLoss(Action *action) {
             return 0;
         case ActionType::MOVE:{
             auto* moveAction = dynamic_cast<ActionMove*>(action);
-            return int(calculateDistance(posX, posY, moveAction->getX(), moveAction->getY()));
-
+            int val = int(calculateDistance(posX, posY, moveAction->getX(), moveAction->getY()) * 0.1);
+            delete(moveAction);
+            return val;
         }
         case ActionType::EAT:{
             auto* eatAction = dynamic_cast<ActionEat*>(action);
-            return int(eatAction->getAmount() * 0.1);
+            int val = int(eatAction->getAmount() * 0.1);
+            delete(eatAction);
+            return val;
         }
         default:
             return 0;
@@ -80,11 +83,13 @@ void Animal::executeAction(Action *action) {
         case ActionType::MOVE:{
             auto* moveAction = dynamic_cast<ActionMove*>(action);
             move(moveAction->getX(), moveAction->getY());
+            delete(moveAction);
             break;
         }
         case ActionType::EAT:{
             auto* eatAction = dynamic_cast<ActionEat*>(action);
             eat(eatAction->getAmount());
+            delete(eatAction);
             break;
         }
         default:

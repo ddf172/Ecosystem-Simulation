@@ -5,6 +5,6 @@
 #include "ActionNone.h"
 
 
-ActionNone::ActionNone() : Action(NULL) {}
+ActionNone::ActionNone() : Action(NONE) {}
 
 ActionNone::~ActionNone() = default;
