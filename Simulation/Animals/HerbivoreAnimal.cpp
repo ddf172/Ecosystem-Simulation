@@ -77,6 +77,4 @@ Action* HerbivoreAnimal::chooseAction(std::vector<Tile*> &surroundingTiles) {
     return new ActionMove(this->getX(), this->getY());
 }
 
-HerbivoreAnimal::~HerbivoreAnimal() {
-
-}
+HerbivoreAnimal::~HerbivoreAnimal() = default;
