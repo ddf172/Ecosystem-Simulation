@@ -17,19 +17,21 @@ int getRandomNumber() {
 }
 
 int main() {
-    Utilities::Renderer renderer = Utilities::Renderer();
-    Grid grid(20, 20, Grid::RANDOM);
+    Grid* grid = new Grid(20, 20, Grid::RANDOM);
+    Utilities::Renderer renderer = Utilities::Renderer(grid);
 
-    for(int i = 0; i < grid.getHeight(); i++) {
-        for(int j = 0; j < grid.getWidth(); j++) {
+    // Random herbivoreAnimal spawn for testing
+    for(int i = 0; i < grid->getHeight(); i++) {
+        for(int j = 0; j < grid->getWidth(); j++) {
             int n = getRandomNumber();
             switch (n) {
                 case 0:
-                    grid.getTile(j, i)->addAnimalOnTile(new HerbivoreAnimal(0, j, i, 0, 0, 0, 0));
+                    grid->getTile(j, i)->addAnimalOnTile(new HerbivoreAnimal(0, j, i, 0, 0, 0, 0));
                     break;
             }
         }
     }
-    renderer.renderGrid(grid);
+    renderer.renderGrid();
+    delete grid;
     return 0;
 }

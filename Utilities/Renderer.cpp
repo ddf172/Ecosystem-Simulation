@@ -18,6 +18,11 @@
 
 using namespace Utilities;
 
+Renderer::Renderer(Grid *grid) {
+    this->grid = grid;
+}
+
+
 void Renderer::renderTestCircle() {
     sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
     sf::CircleShape shape(100.f);
@@ -60,7 +65,7 @@ sf::Color getTileColor(Tile* tile) {
 }
 
 
-void Renderer::renderGrid(Grid& grid) {
+void Renderer::renderGrid() {
 
     float width = 0;
     float height = 0;
@@ -79,8 +84,8 @@ void Renderer::renderGrid(Grid& grid) {
         height = s->height;
     #endif
 
-    float maxTileHeight = height / grid.getHeight();
-    float maxTileWidth = (width * 0.8) / grid.getWidth();
+    float maxTileHeight = height / this->grid->getHeight();
+    float maxTileWidth = (width * 0.8) / this->grid->getWidth();
     float tileSize = std::min(maxTileWidth, maxTileHeight);
 
     sf::RenderWindow window(sf::VideoMode(width, height), "Ecosystem simulation", sf::Style::Titlebar | sf::Style::Close);
@@ -95,16 +100,16 @@ void Renderer::renderGrid(Grid& grid) {
 
         window.clear(sf::Color::Black);
 
-        for (int i = 0; i < grid.getHeight(); i++) {
-            for (int j = 0; j < grid.getWidth(); j++) {
+        for (int i = 0; i < this->grid->getHeight(); i++) {
+            for (int j = 0; j < this->grid->getWidth(); j++) {
                 sf::RectangleShape cell(sf::Vector2f(tileSize, tileSize));
                 cell.setPosition(j * tileSize, i * tileSize);
-                cell.setFillColor(getTileColor(grid.getTile(j, i)));
+                cell.setFillColor(getTileColor(this->grid->getTile(j, i)));
                 cell.setOutlineThickness(1);
                 cell.setOutlineColor(sf::Color(128, 128, 128));
                 window.draw(cell);
 
-                std::vector<Animal*> animalsOnTile = grid.getTile(j, i)->getAnimalsOnTile();
+                std::vector<Animal*> animalsOnTile = this->grid->getTile(j, i)->getAnimalsOnTile();
                 bool herbFlag = false;
                 bool carnFlag = false;
                 bool omniFlag = false;
