@@ -25,6 +25,7 @@ public:
     void addResourceOnTile(Resource* resource);
     int getX() const;
     int getY() const;
+    ~Tile();
 };
 
 #endif //TILE_H

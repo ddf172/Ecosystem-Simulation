@@ -45,4 +45,11 @@ int Tile::getY() const {
     return this->posY;
 }
 
+Tile::~Tile() {
+    for(Resource* resource : this->resourcesOnTile) {
+        delete resource;
+    }
+}
+
+
 
