@@ -1,15 +1,15 @@
 #include "HerbivoreAnimal.h"
 #include "Simulation/Resources/GrassResource.h"
 
-HerbivoreAnimal::HerbivoreAnimal(int id, int startX, int startY, int speed, int maxEnergy, int sightRange, int strength)
-        : Animal(id, startX, startY, speed, maxEnergy, sightRange, strength, AnimalType::HERBIVORE) {
+HerbivoreAnimal::HerbivoreAnimal(int id, int startX, int startY, int speed, int maxEnergy, int sightRange, int strength, int maxEatAmount=10)
+        : Animal(id, startX, startY, speed, maxEnergy, sightRange, strength, AnimalType::HERBIVORE, maxEatAmount) {
 }
 
 Action* HerbivoreAnimal::chooseEatAction(Tile *currentTile) {
     std::vector<Resource*> resourcesOnTile = currentTile->getResourcesOnTile();
     for (auto resource : resourcesOnTile) {
         if (resource->getType() == GRASS) {
-            int amountToEat = std::min(resource->getAmount(), this->getMaxEnergy() - this->getCurrentEnergy());
+            int amountToEat = calculateAmountToEat(*resource);
             return new ActionEat(amountToEat, ResourceType::GRASS);
         }
     }

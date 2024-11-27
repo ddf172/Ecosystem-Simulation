@@ -30,8 +30,11 @@ protected:
     int sightRange;
     int strength;
     AnimalType type;
+    int maxEatAmount;
+    int calculateAmountToEat(Resource& resource) const;
+
 public:
-    Animal(int id, int startX, int startY, int speed, int maxEnergy, int sightRange, int strength, AnimalType type);
+    Animal(int id, int startX, int startY, int speed, int maxEnergy, int sightRange, int strength, AnimalType type, int maxEatAmount);
     int getX() const;
     int getY() const;
     int getCurrentEnergy() const;

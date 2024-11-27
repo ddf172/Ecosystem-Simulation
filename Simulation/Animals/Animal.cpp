@@ -4,7 +4,7 @@
 
 #include "Animal.h"
 
-Animal::Animal(int id, int startX, int startY, int speed, int maxEnergy, int sightRange, int strength, AnimalType type) {
+Animal::Animal(int id, int startX, int startY, int speed, int maxEnergy, int sightRange, int strength, AnimalType type, int maxEatAmount=10) {
     this->id = id;
     this->posX = startX;
     this->posY = startY;
@@ -14,6 +14,14 @@ Animal::Animal(int id, int startX, int startY, int speed, int maxEnergy, int sig
     this->sightRange = sightRange;
     this->strength = strength;
     this->type = type;
+    this->maxEatAmount = maxEatAmount;
+}
+
+int Animal::calculateAmountToEat(Resource &resource) const {
+    int missingEnergy = maxEnergy - currentEnergy;
+    int maxEatAmountLocal = int(missingEnergy/resource.getEnergyValue());
+    return std::min(std::min(maxEatAmountLocal, maxEatAmount), resource.getAmount());
+
 }
 
 int Animal::getX() const {
