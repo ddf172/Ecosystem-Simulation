@@ -15,7 +15,7 @@ class Grid {
 private:
     int width;
     int height;
-    std::vector<std::vector<Tile>> tiles;
+    std::vector<std::vector<Tile*>> tiles;
 
     /**
     * @brief Function that checks if the given coordinates are in bounds of the grid.
@@ -59,7 +59,7 @@ public:
      * @return vector of tile addresses in the range.
      */
     std::vector<Tile*> getSurroundingTiles(int centerX, int centerY, int range);
-    void clearGrid();
+    ~Grid();
 };
 
 

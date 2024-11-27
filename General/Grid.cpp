@@ -14,9 +14,9 @@ Grid::Grid(int width, int height, GenType genType) {
     this->width = width;
     this->height = height;
     for (int i = 0; i < height; i++) {
-        this->tiles.push_back(std::vector<Tile>());
+        this->tiles.push_back(std::vector<Tile*>());
         for (int j = 0; j < width; j++) {
-            this->tiles[i].push_back(Tile(i, j));
+            this->tiles[i].push_back(new Tile(i, j));
         }
     }
     if (genType == RANDOM) {
@@ -50,7 +50,7 @@ std::vector<Tile*> Grid::getSurroundingTiles(int centerX, int centerY, int range
     auto surroundingTiles = std::vector<Tile*>();
     for (int i = std::max(centerX - range, 0); i <= std::min(centerX + range, this->getWidth() - 1); i++) {
         for (int j = std::max(centerY - range, 0); j <= std::min(centerY + range, this->getHeight() - 1); j++) {
-            surroundingTiles.push_back(&this->tiles[i][j]);
+            surroundingTiles.push_back(this->tiles[i][j]);
         }
     }
     return surroundingTiles;
@@ -60,7 +60,7 @@ Tile* Grid::getTile(int x, int y) {
     if (!isInBounds(x, y)) {
         throw std::invalid_argument("Coordinates out of bounds");
     }
-    return &this->tiles[y][x];
+    return this->tiles[y][x];
 }
 
 void Grid::randomGrassGeneration() {
@@ -73,7 +73,7 @@ void Grid::randomGrassGeneration() {
             int randNum = distribution(gen);
             if (randNum == 1) {
                 Resource* newGrass = new GrassResource(0, GRASS, 30, 3);
-                this->tiles[i][j].addResourceOnTile(newGrass);
+                this->tiles[i][j]->addResourceOnTile(newGrass);
             }
         }
     }
@@ -83,16 +83,10 @@ void Grid::perlinNoiseGrassGeneration() {
 
 }
 
-
-
-void Grid::clearGrid() {
+Grid::~Grid() {
     for (int i = 0; i < this->height; i++) {
         for (int j = 0; j < this->width; j++) {
-            std::vector<Resource*> resources = this->tiles[i][j].getResourcesOnTile();
-            for(Resource* resource : resources) {
-                delete resource;
-            }
-            delete this->getTile(i, j);
+            delete this->tiles[i][j];
         }
     }
 }
