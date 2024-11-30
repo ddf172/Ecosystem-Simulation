@@ -4,7 +4,7 @@
 
 #include "Animal.h"
 
-Animal::Animal(int id, int startX, int startY, int speed, int maxEnergy, int sightRange, int strength, AnimalType type, int maxEatAmount=10) {
+Animal::Animal(int id, int startX, int startY, int speed, int maxEnergy, int sightRange, int strength, AnimalType type, int maxEatAmount) {
     this->id = id;
     this->posX = startX;
     this->posY = startY;

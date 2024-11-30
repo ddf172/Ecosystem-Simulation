@@ -1,7 +1,7 @@
 #include "HerbivoreAnimal.h"
 #include "Simulation/Resources/GrassResource.h"
 
-HerbivoreAnimal::HerbivoreAnimal(int id, int startX, int startY, int speed, int maxEnergy, int sightRange, int strength, int maxEatAmount=10)
+HerbivoreAnimal::HerbivoreAnimal(int id, int startX, int startY, int speed, int maxEnergy, int sightRange, int strength, int maxEatAmount)
         : Animal(id, startX, startY, speed, maxEnergy, sightRange, strength, AnimalType::HERBIVORE, maxEatAmount) {
 }
 

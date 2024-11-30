@@ -15,10 +15,8 @@
 
 class HerbivoreAnimal: public Animal {
 public:
-    HerbivoreAnimal(int id, int startX, int startY, int speed, int maxEnergy, int sightRange, int strength, AnimalType type, int maxEatAmount);
 
-    HerbivoreAnimal(int id, int startX, int startY, int speed, int maxEnergy, int sightRange, int strength,
-                    int maxEatAmount);
+    HerbivoreAnimal(int id, int startX, int startY, int speed, int maxEnergy, int sightRange, int strength, int maxEatAmount = 10);
 
     Action* chooseEatAction(Tile* currentTile);
 
