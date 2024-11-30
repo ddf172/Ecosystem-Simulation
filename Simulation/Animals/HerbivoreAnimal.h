@@ -9,6 +9,7 @@
 #include "Animal.h"
 #include "Simulation/Actions/ActionMove.h"
 #include "Simulation/Actions/ActionEat.h"
+#include "Simulation/Actions/ActionDie.h"
 #include "Utilities/Utilities.h"
 
 
@@ -24,6 +25,8 @@ public:
     Action* chooseEatAction(Tile* currentTile);
 
     Action* chooseMoveActionToNearestTileWithFood(std::vector<Tile*> &surroundingTiles);
+
+    Action* chooseDieAction();
 
     Action* chooseAction(std::vector<Tile*> &surroundingTiles);
 

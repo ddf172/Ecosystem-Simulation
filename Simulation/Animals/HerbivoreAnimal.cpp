@@ -47,9 +47,23 @@ Action* HerbivoreAnimal::chooseMoveActionToNearestTileWithFood(std::vector<Tile*
     return nullptr;
 }
 
+Action* HerbivoreAnimal::chooseDieAction() {
+    int resourceAmount = maxHealth / 2 + currentEnergy / 2;
+    if (this->health <= 0 || this->currentEnergy <= 0) {
+        return new ActionDie(resourceAmount);
+    }
+    return nullptr;
+}
+
 Action* HerbivoreAnimal::chooseAction(std::vector<Tile*> &surroundingTiles){
 
     Action* action = nullptr;
+
+    // Check if animal is dead
+    action = chooseDieAction();
+    if (action != nullptr) {
+        return action;
+    }
 
     Tile* currentTile = nullptr;
     for (Tile* tile : surroundingTiles) {
@@ -66,7 +80,6 @@ Action* HerbivoreAnimal::chooseAction(std::vector<Tile*> &surroundingTiles){
             return action;
         }
     }
-
 
     if (currentEnergy < maxEnergy / 2) {
         action = chooseMoveActionToNearestTileWithFood(surroundingTiles);
