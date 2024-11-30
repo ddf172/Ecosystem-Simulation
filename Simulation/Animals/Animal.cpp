@@ -4,17 +4,20 @@
 
 #include "Animal.h"
 
-Animal::Animal(int id, int startX, int startY, int speed, int maxEnergy, int sightRange, int strength, AnimalType type, int maxEatAmount) {
+Animal::Animal(int id, int startX, int startY, int speed, int currentEnergy, int maxEnergy,
+               int sightRange, int strength, AnimalType type, int maxEatAmount, int health, int maxHealth) {
     this->id = id;
     this->posX = startX;
     this->posY = startY;
-    this->currentEnergy = int(maxEnergy/2);
+    this->currentEnergy = currentEnergy;
     this->maxEnergy = maxEnergy;
     this->speed = speed;
     this->sightRange = sightRange;
     this->strength = strength;
     this->type = type;
     this->maxEatAmount = maxEatAmount;
+    this->health = health;
+    this->maxHealth = maxHealth;
 }
 
 int Animal::calculateAmountToEat(Resource &resource) const {

@@ -26,7 +26,7 @@ int main() {
             int n = getRandomNumber();
             switch (n) {
                 case 0:
-                    grid->getTile(j, i)->addAnimalOnTile(new HerbivoreAnimal(0, j, i, 0, 0, 0, 0));
+                    grid->getTile(j, i)->addAnimalOnTile(new HerbivoreAnimal(0, j, i));
                     break;
             }
         }
