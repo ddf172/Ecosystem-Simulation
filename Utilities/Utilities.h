@@ -7,6 +7,8 @@
 
 #include <cmath>
 #include <General/Tile.h>
+#include <vector>
+#include <algorithm>
 
 class Tile;
 
@@ -17,5 +19,7 @@ bool canReach(const Tile& t1, const Tile& t2, int numberOfMoves);
 int calculateDistance(int x1, int y1, int x2, int y2);
 
 int calculateDistance(const Tile& t1, const Tile& t2);
+
+std::vector<Tile *> getTilesWithResources(const std::vector<Tile *> &tiles, const std::vector<ResourceType> &foodTypes);
 
 #endif //ECOSYSTEM_SIMULATION_UTILITIES_H
