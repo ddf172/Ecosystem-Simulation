@@ -20,31 +20,22 @@ Action* HerbivoreAnimal::chooseEatAction(Tile *currentTile) {
 }
 
 Action* HerbivoreAnimal::chooseMoveActionToNearestTileWithFood(std::vector<Tile*> &surroundingTiles) {
-    // Find the closest tile with food
-    std::pair<Tile*, int> closestTileWithFood = {nullptr, 100000};
+    std::vector<Tile*> tilesWithFood;
+    std::vector<ResourceType> foodTypes = {GRASS};
 
-    for (Tile* tile : surroundingTiles) {
-        std::vector<Resource*> resourcesOnTile = tile->getResourcesOnTile();
-
-        // Go through all resources on tile, if GRASS is found then calculate distance and break loop
-        for (auto resource : resourcesOnTile) {
-            if (resource->getType() == GRASS) {
-                int distance = calculateDistance(this->getX(), this->getY(), tile->getX(), tile->getY());
-
-                // If the animal can reach the tile and the tile is closer than the previous closest tile
-                if (canReach(this->getX(), this->getY(), tile->getX(), tile->getY(), this->getSpeed())
-                    && distance < closestTileWithFood.second){
-                    closestTileWithFood = {tile, distance};
-                }
-                break;
-            }
-        }
-
+    tilesWithFood = getTilesWithResources(surroundingTiles, foodTypes);
+    if (tilesWithFood.empty()) {
+        return nullptr;
     }
-    if (closestTileWithFood.first != nullptr) {
-        return new ActionMove(closestTileWithFood.first->getX(), closestTileWithFood.first->getY());
-    }
-    return nullptr;
+
+    Tile* nearestTile = *std::min_element(tilesWithFood.begin(), tilesWithFood.end(), [this](Tile* a, Tile* b) {
+        int distanceA = calculateDistance(this->getX(), this->getY(), a->getX(), a->getY());
+        int distanceB = calculateDistance(this->getX(), this->getY(), b->getX(), b->getY());
+        return distanceA < distanceB;
+    });
+
+    return new ActionMove(nearestTile->getX(), nearestTile->getY());
+
 }
 
 Action* HerbivoreAnimal::chooseDieAction() {
