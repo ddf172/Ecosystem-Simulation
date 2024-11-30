@@ -32,3 +32,12 @@ std::vector<Tile *> getTilesWithResources(const std::vector<Tile *> &tiles, cons
     }
     return result;
 }
+
+Tile* getCurrentPositionTile(std::vector<Tile*> &surroundingTiles, int x, int y) {
+    for (Tile* tile : surroundingTiles) {
+        if (tile->getX() == x && tile->getY() == y) {
+            return tile;
+        }
+    }
+    return nullptr;
+}

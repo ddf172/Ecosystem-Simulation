@@ -22,4 +22,6 @@ int calculateDistance(const Tile& t1, const Tile& t2);
 
 std::vector<Tile *> getTilesWithResources(const std::vector<Tile *> &tiles, const std::vector<ResourceType> &foodTypes);
 
+Tile* getCurrentPositionTile(std::vector<Tile*> &surroundingTiles, int x, int y);
+
 #endif //ECOSYSTEM_SIMULATION_UTILITIES_H

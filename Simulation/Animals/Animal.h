@@ -12,6 +12,7 @@
 #include "Simulation/Actions/ActionTypeEnum.h"
 #include "Simulation/Actions/ActionMove.h"
 #include "Simulation/Actions/ActionEat.h"
+#include "Simulation/Actions/ActionDie.h"
 #include "Utilities/Utilities.h"
 
 class Tile;
@@ -82,6 +83,12 @@ public:
      * @param action - action to be executed
      */
     virtual void executeAction(Action *action);
+
+    /**
+     * @brief Function that checks if the animal is alive.
+     * @return nullptr if animal is alive, ActionDie if animal is dead.
+     */
+    Action* isAlive() const;
 
     ~Animal();
 };

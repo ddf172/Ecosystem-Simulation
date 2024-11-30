@@ -52,6 +52,7 @@ add_executable(Ecosystem_Simulation
         Simulation/Actions/ActionNone.h
         Simulation/Actions/ActionDie.cpp
         Simulation/Actions/ActionDie.h
+        Simulation/Actions/ActionDie.cpp
 )
 
 target_link_libraries(Ecosystem_Simulation PRIVATE sfml-graphics sfml-system sfml-window)

@@ -108,3 +108,11 @@ void Animal::executeAction(Action *action) {
     }
     currentEnergy -= calculateEnergyLoss(action);
 }
+
+Action* Animal::isAlive() const {
+    int resourceAmount = maxHealth / 2 + currentEnergy / 2;
+    if (this->health <= 0 || this->currentEnergy <= 0) {
+        return new ActionDie(resourceAmount);
+    }
+    return nullptr;
+}

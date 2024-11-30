@@ -11,7 +11,7 @@ class ActionDie : public Action{
 private:
     int resourceAmount;
 public:
-    ActionDie(int resourceAmount);
+    explicit ActionDie(int resourceAmount);
     ~ActionDie() override;
     int getResourceAmount() const;
 };
