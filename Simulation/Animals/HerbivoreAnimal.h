@@ -23,7 +23,14 @@ public:
 
     Action* chooseMoveActionToNearestTileWithFood(std::vector<Tile*> &surroundingTiles);
 
-    Action* chooseAction(std::vector<Tile*> &surroundingTiles);
+    /**
+     * Chooses the action for the animal
+     * @param surroundingTiles - tiles surrounding the animal
+     * @return - action to be performed
+     * First use chooseAction to choose the action
+     * Then use executeAction to execute the action
+     */
+    Action* chooseAction(std::vector<Tile*> &surroundingTiles) override;
 
     ~HerbivoreAnimal();
 };

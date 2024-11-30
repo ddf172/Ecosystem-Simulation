@@ -9,6 +9,10 @@
 
 class ActionDie : public Action{
 private:
+    /**
+     * Amount of resources that the entity will drop
+     * You have to implement logic of adding resource to the tile in simulation Manager
+     */
     int resourceAmount;
 public:
     explicit ActionDie(int resourceAmount);

@@ -90,6 +90,7 @@ int Animal::calculateEnergyLoss(Action *action) {
 void Animal::executeAction(Action *action) {
     switch (action->getType()) {
         case ActionType::NONE:
+            delete(action);
             break;
         case ActionType::MOVE:{
             auto* moveAction = dynamic_cast<ActionMove*>(action);
@@ -101,6 +102,11 @@ void Animal::executeAction(Action *action) {
             auto* eatAction = dynamic_cast<ActionEat*>(action);
             eat(eatAction->getAmount());
             delete(eatAction);
+            break;
+        }
+        case ActionType::DIE:{
+            health = 0;
+            delete(action);
             break;
         }
         default:

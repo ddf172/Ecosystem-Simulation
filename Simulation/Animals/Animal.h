@@ -87,6 +87,7 @@ public:
     /**
      * @brief Function that checks if the animal is alive.
      * @return nullptr if animal is alive, ActionDie if animal is dead.
+     * Function deletes action after updating animal with correct values.
      */
     Action* isAlive() const;
 
