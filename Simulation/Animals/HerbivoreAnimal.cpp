@@ -57,10 +57,8 @@ Action* HerbivoreAnimal::chooseDieAction() {
 
 Action* HerbivoreAnimal::chooseAction(std::vector<Tile*> &surroundingTiles){
 
-    Action* action = nullptr;
-
     // Check if animal is dead
-    action = chooseDieAction();
+    Action* action = chooseDieAction();
     if (action != nullptr) {
         return action;
     }
