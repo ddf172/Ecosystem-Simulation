@@ -20,71 +20,33 @@ Action* HerbivoreAnimal::chooseEatAction(Tile *currentTile) {
 }
 
 Action* HerbivoreAnimal::chooseMoveActionToNearestTileWithFood(std::vector<Tile*> &surroundingTiles) {
-    // Find the closest tile with food
-    std::pair<Tile*, int> closestTileWithFood = {nullptr, 100000};
+    std::vector<Tile*> tilesWithFood;
+    std::vector<ResourceType> foodTypes = {GRASS};
 
-    for (Tile* tile : surroundingTiles) {
-        std::vector<Resource*> resourcesOnTile = tile->getResourcesOnTile();
-
-        // Go through all resources on tile, if GRASS is found then calculate distance and break loop
-        for (auto resource : resourcesOnTile) {
-            if (resource->getType() == GRASS) {
-                int distance = calculateDistance(this->getX(), this->getY(), tile->getX(), tile->getY());
-
-                // If the animal can reach the tile and the tile is closer than the previous closest tile
-                if (canReach(this->getX(), this->getY(), tile->getX(), tile->getY(), this->getSpeed())
-                    && distance < closestTileWithFood.second){
-                    closestTileWithFood = {tile, distance};
-                }
-                break;
-            }
-        }
-
+    tilesWithFood = getTilesWithResources(surroundingTiles, foodTypes);
+    if (tilesWithFood.empty()) {
+        return nullptr;
     }
-    if (closestTileWithFood.first != nullptr) {
-        return new ActionMove(closestTileWithFood.first->getX(), closestTileWithFood.first->getY());
-    }
-    return nullptr;
-}
 
-Action* HerbivoreAnimal::chooseDieAction() {
-    int resourceAmount = maxHealth / 2 + currentEnergy / 2;
-    if (this->health <= 0 || this->currentEnergy <= 0) {
-        return new ActionDie(resourceAmount);
-    }
-    return nullptr;
+    Tile* nearestTile = *std::min_element(tilesWithFood.begin(), tilesWithFood.end(), [this](Tile* a, Tile* b) {
+        int distanceA = calculateDistance(this->getX(), this->getY(), a->getX(), a->getY());
+        int distanceB = calculateDistance(this->getX(), this->getY(), b->getX(), b->getY());
+        return distanceA < distanceB;
+    });
+
+    return new ActionMove(nearestTile->getX(), nearestTile->getY());
+
 }
 
 Action* HerbivoreAnimal::chooseAction(std::vector<Tile*> &surroundingTiles){
 
-    // Check if animal is dead
-    Action* action = chooseDieAction();
-    if (action != nullptr) {
-        return action;
-    }
-
-    Tile* currentTile = nullptr;
-    for (Tile* tile : surroundingTiles) {
-        if (tile->getX() == this->getX() && tile->getY() == this->getY()) {
-            currentTile = tile;
-            break;
-        }
-    }
-
-    // Check if animal doesn't float in the abyss
-    if (currentTile != nullptr) {
-        action = chooseEatAction(currentTile);
-        if (action != nullptr){
-            return action;
-        }
-    }
+    Action* action = chooseEatAction(getCurrentPositionTile(surroundingTiles, this->getX(), this->getY()));
+    if (action != nullptr) return action;
 
     if (currentEnergy < maxEnergy / 2) {
         action = chooseMoveActionToNearestTileWithFood(surroundingTiles);
-        if (action != nullptr) {
-            return action;
-        }
     }
+    if (action != nullptr) return action;
 
     // If no action was chosen, return move to the current position so basically do nothing
     return new ActionMove(this->getX(), this->getY());
