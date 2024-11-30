@@ -50,6 +50,8 @@ add_executable(Ecosystem_Simulation
         Simulation/Animals/AnimalTypeEnum.h
         Simulation/Actions/ActionNone.cpp
         Simulation/Actions/ActionNone.h
+        Simulation/Actions/ActionDie.cpp
+        Simulation/Actions/ActionDie.h
 )
 
 target_link_libraries(Ecosystem_Simulation PRIVATE sfml-graphics sfml-system sfml-window)
