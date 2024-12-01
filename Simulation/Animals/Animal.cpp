@@ -4,6 +4,8 @@
 
 #include "Animal.h"
 
+#include <algorithm>
+
 Animal::Animal(int id, int startX, int startY, int speed, int maxEnergy, int sightRange, int strength, AnimalType type, int maxEatAmount=10) {
     this->id = id;
     this->posX = startX;
@@ -58,7 +60,7 @@ void Animal::move(int desX, int desY) {
 }
 
 void Animal::eat(int increase) {
-    currentEnergy += std::min(increase, maxEnergy);
+    currentEnergy += std::min(increase, maxEnergy - currentEnergy);
 }
 
 Animal::~Animal() = default;
@@ -87,6 +89,7 @@ int Animal::calculateEnergyLoss(Action *action) {
 void Animal::executeAction(Action *action) {
     switch (action->getType()) {
         case ActionType::NONE:
+            delete(action);
             break;
         case ActionType::MOVE:{
             auto* moveAction = dynamic_cast<ActionMove*>(action);
@@ -104,4 +107,5 @@ void Animal::executeAction(Action *action) {
             break;
     }
     currentEnergy -= calculateEnergyLoss(action);
+    currentEnergy -= 10;
 }
