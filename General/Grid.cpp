@@ -16,7 +16,7 @@ Grid::Grid(int width, int height, GenType genType) {
     for (int i = 0; i < height; i++) {
         this->tiles.push_back(std::vector<Tile*>());
         for (int j = 0; j < width; j++) {
-            this->tiles[i].push_back(new Tile(i, j));
+            this->tiles[i].push_back(new Tile(j, i));
         }
     }
     if (genType == RANDOM) {
@@ -72,7 +72,7 @@ void Grid::randomGrassGeneration() {
         for (int j = 0; j < this->width; j++) {
             int randNum = distribution(gen);
             if (randNum == 1) {
-                Resource* newGrass = new GrassResource(0, GRASS, 30, 3);
+                Resource* newGrass = new GrassResource(100, 1, 30, 3);
                 this->tiles[i][j]->addResourceOnTile(newGrass);
             }
         }

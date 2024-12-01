@@ -2,11 +2,11 @@
 // Created by ddf on 28.10.2024.
 //
 
-#include <Utilities/Renderer.h>
 #include <random>
-
+#include <iostream>
 #include "Grid.h"
 #include "Simulation/Animals/HerbivoreAnimal.h"
+#include "General/SimulationManager.h"
 
 // Created purely to test rendering
 int getRandomNumber() {
@@ -16,11 +16,8 @@ int getRandomNumber() {
     return dist(gen);
 }
 
-int main() {
-    Grid* grid = new Grid(20, 20, Grid::RANDOM);
-    Utilities::Renderer renderer = Utilities::Renderer(grid);
-
-    // Random herbivoreAnimal spawn for testing
+// Created for testing
+void spawnHerbivoreAnimals(Grid* grid) {
     for(int i = 0; i < grid->getHeight(); i++) {
         for(int j = 0; j < grid->getWidth(); j++) {
             int n = getRandomNumber();
@@ -31,7 +28,29 @@ int main() {
             }
         }
     }
-    renderer.renderGrid();
+}
+
+int main() {
+    Grid* grid = new Grid(20, 20, Grid::RANDOM);
+    spawnHerbivoreAnimals(grid); // Random herbivoreAnimal spawn for testing
+
+    for (int i = 0; i < 20; i++) {
+        for (int j = 0; j < 20; j++) {
+            std::cout << grid->getTile(i, j)->getAnimalsOnTile()->size() << ' ';
+        }
+        std::cout << '\n';
+    }
+    std::cout << "\n\n";
+    SimulationManager manager(grid, 200, true);
+    manager.runSimulation();
+
+    for (int i = 0; i < 20; i++) {
+        for (int j = 0; j < 20; j++) {
+            std::cout << grid->getTile(i, j)->getAnimalsOnTile()->size() << ' ';
+        }
+        std::cout << '\n';
+    }
+
     delete grid;
     return 0;
 }

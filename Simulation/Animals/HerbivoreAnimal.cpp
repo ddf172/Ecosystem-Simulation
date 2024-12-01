@@ -1,4 +1,7 @@
 #include "HerbivoreAnimal.h"
+
+#include <iostream>
+
 #include "Simulation/Resources/GrassResource.h"
 
 HerbivoreAnimal::HerbivoreAnimal(int id, int startX, int startY) :
@@ -9,8 +12,8 @@ HerbivoreAnimal::HerbivoreAnimal(int id, int startX, int startY, int speed, int 
 Animal(id, startX, startY, speed, currentEnergy, maxEnergy, sightRange, strength, AnimalType::HERBIVORE, maxEatAmount, health, maxHealth){}
 
 Action* HerbivoreAnimal::chooseEatAction(Tile *currentTile) {
-    std::vector<Resource*> resourcesOnTile = currentTile->getResourcesOnTile();
-    for (auto resource : resourcesOnTile) {
+    std::vector<Resource*>* resourcesOnTile = currentTile->getResourcesOnTile();
+    for (auto resource : *resourcesOnTile) {
         if (resource->getType() == GRASS) {
             int amountToEat = calculateAmountToEat(*resource);
             return new ActionEat(amountToEat, ResourceType::GRASS);

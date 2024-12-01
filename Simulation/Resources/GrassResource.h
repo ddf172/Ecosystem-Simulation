@@ -9,15 +9,18 @@
 
 class GrassResource: public Resource {
 private:
-    int regrowCooldown;
+    int currentRegrowCooldown;
+    int maxRegrowCooldown;
     int regrowAmount;
+
 public:
     GrassResource(int amount, int energyValue, int regrowAmount, int regrowCooldown);
     ~GrassResource();
-    int getRegrowCooldown() const;
+    int getCurrentRegrowCooldown() const;
     int getRegrowAmount() const;
-    void setRegrowCooldown(int regrowCooldown);
+    void setCurrentRegrowCooldown(int newRegrowCooldown);
     void setRegrowAmount(int regrowAmount);
+    void regenerate();
 };
 
 #endif //GRASSRESOURCE_H

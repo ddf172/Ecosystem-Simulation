@@ -20,8 +20,6 @@ include_directories(.)
 add_executable(Ecosystem_Simulation
         General/Grid.cpp
         General/Grid.h
-        Utilities/Renderer.h
-        Utilities/Renderer.cpp
         General/Tile.h
         General/Tile.cpp
         General/SimulationManager.h
@@ -36,8 +34,6 @@ add_executable(Ecosystem_Simulation
         Simulation/Resources/ResourceTypeEnum.h
         Simulation/Animals/HerbivoreAnimal.cpp
         Simulation/Animals/HerbivoreAnimal.h
-        General/EnvironmentHandler.cpp
-        General/EnvironmentHandler.h
         Utilities/Utilities.h
         Utilities/Utilities.cpp
         Simulation/Actions/Action.h

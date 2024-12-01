@@ -11,8 +11,14 @@
 class SimulationManager {
 private:
     Grid *grid;
-    public:
-        void ManageTurn();
+    int maxTurns;
+    bool renderGame;
+public:
+    SimulationManager(Grid *grid, int maxTurns, bool renderGame);
+    void runSimulation();
+    void setRenderGame(bool val);
+    void setMaxTurns(int val);
+    void manageTurn();
 };
 
 

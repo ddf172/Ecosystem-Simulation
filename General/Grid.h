@@ -6,9 +6,7 @@
 #define GRID_H
 
 #include "Tile.h"
-#include "Utilities/Renderer.h"
 #include <vector>
-#include "EnvironmentHandler.h"
 
 
 class Grid {
@@ -38,7 +36,6 @@ public:
     * @param height Height of the grid
     */
     Grid(int width, int height, GenType genType);
-    friend class Utilities::Renderer;
     friend class EnvironmentHandler;
     int getWidth() const;
     int getHeight() const;
