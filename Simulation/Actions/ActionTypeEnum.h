@@ -9,7 +9,8 @@ enum ActionType {
     EAT,
     MOVE,
     REPRODUCE,
-    NONE
+    NONE,
+    DIE
 };
 
 #endif //ECOSYSTEM_SIMULATION_ACTIONTYPEENUM_H

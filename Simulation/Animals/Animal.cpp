@@ -4,19 +4,20 @@
 
 #include "Animal.h"
 
-#include <algorithm>
-
-Animal::Animal(int id, int startX, int startY, int speed, int maxEnergy, int sightRange, int strength, AnimalType type, int maxEatAmount=10) {
+Animal::Animal(int id, int startX, int startY, int speed, int currentEnergy, int maxEnergy,
+               int sightRange, int strength, AnimalType type, int maxEatAmount, int health, int maxHealth) {
     this->id = id;
     this->posX = startX;
     this->posY = startY;
-    this->currentEnergy = int(maxEnergy/2);
+    this->currentEnergy = currentEnergy;
     this->maxEnergy = maxEnergy;
     this->speed = speed;
     this->sightRange = sightRange;
     this->strength = strength;
     this->type = type;
     this->maxEatAmount = maxEatAmount;
+    this->health = health;
+    this->maxHealth = maxHealth;
 }
 
 int Animal::calculateAmountToEat(Resource &resource) const {
@@ -103,9 +104,22 @@ void Animal::executeAction(Action *action) {
             delete(eatAction);
             break;
         }
+        case ActionType::DIE:{
+            health = 0;
+            delete(action);
+            break;
+        }
         default:
             break;
     }
     currentEnergy -= calculateEnergyLoss(action);
     currentEnergy -= 10;
+}
+
+Action* Animal::isAlive() const {
+    int resourceAmount = maxHealth / 2 + currentEnergy / 2;
+    if (this->health <= 0 || this->currentEnergy <= 0) {
+        return new ActionDie(resourceAmount);
+    }
+    return nullptr;
 }

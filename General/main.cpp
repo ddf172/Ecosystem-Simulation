@@ -23,8 +23,8 @@ void spawnHerbivoreAnimals(Grid* grid) {
             int n = getRandomNumber();
             switch (n) {
                 case 0:
-                    grid->getTile(j, i)->addAnimalOnTile(new HerbivoreAnimal(0, j, i, 5, 100, 10, 0, 10));
-                break;
+                    grid->getTile(j, i)->addAnimalOnTile(new HerbivoreAnimal(0, j, i));
+                    break;
             }
         }
     }

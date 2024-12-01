@@ -12,6 +12,7 @@
 #include "Simulation/Actions/ActionTypeEnum.h"
 #include "Simulation/Actions/ActionMove.h"
 #include "Simulation/Actions/ActionEat.h"
+#include "Simulation/Actions/ActionDie.h"
 #include "Utilities/Utilities.h"
 
 class Tile;
@@ -29,12 +30,15 @@ protected:
     int maxEnergy;
     int sightRange;
     int strength;
+    int health;
+    int maxHealth;
     AnimalType type;
     int maxEatAmount;
     int calculateAmountToEat(Resource& resource) const;
 
 public:
-    Animal(int id, int startX, int startY, int speed, int maxEnergy, int sightRange, int strength, AnimalType type, int maxEatAmount);
+    Animal(int id, int startX, int startY, int speed, int currentEnergy, int maxEnergy,
+           int sightRange, int strength, AnimalType type, int maxEatAmount, int health, int maxHealth);
     int getX() const;
     int getY() const;
     int getCurrentEnergy() const;
@@ -79,6 +83,13 @@ public:
      * @param action - action to be executed
      */
     virtual void executeAction(Action *action);
+
+    /**
+     * @brief Function that checks if the animal is alive.
+     * @return nullptr if animal is alive, ActionDie if animal is dead.
+     * Function deletes action after updating animal with correct values.
+     */
+    Action* isAlive() const;
 
     ~Animal();
 };

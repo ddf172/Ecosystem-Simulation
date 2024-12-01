@@ -4,9 +4,12 @@
 
 #include "Simulation/Resources/GrassResource.h"
 
-HerbivoreAnimal::HerbivoreAnimal(int id, int startX, int startY, int speed, int maxEnergy, int sightRange, int strength, int maxEatAmount=10)
-        : Animal(id, startX, startY, speed, maxEnergy, sightRange, strength, AnimalType::HERBIVORE, maxEatAmount) {
-}
+HerbivoreAnimal::HerbivoreAnimal(int id, int startX, int startY) :
+Animal(id, startX, startY,5, 50, 100, 5, 1, AnimalType::HERBIVORE, 10, 100, 100){}
+
+HerbivoreAnimal::HerbivoreAnimal(int id, int startX, int startY, int speed, int currentEnergy, int maxEnergy,
+                                 int sightRange, int strength, int maxEatAmount, int health, int maxHealth) :
+Animal(id, startX, startY, speed, currentEnergy, maxEnergy, sightRange, strength, AnimalType::HERBIVORE, maxEatAmount, health, maxHealth){}
 
 Action* HerbivoreAnimal::chooseEatAction(Tile *currentTile) {
     std::vector<Resource*>* resourcesOnTile = currentTile->getResourcesOnTile();
@@ -19,63 +22,34 @@ Action* HerbivoreAnimal::chooseEatAction(Tile *currentTile) {
     return nullptr;
 }
 
-
 Action* HerbivoreAnimal::chooseMoveActionToNearestTileWithFood(std::vector<Tile*> &surroundingTiles) {
-    // Find the closest tile with food
+    std::vector<Tile*> tilesWithFood;
+    std::vector<ResourceType> foodTypes = {GRASS};
 
-    std::pair<Tile*, int> closestTileWithFood = {nullptr, 100000};
-
-    for (Tile* tile : surroundingTiles) {
-        std::vector<Resource*>* resourcesOnTile = tile->getResourcesOnTile();
-
-        // Go through all resources on tile, if GRASS is found then calculate distance and break loop
-        for (auto resource : *resourcesOnTile) {
-            if (resource->getType() == GRASS) {
-                int distance = calculateDistance(this->getX(), this->getY(), tile->getX(), tile->getY());
-
-                // If the animal can reach the tile and the tile is closer than the previous closest tile
-                if (canReach(this->getX(), this->getY(), tile->getX(), tile->getY(), this->getSpeed())
-                    && distance < closestTileWithFood.second){
-                    closestTileWithFood = {tile, distance};
-                }
-                break;
-            }
-        }
-
+    tilesWithFood = getTilesWithResources(surroundingTiles, foodTypes);
+    if (tilesWithFood.empty()) {
+        return nullptr;
     }
-    if (closestTileWithFood.first != nullptr) {
-        return new ActionMove(closestTileWithFood.first->getX(), closestTileWithFood.first->getY());
-    }
-    return nullptr;
+
+    Tile* nearestTile = *std::min_element(tilesWithFood.begin(), tilesWithFood.end(), [this](Tile* a, Tile* b) {
+        int distanceA = calculateDistance(this->getX(), this->getY(), a->getX(), a->getY());
+        int distanceB = calculateDistance(this->getX(), this->getY(), b->getX(), b->getY());
+        return distanceA < distanceB;
+    });
+
+    return new ActionMove(nearestTile->getX(), nearestTile->getY());
+
 }
 
 Action* HerbivoreAnimal::chooseAction(std::vector<Tile*> &surroundingTiles){
 
-    Action* action = nullptr;
-
-    Tile* currentTile = nullptr;
-    for (Tile* tile : surroundingTiles) {
-        if (tile->getX() == this->getX() && tile->getY() == this->getY()) {
-            currentTile = tile;
-            break;
-        }
-    }
-
-    // Check if animal doesn't float in the abyss
-    if (currentTile != nullptr) {
-        action = chooseEatAction(currentTile);
-        if (action != nullptr){
-            return action;
-        }
-    }
-
+    Action* action = chooseEatAction(getCurrentPositionTile(surroundingTiles, this->getX(), this->getY()));
+    if (action != nullptr) return action;
 
     if (currentEnergy < maxEnergy / 2) {
         action = chooseMoveActionToNearestTileWithFood(surroundingTiles);
-        if (action != nullptr) {
-            return action;
-        }
     }
+    if (action != nullptr) return action;
 
     // If no action was chosen, return move to the current position so basically do nothing
     return new ActionMove(this->getX(), this->getY());
