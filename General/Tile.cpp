@@ -11,8 +11,8 @@ void Tile::addResourceOnTile(Resource* resource) {
     this->resourcesOnTile.push_back(resource);
 }
 
-std::vector<Resource*> Tile::getResourcesOnTile() {
-    return this->resourcesOnTile;
+std::vector<Resource*>* Tile::getResourcesOnTile() {
+    return &this->resourcesOnTile;
 }
 
 Tile::Tile(int posX, int posY) {
@@ -33,8 +33,8 @@ void Tile::removeAnimalOnTile(Animal *animal){
     }
 }
 
-std::vector<Animal *> Tile::getAnimalsOnTile() {
-    return this->animalsOnTile;
+std::vector<Animal *>* Tile::getAnimalsOnTile() {
+    return &this->animalsOnTile;
 }
 
 int Tile::getX() const {

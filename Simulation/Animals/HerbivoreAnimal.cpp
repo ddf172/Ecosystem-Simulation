@@ -1,4 +1,7 @@
 #include "HerbivoreAnimal.h"
+
+#include <iostream>
+
 #include "Simulation/Resources/GrassResource.h"
 
 HerbivoreAnimal::HerbivoreAnimal(int id, int startX, int startY, int speed, int maxEnergy, int sightRange, int strength, int maxEatAmount=10)
@@ -6,8 +9,8 @@ HerbivoreAnimal::HerbivoreAnimal(int id, int startX, int startY, int speed, int 
 }
 
 Action* HerbivoreAnimal::chooseEatAction(Tile *currentTile) {
-    std::vector<Resource*> resourcesOnTile = currentTile->getResourcesOnTile();
-    for (auto resource : resourcesOnTile) {
+    std::vector<Resource*>* resourcesOnTile = currentTile->getResourcesOnTile();
+    for (auto resource : *resourcesOnTile) {
         if (resource->getType() == GRASS) {
             int amountToEat = calculateAmountToEat(*resource);
             return new ActionEat(amountToEat, ResourceType::GRASS);
@@ -19,13 +22,14 @@ Action* HerbivoreAnimal::chooseEatAction(Tile *currentTile) {
 
 Action* HerbivoreAnimal::chooseMoveActionToNearestTileWithFood(std::vector<Tile*> &surroundingTiles) {
     // Find the closest tile with food
+
     std::pair<Tile*, int> closestTileWithFood = {nullptr, 100000};
 
     for (Tile* tile : surroundingTiles) {
-        std::vector<Resource*> resourcesOnTile = tile->getResourcesOnTile();
+        std::vector<Resource*>* resourcesOnTile = tile->getResourcesOnTile();
 
         // Go through all resources on tile, if GRASS is found then calculate distance and break loop
-        for (auto resource : resourcesOnTile) {
+        for (auto resource : *resourcesOnTile) {
             if (resource->getType() == GRASS) {
                 int distance = calculateDistance(this->getX(), this->getY(), tile->getX(), tile->getY());
 

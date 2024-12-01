@@ -10,6 +10,7 @@ class Resource {
 protected:
     ResourceType type;
     int amount;
+    int maxAmount;
     // increase in energy value that the single amount gives
     int energyValue;
 public:
@@ -20,6 +21,7 @@ public:
     int getEnergyValue() const;
     void setAmount(int amount);
     void setEnergyValue(int energyValue);
+    int getMaxAmount() const;
 };
 
 #endif //RESOURCE_H
