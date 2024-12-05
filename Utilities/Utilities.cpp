@@ -22,8 +22,8 @@ int calculateDistance(const Tile& t1, const Tile& t2) {
 std::vector<Tile *> getTilesWithResources(const std::vector<Tile *> &tiles, const std::vector<ResourceType> &foodTypes) {
     std::vector<Tile *> result;
     for (Tile *tile : tiles) {
-        std::vector<Resource*> tileResources = tile->getResourcesOnTile();
-        for (Resource *resource : tileResources) {
+        std::vector<Resource*>* tileResources = tile->getResourcesOnTile();
+        for (Resource *resource : *tileResources) {
             if (std::find(foodTypes.begin(), foodTypes.end(), resource->getType()) != foodTypes.end()) {
                 result.push_back(tile);
                 break;
