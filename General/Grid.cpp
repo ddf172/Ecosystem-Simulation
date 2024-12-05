@@ -50,7 +50,7 @@ std::vector<Tile*> Grid::getSurroundingTiles(int centerX, int centerY, int range
     auto surroundingTiles = std::vector<Tile*>();
     for (int i = std::max(centerX - range, 0); i <= std::min(centerX + range, this->getWidth() - 1); i++) {
         for (int j = std::max(centerY - range, 0); j <= std::min(centerY + range, this->getHeight() - 1); j++) {
-            surroundingTiles.push_back(this->tiles[i][j]);
+            surroundingTiles.push_back(this->tiles[j][i]);
         }
     }
     return surroundingTiles;
