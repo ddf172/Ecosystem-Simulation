@@ -1,4 +1,7 @@
 #include "HerbivoreAnimal.h"
+
+#include <iostream>
+
 #include "Simulation/Resources/GrassResource.h"
 
 HerbivoreAnimal::HerbivoreAnimal(int id, int startX, int startY) :
@@ -39,7 +42,6 @@ Action* HerbivoreAnimal::chooseMoveActionToNearestTileWithFood(std::vector<Tile*
 }
 
 Action* HerbivoreAnimal::chooseAction(std::vector<Tile*> &surroundingTiles){
-
     Action* action = chooseEatAction(getCurrentPositionTile(surroundingTiles, this->getX(), this->getY()));
     if (action != nullptr) return action;
 

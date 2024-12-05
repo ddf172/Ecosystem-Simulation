@@ -4,6 +4,8 @@
 
 #include "Animal.h"
 
+#include <iostream>
+
 Animal::Animal(int id, int startX, int startY, int speed, int currentEnergy, int maxEnergy,
                int sightRange, int strength, AnimalType type, int maxEatAmount, int health, int maxHealth) {
     this->id = id;
@@ -73,13 +75,11 @@ int Animal::calculateEnergyLoss(Action *action) {
         case ActionType::MOVE:{
             auto* moveAction = dynamic_cast<ActionMove*>(action);
             int val = int(calculateDistance(posX, posY, moveAction->getX(), moveAction->getY()) * 0.1);
-            delete(moveAction);
             return val;
         }
         case ActionType::EAT:{
             auto* eatAction = dynamic_cast<ActionEat*>(action);
             int val = int(eatAction->getAmount() * 0.1);
-            delete(eatAction);
             return val;
         }
         default:
@@ -95,24 +95,27 @@ void Animal::executeAction(Action *action) {
         case ActionType::MOVE:{
             auto* moveAction = dynamic_cast<ActionMove*>(action);
             move(moveAction->getX(), moveAction->getY());
+            currentEnergy -= calculateEnergyLoss(action);
             delete(moveAction);
             break;
         }
         case ActionType::EAT:{
             auto* eatAction = dynamic_cast<ActionEat*>(action);
             eat(eatAction->getAmount());
+            currentEnergy -= calculateEnergyLoss(eatAction);
             delete(eatAction);
             break;
         }
         case ActionType::DIE:{
             health = 0;
+            currentEnergy -= calculateEnergyLoss(action);
             delete(action);
             break;
         }
         default:
             break;
     }
-    currentEnergy -= calculateEnergyLoss(action);
+
     currentEnergy -= 10;
 }
 
