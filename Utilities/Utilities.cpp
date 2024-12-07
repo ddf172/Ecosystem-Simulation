@@ -19,14 +19,16 @@ int calculateDistance(const Tile& t1, const Tile& t2) {
     return calculateDistance(t1.getX(), t1.getY(), t2.getX(), t2.getY());
 }
 
-std::vector<Tile *> getTilesWithResources(const std::vector<Tile *> &tiles, const std::vector<ResourceType> &foodTypes) {
+std::vector<Tile *> getTilesWithResources(const std::vector<Tile *> &tiles, const std::vector<ResourceType> &foodTypes, int threshold) {
     std::vector<Tile *> result;
     for (Tile *tile : tiles) {
         std::vector<Resource*>* tileResources = tile->getResourcesOnTile();
         for (Resource *resource : *tileResources) {
             if (std::find(foodTypes.begin(), foodTypes.end(), resource->getType()) != foodTypes.end()) {
-                result.push_back(tile);
-                break;
+                if (resource->getAmount() > threshold) {
+                    result.push_back(tile);
+                    break;
+                }
             }
         }
     }

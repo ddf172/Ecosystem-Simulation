@@ -15,6 +15,9 @@ Action* HerbivoreAnimal::chooseEatAction(Tile *currentTile) {
     std::vector<Resource*>* resourcesOnTile = currentTile->getResourcesOnTile();
     for (auto resource : *resourcesOnTile) {
         if (resource->getType() == GRASS) {
+            if (resource->getAmount() < 20) {
+                continue;
+            }
             int amountToEat = calculateAmountToEat(*resource);
             return new ActionEat(amountToEat, ResourceType::GRASS);
         }

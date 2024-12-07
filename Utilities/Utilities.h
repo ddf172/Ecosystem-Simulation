@@ -20,7 +20,7 @@ int calculateDistance(int x1, int y1, int x2, int y2);
 
 int calculateDistance(const Tile& t1, const Tile& t2);
 
-std::vector<Tile *> getTilesWithResources(const std::vector<Tile *> &tiles, const std::vector<ResourceType> &foodTypes);
+std::vector<Tile *> getTilesWithResources(const std::vector<Tile *> &tiles, const std::vector<ResourceType> &foodTypes, int threshold = 20);
 
 Tile* getCurrentPositionTile(std::vector<Tile*> &surroundingTiles, int x, int y);
 
