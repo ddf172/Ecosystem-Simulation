@@ -72,9 +72,12 @@ void SimulationManager::manageTurn() {
         for(int j = 0; j < grid->getWidth(); j++) {
             Tile* tile = grid->getTile(j, i);
             std::vector<Animal*>* animals = tile->getAnimalsOnTile();
+            std::vector<Animal*> toRemove;
+
             for(Animal* animal : *animals) {
                 std::vector<Tile*> surroundingTiles = grid->getSurroundingTiles(j, i, animal->getSightRange());
                 Action* action = animal->chooseAction(surroundingTiles);
+                animal->executeAction(action);
 
                 if (action->getType() == MOVE) {
                     ActionMove* actionMove = dynamic_cast<ActionMove*>(action);
@@ -90,7 +93,14 @@ void SimulationManager::manageTurn() {
                         }
                     }
                 }
-                animal->executeAction(action);
+                else if (action-> getType() == DIE) {
+                    ActionDie* actionDie = dynamic_cast<ActionDie*>(action);
+                    auto it = std::find(animals->begin(),animals->end(), animal);
+                    animals->erase(it);
+
+                    // Place meat on map
+                }
+                delete action;
             }
         }
     }

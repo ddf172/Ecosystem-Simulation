@@ -5,7 +5,7 @@
 #include "Simulation/Resources/GrassResource.h"
 
 HerbivoreAnimal::HerbivoreAnimal(int id, int startX, int startY) :
-Animal(id, startX, startY, 5, 50, 100, 5, 1, AnimalType::HERBIVORE, 10, 100, 100){}
+Animal(id, startX, startY, 5, 50, 100, 5, 1, AnimalType::HERBIVORE, 25, 100, 100){}
 
 HerbivoreAnimal::HerbivoreAnimal(int id, int startX, int startY, int speed, int currentEnergy, int maxEnergy,
                                  int sightRange, int strength, int maxEatAmount, int health, int maxHealth) :
@@ -45,7 +45,12 @@ Action* HerbivoreAnimal::chooseMoveActionToNearestTileWithFood(std::vector<Tile*
 }
 
 Action* HerbivoreAnimal::chooseAction(std::vector<Tile*> &surroundingTiles){
-    Action* action = chooseEatAction(getCurrentPositionTile(surroundingTiles, this->getX(), this->getY()));
+    Action* action;
+    if (currentEnergy <= 0) {
+        action = new ActionDie(100);
+        return action;
+    }
+    action = chooseEatAction(getCurrentPositionTile(surroundingTiles, this->getX(), this->getY()));
     if (action != nullptr) return action;
 
     if (currentEnergy < maxEnergy / 2) {

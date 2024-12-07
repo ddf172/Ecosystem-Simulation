@@ -77,11 +77,6 @@ int Animal::calculateEnergyLoss(Action *action) {
             int val = int(calculateDistance(posX, posY, moveAction->getX(), moveAction->getY()) * 0.1);
             return val;
         }
-        case ActionType::EAT:{
-            auto* eatAction = dynamic_cast<ActionEat*>(action);
-            int val = int(eatAction->getAmount() * 0.1);
-            return val;
-        }
         default:
             return 0;
     }
@@ -90,26 +85,21 @@ int Animal::calculateEnergyLoss(Action *action) {
 void Animal::executeAction(Action *action) {
     switch (action->getType()) {
         case ActionType::NONE:
-            delete(action);
             break;
         case ActionType::MOVE:{
             auto* moveAction = dynamic_cast<ActionMove*>(action);
             move(moveAction->getX(), moveAction->getY());
             currentEnergy -= calculateEnergyLoss(action);
-            delete moveAction;
             break;
         }
         case ActionType::EAT:{
             auto* eatAction = dynamic_cast<ActionEat*>(action);
             eat(eatAction->getAmount());
             currentEnergy -= calculateEnergyLoss(eatAction);
-            delete eatAction;
             break;
         }
         case ActionType::DIE:{
             health = 0;
-            currentEnergy -= calculateEnergyLoss(action);
-            delete action;
             break;
         }
         default:
