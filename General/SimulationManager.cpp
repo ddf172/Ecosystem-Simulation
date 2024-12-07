@@ -74,15 +74,18 @@ void SimulationManager::manageTurn() {
             std::vector<Animal*>* animals = tile->getAnimalsOnTile();
             std::vector<Animal*> toRemove;
 
-            for(Animal* animal : *animals) {
+            for(auto it = animals->begin(); it != animals->end();) {
+                Animal* animal = *it;
                 std::vector<Tile*> surroundingTiles = grid->getSurroundingTiles(j, i, animal->getSightRange());
                 Action* action = animal->chooseAction(surroundingTiles);
+                bool animalErased = false;
+
                 animal->executeAction(action);
 
                 if (action->getType() == MOVE) {
                     ActionMove* actionMove = dynamic_cast<ActionMove*>(action);
-                    auto it = std::find(animals->begin(),animals->end(), animal);
                     animals->erase(it);
+                    animalErased = true;
                     grid->getTile(actionMove->getX(), actionMove->getY())->addAnimalOnTile(animal);
                 }
                 else if (action-> getType() == EAT) {
@@ -97,9 +100,15 @@ void SimulationManager::manageTurn() {
                     ActionDie* actionDie = dynamic_cast<ActionDie*>(action);
                     auto it = std::find(animals->begin(),animals->end(), animal);
                     animals->erase(it);
+                    animalErased = true;
 
                     // Place meat on map
+
+                    // at this moment delete animal causes error, so right now we have nice memory leak
+                    // delete animal;
+
                 }
+                if (!animalErased) it++;
                 delete action;
             }
         }
