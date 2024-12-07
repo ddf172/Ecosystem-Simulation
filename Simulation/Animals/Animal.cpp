@@ -96,20 +96,20 @@ void Animal::executeAction(Action *action) {
             auto* moveAction = dynamic_cast<ActionMove*>(action);
             move(moveAction->getX(), moveAction->getY());
             currentEnergy -= calculateEnergyLoss(action);
-            delete(moveAction);
+            delete moveAction;
             break;
         }
         case ActionType::EAT:{
             auto* eatAction = dynamic_cast<ActionEat*>(action);
             eat(eatAction->getAmount());
             currentEnergy -= calculateEnergyLoss(eatAction);
-            delete(eatAction);
+            delete eatAction;
             break;
         }
         case ActionType::DIE:{
             health = 0;
             currentEnergy -= calculateEnergyLoss(action);
-            delete(action);
+            delete action;
             break;
         }
         default:

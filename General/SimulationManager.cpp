@@ -6,7 +6,7 @@
 
 #include <algorithm>
 #include <iostream>
-
+#include <random>
 
 #include <SFML/Graphics.hpp>
 #include "Simulation/Resources/GrassResource.h"
@@ -77,16 +77,16 @@ void SimulationManager::manageTurn() {
                 Action* action = animal->chooseAction(surroundingTiles);
 
                 if (action->getType() == MOVE) {
-                    ActionMove* actionmove = dynamic_cast<ActionMove*>(action);
+                    ActionMove* actionMove = dynamic_cast<ActionMove*>(action);
                     auto it = std::find(animals->begin(),animals->end(), animal);
                     animals->erase(it);
-                    grid->getTile(actionmove->getX(), actionmove->getY())->addAnimalOnTile(animal);
+                    grid->getTile(actionMove->getX(), actionMove->getY())->addAnimalOnTile(animal);
                 }
                 else if (action-> getType() == EAT) {
-                    ActionEat* actioneat = dynamic_cast<ActionEat*>(action);
+                    ActionEat* actionEat = dynamic_cast<ActionEat*>(action);
                     for (Resource* resource : *tile->getResourcesOnTile()) {
-                        if(resource->getType() == actioneat->getResourceType()) {
-                            resource->setAmount(resource->getAmount() - actioneat->getAmount());
+                        if(resource->getType() == actionEat->getResourceType()) {
+                            resource->setAmount(resource->getAmount() - actionEat->getAmount());
                         }
                     }
                 }
@@ -124,11 +124,9 @@ void SimulationManager::runSimulation() {
     sf::Time renderInterval = sf::seconds(0.3f);
     sf::Time elapsedTime = sf::Time::Zero;
 
-    while(window.isOpen()) {
-
+    while (window.isOpen()) {
         sf::Event event;
-        while (window.pollEvent(event))
-        {
+        while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed)
                 window.close();
         }
@@ -145,47 +143,59 @@ void SimulationManager::runSimulation() {
                     cell.setOutlineThickness(1);
                     cell.setOutlineColor(sf::Color(128, 128, 128));
                     window.draw(cell);
-
-                    std::vector<Animal*>* animalsOnTile = this->grid->getTile(j, i)->getAnimalsOnTile();
-                    bool herbFlag = false;
-                    bool carnFlag = false;
-                    bool omniFlag = false;
-                    for (Animal* animal : *animalsOnTile) {
-                        if (animal->getType() == HERBIVORE) herbFlag = true;
-                        else if (animal->getType() == CARNIVORE) carnFlag = true;
-                        else if (animal->getType() == OMNIVORE) omniFlag = true;
-
-                    }
-
-                    if (herbFlag) {
-                        sf::CircleShape circle(tileSize * 0.2f);
-                        circle.setFillColor(sf::Color::Yellow);
-                        circle.setPosition(j * tileSize + tileSize * 0.3f, i * tileSize + tileSize * 0.05f);
-                        window.draw(circle);
-
-                    }
-                    if (carnFlag) {
-                        sf::CircleShape circle(tileSize * 0.2f);
-                        circle.setFillColor(sf::Color::Cyan);
-                        circle.setPosition(j * tileSize + tileSize * 0.05f, i * tileSize + tileSize * 0.55f);
-                        window.draw(circle);
-
-                    }
-                    if (omniFlag) {
-                        sf::CircleShape circle(tileSize * 0.2f);
-                        circle.setFillColor(sf::Color::Magenta);
-                        circle.setPosition(j * tileSize + tileSize * 0.55f, i * tileSize + tileSize * 0.55f);
-                        window.draw(circle);
-                    }
-
                 }
             }
+
+            for (int i = 0; i < this->grid->getHeight(); i++) {
+                for (int j = 0; j < this->grid->getWidth(); j++) {
+                    std::vector<Animal*>* animalsOnTile = this->grid->getTile(j, i)->getAnimalsOnTile();
+                    int herbCount = 0;
+                    int carnCount = 0;
+                    int omniCount = 0;
+                    for (Animal* animal : *animalsOnTile) {
+                        if (animal->getType() == HERBIVORE) herbCount++;
+                        else if (animal->getType() == CARNIVORE) carnCount++;
+                        else if (animal->getType() == OMNIVORE) omniCount++;
+                    }
+
+                    std::random_device rd;
+                    std::mt19937 gen(rd());
+                    std::uniform_real_distribution<float> dist(0.0f, 0.8f);
+
+                    for (int k = 0; k < herbCount; k++) {
+                        sf::CircleShape circle(tileSize * 0.2f);
+                        circle.setFillColor(sf::Color::Yellow);
+                        float randomOffsetX = dist(gen) * tileSize;
+                        float randomOffsetY = dist(gen) * tileSize;
+                        circle.setPosition(j * tileSize + randomOffsetX, i * tileSize + randomOffsetY);
+                        window.draw(circle);
+                    }
+                    for (int k = 0; k < carnCount; k++) {
+                        sf::CircleShape circle(tileSize * 0.2f);
+                        circle.setFillColor(sf::Color::Cyan);
+                        float randomOffsetX = dist(gen) * tileSize;
+                        float randomOffsetY = dist(gen) * tileSize;
+                        circle.setPosition(j * tileSize + randomOffsetX, i * tileSize + randomOffsetY);
+                        window.draw(circle);
+                    }
+                    for (int k = 0; k < omniCount; k++) {
+                        sf::CircleShape circle(tileSize * 0.2f);
+                        circle.setFillColor(sf::Color::Magenta);
+                        float randomOffsetX = dist(gen) * tileSize;
+                        float randomOffsetY = dist(gen) * tileSize;
+                        circle.setPosition(j * tileSize + randomOffsetX, i * tileSize + randomOffsetY);
+                        window.draw(circle);
+                    }
+                }
+            }
+
             window.display();
             clock.restart();
             manageTurn();
         }
     }
 }
+
 
 void SimulationManager::setRenderGame(bool val) {
     this->renderGame = val;
