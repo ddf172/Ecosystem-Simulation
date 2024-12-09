@@ -7,6 +7,7 @@
 #include <vector>
 #include "Simulation/Animals/Animal.h"
 #include "Simulation/Resources/Resource.h"
+#include "Utilities/MergingContainer.h"
 
 class Animal;
 
@@ -15,7 +16,7 @@ private:
     int posX;
     int posY;
     std::vector<Animal*> animalsOnTile;
-    std::vector<Resource*> resourcesOnTile;
+    MergingContainer<Resource*> resourcesOnTile;
 public:
     Tile(int posX, int posY);
     std::vector<Animal*>* getAnimalsOnTile();
