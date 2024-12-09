@@ -7,17 +7,12 @@
 
 #include "Grid.h"
 
-
 class SimulationManager {
 private:
     Grid *grid;
-    int maxTurns;
-    bool renderGame;
 public:
-    SimulationManager(Grid *grid, int maxTurns, bool renderGame);
+    SimulationManager(Grid *grid);
     void runSimulation();
-    void setRenderGame(bool val);
-    void setMaxTurns(int val);
     void manageTurn();
 };
 
