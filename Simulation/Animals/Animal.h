@@ -44,6 +44,7 @@ public:
     int getCurrentEnergy() const;
     int getMaxEnergy() const;
     int getSpeed() const;
+    int getHealth() const;
     int getSightRange() const;
     AnimalType getType();
 

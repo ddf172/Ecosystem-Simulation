@@ -49,6 +49,10 @@ int Animal::getSightRange() const {
     return sightRange;
 }
 
+int Animal::getHealth() const {
+    return health;
+}
+
 int Animal::getSpeed() const {
     return speed;
 }

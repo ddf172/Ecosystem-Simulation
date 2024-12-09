@@ -31,25 +31,11 @@ void spawnHerbivoreAnimals(Grid* grid) {
 }
 
 int main() {
-    Grid* grid = new Grid(20, 20, Grid::RANDOM);
+    Grid* grid = new Grid(50, 50, Grid::RANDOM);
     spawnHerbivoreAnimals(grid); // Random herbivoreAnimal spawn for testing
 
-    for (int i = 0; i < 20; i++) {
-        for (int j = 0; j < 20; j++) {
-            std::cout << grid->getTile(i, j)->getAnimalsOnTile()->size() << ' ';
-        }
-        std::cout << '\n';
-    }
-    std::cout << "\n\n";
-    SimulationManager manager(grid, 200, true);
+    SimulationManager manager(grid);
     manager.runSimulation();
-
-    for (int i = 0; i < 20; i++) {
-        for (int j = 0; j < 20; j++) {
-            std::cout << grid->getTile(i, j)->getAnimalsOnTile()->size() << ' ';
-        }
-        std::cout << '\n';
-    }
 
     delete grid;
     return 0;
