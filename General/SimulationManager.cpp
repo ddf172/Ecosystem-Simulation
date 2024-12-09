@@ -82,7 +82,6 @@ void SimulationManager::manageTurn() {
 }
 
 void SimulationManager::runSimulation() {
-    std::cout << grid;
     Renderer renderer(grid);
     sf::RenderWindow* window = renderer.getWindow();
 
