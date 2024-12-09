@@ -8,17 +8,17 @@
 #include <iostream>
 
 void Tile::addResourceOnTile(Resource* resource) {
-    this->resourcesOnTile.push_back(resource);
+    this->resourcesOnTile.addItem(resource);
 }
 
 std::vector<Resource*>* Tile::getResourcesOnTile() {
-    return &this->resourcesOnTile;
+    return this->resourcesOnTile.getData();
 }
 
 Tile::Tile(int posX, int posY) {
     this->posX = posX;
     this->posY = posY;
-    this->resourcesOnTile = std::vector<Resource*>();
+    this->resourcesOnTile = MergingContainer<Resource*>();
     this->animalsOnTile = std::vector<Animal*>();
 }
 
