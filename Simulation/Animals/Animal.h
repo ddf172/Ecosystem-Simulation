@@ -45,10 +45,12 @@ public:
     int getMaxEnergy() const;
     int getSpeed() const;
     int getHealth() const;
+    int getMaxHealth() const;
     int getSightRange() const;
     std::vector<ResourceType> getFoodTypes() const;
     AnimalType getType();
     int calculateAmountToEat(Resource& resource) const;
+    bool isAlive() const;
 
     /* COMMENT FROM PIT: Mysle ze bedzie git, jezeli zrobimy ten pomysl ze kazdy animal ma 2 dostepne akcje
      * i teraz -> move() - moze byc tylko w pierwszej akcji
@@ -92,7 +94,6 @@ public:
      * @return nullptr if animal is alive, ActionDie if animal is dead.
      * Function deletes action after updating animal with correct values.
      */
-    Action* isAlive() const;
 
     virtual ~Animal();
 };

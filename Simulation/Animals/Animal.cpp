@@ -30,6 +30,10 @@ int Animal::calculateAmountToEat(Resource &resource) const {
 
 }
 
+bool Animal::isAlive() const {
+    return health > 0 && currentEnergy > 0;
+}
+
 int Animal::getX() const {
     return posX;
 }
@@ -52,6 +56,10 @@ int Animal::getSightRange() const {
 
 int Animal::getHealth() const {
     return health;
+}
+
+int Animal::getMaxHealth() const {
+    return maxHealth;
 }
 
 int Animal::getSpeed() const {
@@ -116,12 +124,4 @@ void Animal::executeAction(Action *action) {
     }
 
     currentEnergy -= 10;
-}
-
-Action* Animal::isAlive() const {
-    int resourceAmount = maxHealth / 2 + currentEnergy / 2;
-    if (this->health <= 0 || this->currentEnergy <= 0) {
-        return new ActionDie(resourceAmount);
-    }
-    return nullptr;
 }
