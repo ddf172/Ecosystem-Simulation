@@ -32,7 +32,6 @@ void spawnHerbivoreAnimals(Grid* grid) {
 }
 
 int main() {
-    // TEST
     Grid* grid = new Grid(50, 50, Grid::RANDOM);
     spawnHerbivoreAnimals(grid); // Random herbivoreAnimal spawn for testing
 
