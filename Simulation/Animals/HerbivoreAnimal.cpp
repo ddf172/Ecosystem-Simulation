@@ -5,11 +5,12 @@
 #include "Simulation/Resources/GrassResource.h"
 
 HerbivoreAnimal::HerbivoreAnimal(int id, int startX, int startY) :
-Animal(id, startX, startY, 5, 50, 100, 5, 1, AnimalType::HERBIVORE, 25, 100, 100){}
+Animal(id, startX, startY, 5, 50, 100, 5, 1, AnimalType::HERBIVORE,
+       25, 100, 100, std::vector<ResourceType>(ResourceType::GRASS)){}
 
 HerbivoreAnimal::HerbivoreAnimal(int id, int startX, int startY, int speed, int currentEnergy, int maxEnergy,
                                  int sightRange, int strength, int maxEatAmount, int health, int maxHealth) :
-Animal(id, startX, startY, speed, currentEnergy, maxEnergy, sightRange, strength, AnimalType::HERBIVORE, maxEatAmount, health, maxHealth){}
+Animal(id, startX, startY, speed, currentEnergy, maxEnergy, sightRange, strength, AnimalType::HERBIVORE, maxEatAmount, health, maxHealth, std::vector<ResourceType>(ResourceType::GRASS)){}
 
 Action* HerbivoreAnimal::chooseEatAction(Tile *currentTile) {
     std::vector<Resource*>* resourcesOnTile = currentTile->getResourcesOnTile();

@@ -8,5 +8,5 @@ EatActionChooserDefault::EatActionChooserDefault(Tile* currentTile) : currentTil
 
 Action* EatActionChooserDefault::chooseAction(Animal* animal) {
     std::vector<Resource*>* resourcesOnTile = currentTile->getResourcesOnTile();
-
+    return nullptr;
 }
