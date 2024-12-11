@@ -71,7 +71,7 @@ void SimulationManager::manageTurn() {
                     // Place meat on map
 
                     // at this moment delete animal causes error, so right now we have nice memory leak
-                    // delete animal;
+                    delete animal;
 
                 }
                 if (!animalErased) it++;

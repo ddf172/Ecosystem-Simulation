@@ -92,7 +92,7 @@ public:
      */
     Action* isAlive() const;
 
-    ~Animal();
+    virtual ~Animal();
 };
 
 
