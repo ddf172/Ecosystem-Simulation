@@ -7,7 +7,7 @@
 #include <iostream>
 
 Animal::Animal(int id, int startX, int startY, int speed, int currentEnergy, int maxEnergy,
-               int sightRange, int strength, AnimalType type, int maxEatAmount, int health, int maxHealth) {
+               int sightRange, int strength, AnimalType type, int maxEatAmount, int health, int maxHealth, std::vector<ResourceType> foodTypes) {
     this->id = id;
     this->posX = startX;
     this->posY = startY;
@@ -20,6 +20,7 @@ Animal::Animal(int id, int startX, int startY, int speed, int currentEnergy, int
     this->maxEatAmount = maxEatAmount;
     this->health = health;
     this->maxHealth = maxHealth;
+    this->foodTypes = std::move(foodTypes);
 }
 
 int Animal::calculateAmountToEat(Resource &resource) const {

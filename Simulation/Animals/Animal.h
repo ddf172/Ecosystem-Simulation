@@ -35,10 +35,11 @@ protected:
     AnimalType type;
     int maxEatAmount;
     int calculateAmountToEat(Resource& resource) const;
+    std::vector<ResourceType> foodTypes;
 
 public:
     Animal(int id, int startX, int startY, int speed, int currentEnergy, int maxEnergy,
-           int sightRange, int strength, AnimalType type, int maxEatAmount, int health, int maxHealth);
+           int sightRange, int strength, AnimalType type, int maxEatAmount, int health, int maxHealth, std::vector<ResourceType> foodTypes);
     int getX() const;
     int getY() const;
     int getCurrentEnergy() const;
