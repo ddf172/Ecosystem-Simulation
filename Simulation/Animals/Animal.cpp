@@ -62,6 +62,10 @@ AnimalType Animal::getType() {
     return type;
 }
 
+std::vector<ResourceType> Animal::getFoodTypes() const {
+    return foodTypes;
+}
+
 void Animal::move(int desX, int desY) {
     posX = desX;
     posY = desY;

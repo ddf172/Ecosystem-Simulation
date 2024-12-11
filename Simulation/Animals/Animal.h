@@ -34,7 +34,6 @@ protected:
     int maxHealth;
     AnimalType type;
     int maxEatAmount;
-    int calculateAmountToEat(Resource& resource) const;
     std::vector<ResourceType> foodTypes;
 
 public:
@@ -47,7 +46,9 @@ public:
     int getSpeed() const;
     int getHealth() const;
     int getSightRange() const;
+    std::vector<ResourceType> getFoodTypes() const;
     AnimalType getType();
+    int calculateAmountToEat(Resource& resource) const;
 
     /* COMMENT FROM PIT: Mysle ze bedzie git, jezeli zrobimy ten pomysl ze kazdy animal ma 2 dostepne akcje
      * i teraz -> move() - moze byc tylko w pierwszej akcji

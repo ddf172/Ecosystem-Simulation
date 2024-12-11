@@ -12,7 +12,7 @@ private:
     Tile* currentTile;
 
 public:
-    EatActionChooserDefault(Tile* currentTile);
+    explicit EatActionChooserDefault(Tile* currentTile);
 
     Action* chooseAction(Animal* animal) override;
 
