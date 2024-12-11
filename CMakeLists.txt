@@ -61,6 +61,8 @@ add_executable(Ecosystem_Simulation
         Simulation/ActionChoosers/IActionChooser.h
         Simulation/ActionChoosers/EatActionChoosers/EatActionChooserDefault.cpp
         Simulation/ActionChoosers/EatActionChoosers/EatActionChooserDefault.h
+        Simulation/ActionChoosers/MoveActionChooser/MoveActionChooserNearestResourceTile.cpp
+        Simulation/ActionChoosers/MoveActionChooser/MoveActionChooserNearestResourceTile.h
 )
 
 target_link_libraries(Ecosystem_Simulation PRIVATE sfml-graphics sfml-system sfml-window)

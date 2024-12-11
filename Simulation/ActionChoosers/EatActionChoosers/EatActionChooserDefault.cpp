@@ -4,6 +4,7 @@
 EatActionChooserDefault::EatActionChooserDefault(Tile* currentTile) : currentTile(currentTile) {}
 
 Action* EatActionChooserDefault::chooseAction(Animal* animal) {
+    int resourceAmountThreshold = 20;
     std::unique_ptr<std::vector<Resource*>> resourcesOnTile(currentTile->getResourcesOnTile());
 
     std::vector<ResourceType> foodTypes = animal->getFoodTypes();
@@ -11,6 +12,10 @@ Action* EatActionChooserDefault::chooseAction(Animal* animal) {
 
     for (auto& resource : *resourcesOnTile) {
         if (std::find(foodTypes.begin(), foodTypes.end(), resource->getType()) != foodTypes.end()) {
+            if (resource->getAmount() < resourceAmountThreshold) {
+                continue;
+            }
+
             int eatAmount = animal->calculateAmountToEat(*resource);
             if (eatAmount * resource->getEnergyValue() > bestResource.second) {
                 bestResource = std::make_pair(resource, eatAmount * resource->getEnergyValue());
