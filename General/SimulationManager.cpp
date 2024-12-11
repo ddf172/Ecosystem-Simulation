@@ -11,6 +11,7 @@
 
 #include "Rendering/Renderer.h"
 #include "Simulation/Resources/GrassResource.h"
+#include "Simulation/Resources/MeatResource.h"
 
 SimulationManager::SimulationManager(Grid *grid) {
     this->grid = grid;
@@ -68,9 +69,8 @@ void SimulationManager::manageTurn() {
                     animals->erase(it);
                     animalErased = true;
 
-                    // Place meat on map
+                    tile->addResourceOnTile(new MeatResource(actionDie->getResourceAmount(), 3));
 
-                    // at this moment delete animal causes error, so right now we have nice memory leak
                     delete animal;
 
                 }

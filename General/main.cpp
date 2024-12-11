@@ -7,6 +7,7 @@
 #include "Grid.h"
 #include "Simulation/Animals/HerbivoreAnimal.h"
 #include "General/SimulationManager.h"
+#include "Simulation/Resources/MeatResource.h"
 
 // Created purely to test rendering
 int getRandomNumber() {
@@ -38,5 +39,6 @@ int main() {
     manager.runSimulation();
 
     delete grid;
+
     return 0;
 }
