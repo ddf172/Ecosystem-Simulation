@@ -11,6 +11,11 @@ class MoveActionChooserNearestResourceTile : public IActionChooser{
 private:
     std::vector<Tile*>& tilesWithResources;
 public:
+    /**
+     * Contract: tilesWithResources has to be within reaching distance of the animal
+     * Constructor for MoveActionChooserNearestResourceTile
+     * @param tilesWithResources vector of tiles with resources
+     */
     explicit MoveActionChooserNearestResourceTile(std::vector<Tile*>& tilesWithResources);
     Action* chooseAction(Animal* animal) override;
     ~MoveActionChooserNearestResourceTile() override = default;
