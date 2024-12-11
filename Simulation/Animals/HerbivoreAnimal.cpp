@@ -29,7 +29,7 @@ Action* HerbivoreAnimal::chooseMoveActionToNearestTileWithFood(std::vector<Tile*
     std::vector<Tile*> tilesWithFood;
     std::vector<ResourceType> foodTypes = {GRASS};
 
-    tilesWithFood = getTilesWithResources(surroundingTiles, foodTypes);
+    tilesWithFood = getTilesWithResources(surroundingTiles, foodTypes, 20);
     if (tilesWithFood.empty()) {
         return nullptr;
     }

@@ -5,10 +5,24 @@
 #ifndef ECOSYSTEM_SIMULATION_BRAIN_H
 #define ECOSYSTEM_SIMULATION_BRAIN_H
 
+#include <memory>
+#include <vector>
+#include "../ActionChoosers/IActionChooser.h"
+#include "../Animals/Animal.h"
 
 class Brain {
+private:
+    std::vector<std::shared_ptr<IActionChooser>> actionChoosers;
+    Animal* animal;
 
+public:
+    explicit Brain(Animal* animal);
+
+    void addActionChooser(IActionChooser* actionChooser);
+
+    std::unique_ptr<Action> chooseAction();
+
+    void clearActionChoosers();
 };
-
 
 #endif //ECOSYSTEM_SIMULATION_BRAIN_H
