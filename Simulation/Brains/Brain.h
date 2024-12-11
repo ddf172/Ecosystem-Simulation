@@ -20,7 +20,7 @@ public:
 
     void addActionChooser(IActionChooser* actionChooser);
 
-    std::unique_ptr<Action> chooseAction();
+    Action* chooseAction();
 
     void clearActionChoosers();
 };

@@ -10,14 +10,14 @@ void Brain::addActionChooser(IActionChooser* actionChooser) {
     actionChoosers.emplace_back(actionChooser);
 }
 
-std::unique_ptr<Action> Brain::chooseAction() {
+Action* Brain::chooseAction() {
     for (const auto& actionChooser : actionChoosers) {
-        std::unique_ptr<Action> action(actionChooser->chooseAction(animal));
+        Action* action(actionChooser->chooseAction(animal));
         if (action != nullptr) {
             return action;
         }
     }
-    return std::make_unique<ActionMove>(0, 0);
+    return new ActionMove(0, 0);
 }
 
 void Brain::clearActionChoosers() {
