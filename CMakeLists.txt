@@ -56,6 +56,8 @@ add_executable(Ecosystem_Simulation
         General/Rendering/GraphicTile.cpp
         General/Rendering/GraphicTile.h
         Utilities/MergingContainer.h
+        Simulation/Resources/MeatResource.cpp
+        Simulation/Resources/MeatResource.h
 )
 
 target_link_libraries(Ecosystem_Simulation PRIVATE sfml-graphics sfml-system sfml-window)
