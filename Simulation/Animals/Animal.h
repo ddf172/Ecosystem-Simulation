@@ -14,14 +14,15 @@
 #include "Simulation/Actions/ActionEat.h"
 #include "Simulation/Actions/ActionDie.h"
 #include "Utilities/Utilities.h"
+#include "../Brains/Brain.h"
 
 class Tile;
 
+class Brain;
+
 class Animal {
-// Current uncommented code is for testing until
-// sensible solution to Animal code structure is implemented
+
 protected:
-    // I think id will be useful
     int id;
     int posX;
     int posY;
@@ -35,7 +36,9 @@ protected:
     AnimalType type;
     int maxEatAmount;
     std::vector<ResourceType> foodTypes;
+    Brain brain;
 
+    virtual void initializeBrain() = 0;
 public:
     Animal(int id, int startX, int startY, int speed, int currentEnergy, int maxEnergy,
            int sightRange, int strength, AnimalType type, int maxEatAmount, int health, int maxHealth, std::vector<ResourceType> foodTypes);

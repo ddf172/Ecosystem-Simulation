@@ -4,23 +4,11 @@
 
 #include "Animal.h"
 
-#include <iostream>
-
 Animal::Animal(int id, int startX, int startY, int speed, int currentEnergy, int maxEnergy,
-               int sightRange, int strength, AnimalType type, int maxEatAmount, int health, int maxHealth, std::vector<ResourceType> foodTypes) {
-    this->id = id;
-    this->posX = startX;
-    this->posY = startY;
-    this->currentEnergy = currentEnergy;
-    this->maxEnergy = maxEnergy;
-    this->speed = speed;
-    this->sightRange = sightRange;
-    this->strength = strength;
-    this->type = type;
-    this->maxEatAmount = maxEatAmount;
-    this->health = health;
-    this->maxHealth = maxHealth;
-    this->foodTypes = std::move(foodTypes);
+               int sightRange, int strength, AnimalType type, int maxEatAmount, int health, int maxHealth, std::vector<ResourceType> foodTypes)
+        : id(id), posX(startX), posY(startY), currentEnergy(currentEnergy), maxEnergy(maxEnergy),
+          speed(speed), sightRange(sightRange), strength(strength), type(type), maxEatAmount(maxEatAmount),
+          health(health), maxHealth(maxHealth), foodTypes(std::move(foodTypes)), brain(this) {
 }
 
 int Animal::calculateAmountToEat(Resource &resource) const {

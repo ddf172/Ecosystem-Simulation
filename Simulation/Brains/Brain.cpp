@@ -1,7 +1,3 @@
-//
-// Created by ddf on 11.12.2024.
-//
-
 #include "Brain.h"
 #include <iostream>
 
@@ -23,4 +19,8 @@ Action* Brain::chooseAction() {
 
 void Brain::clearActionChoosers() {
     actionChoosers.clear();
+}
+
+std::vector<std::shared_ptr<IActionChooser>>& Brain::getActionChoosers() {
+    return actionChoosers;
 }

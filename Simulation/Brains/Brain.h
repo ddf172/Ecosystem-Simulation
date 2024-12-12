@@ -5,10 +5,15 @@
 #ifndef ECOSYSTEM_SIMULATION_BRAIN_H
 #define ECOSYSTEM_SIMULATION_BRAIN_H
 
-#include <memory>
 #include <vector>
+#include <memory>
 #include "../ActionChoosers/IActionChooser.h"
-#include "../Animals/Animal.h"
+#include "../Actions/Action.h"
+#include "../Actions/ActionMove.h"
+
+class IActionChooser;
+
+class Animal;
 
 class Brain {
 private:
@@ -23,6 +28,8 @@ public:
     Action* chooseAction();
 
     void clearActionChoosers();
+
+    std::vector<std::shared_ptr<IActionChooser>>& getActionChoosers();
 
     ~Brain() = default;
 };

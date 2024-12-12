@@ -8,7 +8,6 @@
 #include <vector>
 #include "Animal.h"
 #include "Utilities/Utilities.h"
-#include "../Brains/Brain.h"
 #include "../ActionChoosers/EatActionChoosers/EatActionChooserDefault.h"
 #include "../ActionChoosers/MoveActionChoosers/MoveActionChooserNearestResourceTile.h"
 #include "../ActionChoosers/DieActionChoosers/DieActionChooserDefault.h"
@@ -17,6 +16,9 @@
 
 
 class HerbivoreAnimal: public Animal {
+private:
+    void initializeBrain() override;
+
 public:
 
     HerbivoreAnimal(int id, int startX, int startY);

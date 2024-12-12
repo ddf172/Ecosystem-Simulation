@@ -5,8 +5,9 @@
 #ifndef ECOSYSTEM_SIMULATION_IACTIONCHOOSER_H
 #define ECOSYSTEM_SIMULATION_IACTIONCHOOSER_H
 
-#include "../Actions/Action.h"
 #include "../Animals/Animal.h"
+
+class Animal;
 
 class IActionChooser {
     public:
