@@ -74,7 +74,11 @@ void Animal::eat(int increase) {
     currentEnergy += std::min(increase, maxEnergy - currentEnergy);
 }
 
-Animal::~Animal() {}
+Animal::~Animal() {
+//    if (brain != nullptr) {
+//        delete brain;
+//    }
+}
 
 int Animal::calculateEnergyLoss(Action *action) {
     switch (action->getType()) {

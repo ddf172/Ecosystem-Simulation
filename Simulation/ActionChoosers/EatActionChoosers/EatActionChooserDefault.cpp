@@ -1,13 +1,12 @@
 #include "EatActionChooserDefault.h"
-#include <iostream>
-#include <cassert>
 
-EatActionChooserDefault::EatActionChooserDefault(Tile* currentTile) : currentTile(currentTile) {}
+EatActionChooserDefault::EatActionChooserDefault(std::shared_ptr<Tile> currentTile)
+        : currentTile(std::move(currentTile)) {}
 
 EatActionChooserDefault::EatActionChooserDefault() : currentTile(nullptr) {}
 
 Action* EatActionChooserDefault::chooseAction(Animal* animal) {
-    assert (currentTile != nullptr);
+    assert(currentTile != nullptr);
 
     int resourceAmountThreshold = 20;
     std::vector<Resource*>* resourcesOnTile(currentTile->getResourcesOnTile());
@@ -39,9 +38,5 @@ Action* EatActionChooserDefault::chooseAction(Animal* animal) {
 }
 
 void EatActionChooserDefault::setCurrentTile(Tile* newCurrentTile) {
-    this->currentTile = newCurrentTile;
-}
-
-EatActionChooserDefault::~EatActionChooserDefault(){
-    delete currentTile;
+    currentTile = std::shared_ptr<Tile>(newCurrentTile);
 }
