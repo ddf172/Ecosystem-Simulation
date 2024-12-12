@@ -56,6 +56,15 @@ add_executable(Ecosystem_Simulation
         General/Rendering/GraphicTile.cpp
         General/Rendering/GraphicTile.h
         Utilities/MergingContainer.h
+        Simulation/Brains/Brain.cpp
+        Simulation/Brains/Brain.h
+        Simulation/ActionChoosers/IActionChooser.h
+        Simulation/ActionChoosers/EatActionChoosers/EatActionChooserDefault.cpp
+        Simulation/ActionChoosers/EatActionChoosers/EatActionChooserDefault.h
+        Simulation/ActionChoosers/MoveActionChoosers/MoveActionChooserNearestResourceTile.cpp
+        Simulation/ActionChoosers/MoveActionChoosers/MoveActionChooserNearestResourceTile.h
+        Simulation/ActionChoosers/DieActionChoosers/DieActionChooserDefault.cpp
+        Simulation/ActionChoosers/DieActionChoosers/DieActionChooserDefault.h
         Simulation/Resources/MeatResource.cpp
         Simulation/Resources/MeatResource.h
 )

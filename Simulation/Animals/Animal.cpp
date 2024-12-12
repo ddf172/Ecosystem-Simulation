@@ -4,29 +4,25 @@
 
 #include "Animal.h"
 
-#include <iostream>
-
 Animal::Animal(int id, int startX, int startY, int speed, int currentEnergy, int maxEnergy,
-               int sightRange, int strength, AnimalType type, int maxEatAmount, int health, int maxHealth) {
-    this->id = id;
-    this->posX = startX;
-    this->posY = startY;
-    this->currentEnergy = currentEnergy;
-    this->maxEnergy = maxEnergy;
-    this->speed = speed;
-    this->sightRange = sightRange;
-    this->strength = strength;
-    this->type = type;
-    this->maxEatAmount = maxEatAmount;
-    this->health = health;
-    this->maxHealth = maxHealth;
+               int sightRange, int strength, AnimalType type, int maxEatAmount, int health, int maxHealth, std::vector<ResourceType> foodTypes)
+        : id(id), posX(startX), posY(startY), currentEnergy(currentEnergy), maxEnergy(maxEnergy),
+          speed(speed), sightRange(sightRange), strength(strength), type(type), maxEatAmount(maxEatAmount),
+          health(health), maxHealth(maxHealth), foodTypes(std::move(foodTypes)), brain(nullptr) {
 }
 
 int Animal::calculateAmountToEat(Resource &resource) const {
     int missingEnergy = maxEnergy - currentEnergy;
     int maxEatAmountLocal = int(missingEnergy/resource.getEnergyValue());
     return std::min(std::min(maxEatAmountLocal, maxEatAmount), resource.getAmount());
+}
 
+int Animal::getId() const {
+    return id;
+}
+
+bool Animal::isAlive() const {
+    return health > 0 && currentEnergy > 0;
 }
 
 int Animal::getX() const {
@@ -53,12 +49,20 @@ int Animal::getHealth() const {
     return health;
 }
 
+int Animal::getMaxHealth() const {
+    return maxHealth;
+}
+
 int Animal::getSpeed() const {
     return speed;
 }
 
 AnimalType Animal::getType() {
     return type;
+}
+
+std::vector<ResourceType> Animal::getFoodTypes() const {
+    return foodTypes;
 }
 
 void Animal::move(int desX, int desY) {
@@ -70,7 +74,7 @@ void Animal::eat(int increase) {
     currentEnergy += std::min(increase, maxEnergy - currentEnergy);
 }
 
-Animal::~Animal() = default;
+Animal::~Animal() {}
 
 int Animal::calculateEnergyLoss(Action *action) {
     switch (action->getType()) {
@@ -111,12 +115,4 @@ void Animal::executeAction(Action *action) {
     }
 
     currentEnergy -= 10;
-}
-
-Action* Animal::isAlive() const {
-    int resourceAmount = maxHealth / 2 + currentEnergy / 2;
-    if (this->health <= 0 || this->currentEnergy <= 0) {
-        return new ActionDie(resourceAmount);
-    }
-    return nullptr;
 }
