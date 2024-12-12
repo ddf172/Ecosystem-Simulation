@@ -37,3 +37,11 @@ Action* EatActionChooserDefault::chooseAction(Animal* animal) {
 
     return nullptr;
 }
+
+void EatActionChooserDefault::setCurrentTile(Tile* newCurrentTile) {
+    this->currentTile = newCurrentTile;
+}
+
+EatActionChooserDefault::~EatActionChooserDefault(){
+    delete currentTile;
+}

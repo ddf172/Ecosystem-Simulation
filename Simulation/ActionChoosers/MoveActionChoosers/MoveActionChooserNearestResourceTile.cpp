@@ -28,3 +28,9 @@ Action* MoveActionChooserNearestResourceTile::chooseAction(Animal* animal) {
 
     return new ActionMove(nearestTile->getX(), nearestTile->getY());
 }
+
+void MoveActionChooserNearestResourceTile::setTilesWithResources(std::vector<Tile*>& newTilesWithResources) {
+    tilesWithResources = newTilesWithResources;
+}
+
+MoveActionChooserNearestResourceTile::~MoveActionChooserNearestResourceTile() = default;

@@ -21,7 +21,9 @@ public:
     MoveActionChooserNearestResourceTile();
 
     Action* chooseAction(Animal* animal) override;
-    ~MoveActionChooserNearestResourceTile() override = default;
+    ~MoveActionChooserNearestResourceTile() override;
+
+    void setTilesWithResources(std::vector<Tile*>& newTilesWithResources);
 };
 
 

@@ -20,7 +20,9 @@ public:
 
     Action* chooseAction(Animal* animal) override;
 
-    ~EatActionChooserDefault() override = default;
+    ~EatActionChooserDefault() override;
+
+    void setCurrentTile(Tile* newCurrentTile);
 };
 
 
