@@ -6,6 +6,8 @@
 
 MoveActionChooserNearestResourceTile::MoveActionChooserNearestResourceTile(std::vector<Tile*>& tilesWithResources) : tilesWithResources(tilesWithResources) {}
 
+MoveActionChooserNearestResourceTile::MoveActionChooserNearestResourceTile() : tilesWithResources(std::vector<Tile*>()) {}
+
 Action* MoveActionChooserNearestResourceTile::chooseAction(Animal* animal) {
     if (tilesWithResources.empty()) {
         return nullptr;

@@ -3,6 +3,8 @@
 
 EatActionChooserDefault::EatActionChooserDefault(Tile* currentTile) : currentTile(currentTile) {}
 
+EatActionChooserDefault::EatActionChooserDefault() : currentTile(nullptr) {}
+
 Action* EatActionChooserDefault::chooseAction(Animal* animal) {
     int resourceAmountThreshold = 20;
     std::vector<Resource*>* resourcesOnTile(currentTile->getResourcesOnTile());
