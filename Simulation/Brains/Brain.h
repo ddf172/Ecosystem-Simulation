@@ -5,15 +5,12 @@
 #ifndef ECOSYSTEM_SIMULATION_BRAIN_H
 #define ECOSYSTEM_SIMULATION_BRAIN_H
 
-#include <vector>
 #include <memory>
+#include <vector>
 #include "../ActionChoosers/IActionChooser.h"
-#include "../Actions/Action.h"
-#include "../Actions/ActionMove.h"
-
-class IActionChooser;
 
 class Animal;
+class IActionChooser;
 
 class Brain {
 private:

@@ -8,14 +8,13 @@ Animal::Animal(int id, int startX, int startY, int speed, int currentEnergy, int
                int sightRange, int strength, AnimalType type, int maxEatAmount, int health, int maxHealth, std::vector<ResourceType> foodTypes)
         : id(id), posX(startX), posY(startY), currentEnergy(currentEnergy), maxEnergy(maxEnergy),
           speed(speed), sightRange(sightRange), strength(strength), type(type), maxEatAmount(maxEatAmount),
-          health(health), maxHealth(maxHealth), foodTypes(std::move(foodTypes)), brain(this) {
+          health(health), maxHealth(maxHealth), foodTypes(std::move(foodTypes)), brain(nullptr) {
 }
 
 int Animal::calculateAmountToEat(Resource &resource) const {
     int missingEnergy = maxEnergy - currentEnergy;
     int maxEatAmountLocal = int(missingEnergy/resource.getEnergyValue());
     return std::min(std::min(maxEatAmountLocal, maxEatAmount), resource.getAmount());
-
 }
 
 int Animal::getId() const {
@@ -75,7 +74,7 @@ void Animal::eat(int increase) {
     currentEnergy += std::min(increase, maxEnergy - currentEnergy);
 }
 
-Animal::~Animal() = default;
+Animal::~Animal() {}
 
 int Animal::calculateEnergyLoss(Action *action) {
     switch (action->getType()) {
