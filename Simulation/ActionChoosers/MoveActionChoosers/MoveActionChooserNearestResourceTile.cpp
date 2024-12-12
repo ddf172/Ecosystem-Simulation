@@ -2,6 +2,7 @@
 // Created by ddf on 11.12.2024.
 //
 
+#include <cassert>
 #include "MoveActionChooserNearestResourceTile.h"
 
 MoveActionChooserNearestResourceTile::MoveActionChooserNearestResourceTile(std::vector<Tile*>& tilesWithResources) : tilesWithResources(tilesWithResources) {}
@@ -9,6 +10,8 @@ MoveActionChooserNearestResourceTile::MoveActionChooserNearestResourceTile(std::
 MoveActionChooserNearestResourceTile::MoveActionChooserNearestResourceTile() : tilesWithResources(std::vector<Tile*>()) {}
 
 Action* MoveActionChooserNearestResourceTile::chooseAction(Animal* animal) {
+    assert (animal != nullptr);
+
     if (tilesWithResources.empty()) {
         return nullptr;
     }

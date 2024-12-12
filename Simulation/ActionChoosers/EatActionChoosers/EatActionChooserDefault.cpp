@@ -1,11 +1,14 @@
 #include "EatActionChooserDefault.h"
 #include <iostream>
+#include <cassert>
 
 EatActionChooserDefault::EatActionChooserDefault(Tile* currentTile) : currentTile(currentTile) {}
 
 EatActionChooserDefault::EatActionChooserDefault() : currentTile(nullptr) {}
 
 Action* EatActionChooserDefault::chooseAction(Animal* animal) {
+    assert (currentTile != nullptr);
+
     int resourceAmountThreshold = 20;
     std::vector<Resource*>* resourcesOnTile(currentTile->getResourcesOnTile());
 
