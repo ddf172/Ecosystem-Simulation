@@ -11,8 +11,9 @@
 
 class GraphicTile {
     Tile* tile;
-    sf::RectangleShape shape;
+    sf::RectangleShape tileShape;
     sf::RenderWindow* window;
+    sf::RectangleShape meatShape;
 public:
     GraphicTile(Tile* tile, sf::RenderWindow* window, float tileSize);
     void updateFillColor();
