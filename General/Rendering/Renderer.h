@@ -18,7 +18,6 @@ class Renderer {
     std::vector<GraphicTile> graphicTiles;
     float tileSize;
     void initRender();
-    sf::Color getTileColor(Tile* tile);
 public:
     Renderer(Grid *grid);
     void renderTurn();

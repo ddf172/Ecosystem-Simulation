@@ -8,7 +8,7 @@
 #include <iostream>
 
 void Tile::addResourceOnTile(Resource* resource) {
-    this->resourcesOnTile.addItem(resource);
+    this->resourcesOnTile += resource;
 }
 
 std::vector<Resource*>* Tile::getResourcesOnTile() {
@@ -48,6 +48,9 @@ int Tile::getY() const {
 Tile::~Tile() {
     for(Resource* resource : this->resourcesOnTile) {
         delete resource;
+    }
+    for(Animal* animal : this->animalsOnTile) {
+        delete animal;
     }
 }
 

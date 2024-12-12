@@ -1,5 +1,8 @@
 #ifndef RESOURCECONTAINER_H
 #define RESOURCECONTAINER_H
+
+#include <algorithm>
+#include <iostream>
 #include <vector>
 #include "Simulation/Resources/Resource.h"
 #include <type_traits>
@@ -17,12 +20,12 @@ public:
     typename std::vector<T>::const_iterator begin() const;
     typename std::vector<T>::const_iterator end() const;
 
-    void addItem(T item);
+    void operator+=(T item);
     std::vector<T>* getData();
 };
 
 template<typename T>
-void MergingContainer<T>::addItem(T item) {
+void MergingContainer<T>::operator+=(T item) {
     Resource* newResource = dynamic_cast<Resource*>(item);
     for(Resource* resource : this->data) {
         if(resource->getType() == newResource->getType()) {
@@ -35,6 +38,16 @@ void MergingContainer<T>::addItem(T item) {
 
 template<typename T>
 std::vector<T>* MergingContainer<T>::getData() {
+    for (std::vector<Resource*>::iterator it = this->data.begin(); it != this->data.end();) {
+        Resource* resource = dynamic_cast<Resource*>(*it);
+        if(resource->getType() == MEAT && resource->getAmount() == 0) {
+            delete resource;
+            it = this->data.erase(it);
+        }
+        else {
+            ++it;
+        }
+    }
     return &this->data;
 }
 
