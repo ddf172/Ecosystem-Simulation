@@ -3,6 +3,7 @@
 //
 
 #include "Brain.h"
+#include <iostream>
 
 Brain::Brain(Animal* animal) : animal(animal) {}
 

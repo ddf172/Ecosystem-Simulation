@@ -6,11 +6,11 @@
 
 HerbivoreAnimal::HerbivoreAnimal(int id, int startX, int startY) :
 Animal(id, startX, startY, 5, 50, 100, 5, 1, AnimalType::HERBIVORE,
-       25, 100, 100, std::vector<ResourceType>(ResourceType::GRASS)){}
+       25, 100, 100, {ResourceType::GRASS}){}
 
 HerbivoreAnimal::HerbivoreAnimal(int id, int startX, int startY, int speed, int currentEnergy, int maxEnergy,
                                  int sightRange, int strength, int maxEatAmount, int health, int maxHealth) :
-Animal(id, startX, startY, speed, currentEnergy, maxEnergy, sightRange, strength, AnimalType::HERBIVORE, maxEatAmount, health, maxHealth, std::vector<ResourceType>(ResourceType::GRASS)){}
+Animal(id, startX, startY, speed, currentEnergy, maxEnergy, sightRange, strength, AnimalType::HERBIVORE, maxEatAmount, health, maxHealth, {ResourceType::GRASS}){}
 
 Action* HerbivoreAnimal::chooseEatAction(Tile *currentTile) {
     std::vector<Resource*>* resourcesOnTile = currentTile->getResourcesOnTile();
@@ -46,21 +46,12 @@ Action* HerbivoreAnimal::chooseMoveActionToNearestTileWithFood(std::vector<Tile*
 }
 
 Action* HerbivoreAnimal::chooseAction(std::vector<Tile*> &surroundingTiles){
-    Action* action;
-    if (currentEnergy <= 0) {
-        action = new ActionDie(100);
-        return action;
-    }
-    action = chooseEatAction(getCurrentPositionTile(surroundingTiles, this->getX(), this->getY()));
-    if (action != nullptr) return action;
-
-    if (currentEnergy < maxEnergy / 2) {
-        action = chooseMoveActionToNearestTileWithFood(surroundingTiles);
-    }
-    if (action != nullptr) return action;
-
-    // If no action was chosen, return move to the current position so basically do nothing
-    return new ActionMove(this->getX(), this->getY());
+    Tile *currentTile = getCurrentPositionTile(surroundingTiles, getX(), getY());
+    Brain brain(this);
+    brain.addActionChooser(new DieActionChooserDefault());
+    brain.addActionChooser(new EatActionChooserDefault(currentTile));
+    brain.addActionChooser(new MoveActionChooserNearestResourceTile(surroundingTiles));
+    return brain.chooseAction();
 }
 
 HerbivoreAnimal::~HerbivoreAnimal() = default;

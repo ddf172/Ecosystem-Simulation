@@ -30,6 +30,10 @@ int Animal::calculateAmountToEat(Resource &resource) const {
 
 }
 
+int Animal::getId() const {
+    return id;
+}
+
 bool Animal::isAlive() const {
     return health > 0 && currentEnergy > 0;
 }

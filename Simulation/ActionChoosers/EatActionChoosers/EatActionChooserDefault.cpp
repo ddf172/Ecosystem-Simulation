@@ -1,11 +1,11 @@
 #include "EatActionChooserDefault.h"
-#include <memory>
+#include <iostream>
 
 EatActionChooserDefault::EatActionChooserDefault(Tile* currentTile) : currentTile(currentTile) {}
 
 Action* EatActionChooserDefault::chooseAction(Animal* animal) {
     int resourceAmountThreshold = 20;
-    std::unique_ptr<std::vector<Resource*>> resourcesOnTile(currentTile->getResourcesOnTile());
+    std::vector<Resource*>* resourcesOnTile(currentTile->getResourcesOnTile());
 
     std::vector<ResourceType> foodTypes = animal->getFoodTypes();
     std::pair<Resource*, int> bestResource = std::make_pair(nullptr, 0);

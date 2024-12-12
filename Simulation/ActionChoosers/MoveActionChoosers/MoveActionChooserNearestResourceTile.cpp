@@ -12,6 +12,9 @@ Action* MoveActionChooserNearestResourceTile::chooseAction(Animal* animal) {
     }
 
     Tile* nearestTile = *std::min_element(tilesWithResources.begin(), tilesWithResources.end(), [animal](Tile* a, Tile* b) {
+        if (a->getX() == animal->getX() && a->getY() == animal->getY()) {
+            return false;
+        }
         int distanceA = calculateDistance(animal->getX(), animal->getY(), a->getX(), a->getY());
         int distanceB = calculateDistance(animal->getX(), animal->getY(), b->getX(), b->getY());
         return distanceA < distanceB;

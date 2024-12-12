@@ -23,6 +23,8 @@ public:
     Action* chooseAction();
 
     void clearActionChoosers();
+
+    ~Brain() = default;
 };
 
 #endif //ECOSYSTEM_SIMULATION_BRAIN_H

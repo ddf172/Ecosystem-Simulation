@@ -3,6 +3,7 @@
 //
 
 #include "DieActionChooserDefault.h"
+#include <iostream>
 
 Action* DieActionChooserDefault::chooseAction(Animal* animal) {
     if (!animal->isAlive()) {
