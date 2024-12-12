@@ -13,8 +13,6 @@ GrassResource::GrassResource(int amount, int energyValue, int regrowAmount, int 
     this->maxRegrowCooldown = regrowCooldown;
 }
 
-GrassResource::~GrassResource() = default;
-
 int GrassResource::getCurrentRegrowCooldown() const {
     return currentRegrowCooldown;
 }

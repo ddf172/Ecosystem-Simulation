@@ -11,6 +11,7 @@ class MeatResource: public Resource  {
 
 public:
     MeatResource(int amount, int energyValue);
+    ~MeatResource() override = default;
 };
 
 
