@@ -13,8 +13,10 @@
 #include "Simulation/Resources/GrassResource.h"
 #include "Simulation/Resources/MeatResource.h"
 
-SimulationManager::SimulationManager(Grid *grid) {
+SimulationManager::SimulationManager(Grid *grid, bool renderGame, int maxTurns) {
     this->grid = grid;
+    this->renderGame = renderGame;
+    this->maxTurns = maxTurns;
 }
 
 void SimulationManager::manageTurn() {
@@ -81,24 +83,38 @@ void SimulationManager::manageTurn() {
 }
 
 void SimulationManager::runSimulation() {
-    Renderer renderer(grid);
-    sf::RenderWindow* window = renderer.getWindow();
+    int currentTurn = 0;
+    if (renderGame) {
+        Renderer renderer(grid);
+        sf::RenderWindow* window = renderer.getWindow();
 
-    sf::Clock clock;
-    sf::Time renderInterval = sf::seconds(0.3f);
-    sf::Time elapsedTime = sf::Time::Zero;
+        sf::Clock clock;
+        sf::Time renderInterval = sf::seconds(0.3f);
+        sf::Time elapsedTime = sf::Time::Zero;
 
-    while (window->isOpen()) {
-        sf::Event event;
-        while (window->pollEvent(event)) {
-            if (event.type == sf::Event::Closed)
-                window->close();
+        while (window->isOpen()) {
+            sf::Event event;
+            while (window->pollEvent(event)) {
+                if (event.type == sf::Event::Closed)
+                    window->close();
+            }
+
+            elapsedTime = clock.getElapsedTime();
+            if (elapsedTime >= renderInterval) {
+                renderer.renderTurn();
+                clock.restart();
+                manageTurn();
+                currentTurn++;
+                if (currentTurn == this->maxTurns) {
+                    window->close();
+                }
+            }
         }
-
-        elapsedTime = clock.getElapsedTime();
-        if (elapsedTime >= renderInterval) {
-            renderer.renderTurn();
-            clock.restart();
+    }
+    else {
+        while (currentTurn < maxTurns) {
+            currentTurn++;
+            std::cout << "Turn " << currentTurn << '\n';
             manageTurn();
         }
     }

@@ -90,12 +90,3 @@ Grid::~Grid() {
         }
     }
 }
-
-void Grid::printGrid() {
-    std::cerr << "Printing\n";
-    for(int i = 0; i < getHeight(); i++) {
-        for(int j = 0; j < getWidth(); j++) {
-            if (tiles[i][j]->getX() != j) std::cerr << tiles[i][j]->getX() << '\n';
-        }
-    }
-}
