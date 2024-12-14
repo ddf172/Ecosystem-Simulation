@@ -29,8 +29,6 @@ void SimulationManager::manageTurn() {
                     grass->regenerate();
                 }
             }
-            // remove meat if there is no meat
-            std::remove_if(resources->begin(), resources->end(), [](Resource* resource){ return resource->getType() == MEAT && resource->getAmount() <= 0;});
         }
     }
 
@@ -44,10 +42,12 @@ void SimulationManager::manageTurn() {
             for(auto it = animals->begin(); it != animals->end();) {
                 Animal* animal = *it;
                 std::vector<Tile*> surroundingTiles = grid->getSurroundingTiles(j, i, animal->getSightRange());
+
                 Action* action = animal->chooseAction(surroundingTiles);
                 bool animalErased = false;
 
                 animal->executeAction(action);
+
 
                 if (action->getType() == MOVE) {
                     ActionMove* actionMove = dynamic_cast<ActionMove*>(action);
@@ -65,20 +65,19 @@ void SimulationManager::manageTurn() {
                 }
                 else if (action-> getType() == DIE) {
                     ActionDie* actionDie = dynamic_cast<ActionDie*>(action);
-                    auto it = std::find(animals->begin(),animals->end(), animal);
-                    animals->erase(it);
+                    auto animal_it = std::find(animals->begin(),animals->end(), animal);
+                    animals->erase(animal_it);
                     animalErased = true;
 
                     tile->addResourceOnTile(new MeatResource(actionDie->getResourceAmount(), 3));
-
                     delete animal;
-
                 }
                 if (!animalErased) it++;
                 delete action;
             }
         }
     }
+
 }
 
 void SimulationManager::runSimulation() {

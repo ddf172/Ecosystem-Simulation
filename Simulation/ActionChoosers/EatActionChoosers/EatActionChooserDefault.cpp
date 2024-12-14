@@ -1,7 +1,8 @@
 #include "EatActionChooserDefault.h"
 
-EatActionChooserDefault::EatActionChooserDefault(std::shared_ptr<Tile> currentTile)
-        : currentTile(std::move(currentTile)) {}
+EatActionChooserDefault::EatActionChooserDefault(Tile* currentTile) {
+    this->currentTile = currentTile;
+}
 
 EatActionChooserDefault::EatActionChooserDefault() : currentTile(nullptr) {}
 
@@ -38,5 +39,5 @@ Action* EatActionChooserDefault::chooseAction(Animal* animal) {
 }
 
 void EatActionChooserDefault::setCurrentTile(Tile* newCurrentTile) {
-    currentTile = std::shared_ptr<Tile>(newCurrentTile);
+    currentTile = newCurrentTile;
 }

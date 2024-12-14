@@ -45,9 +45,10 @@ Renderer::Renderer(Grid *grid) {
         width = desktopRect.right * 0.8;
     #elif defined(__linux__)
         Display* d = XOpenDisplay(NULL);
-        Screen*  s = DefaultScreenOfDisplay(d);
-        width = s->width;
-        height = s->height;
+        Screen* s = DefaultScreenOfDisplay(d);
+        width = s->width * 0.8;
+        height = s->height * 0.8;
+        XCloseDisplay(d);
     #endif
 
     float maxTileHeight = height / grid->getHeight();
@@ -84,5 +85,10 @@ void Renderer::renderTurn() {
 sf::RenderWindow *Renderer::getWindow() {
     return this->window;
 }
+
+Renderer::~Renderer() {
+    delete window;
+}
+
 
 

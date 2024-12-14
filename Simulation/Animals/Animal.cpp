@@ -75,9 +75,9 @@ void Animal::eat(int increase) {
 }
 
 Animal::~Animal() {
-//    if (brain != nullptr) {
-//        delete brain;
-//    }
+    if (brain != nullptr) {
+        delete brain;
+    }
 }
 
 int Animal::calculateEnergyLoss(Action *action) {

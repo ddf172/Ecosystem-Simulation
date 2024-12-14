@@ -23,7 +23,6 @@ void HerbivoreAnimal::initializeBrain() {
 
 Action* HerbivoreAnimal::chooseAction(std::vector<Tile*> &surroundingTiles) {
     Tile *currentTile = getCurrentPositionTile(surroundingTiles, getX(), getY());
-
     std::vector<Tile*> tilesWithResources = getTilesWithResources(surroundingTiles, {GRASS}, 20);
 
     for (auto &actionChooser : brain->getActionChoosers()) {
@@ -35,7 +34,9 @@ Action* HerbivoreAnimal::chooseAction(std::vector<Tile*> &surroundingTiles) {
         }
     }
 
-    return brain->chooseAction();
+    Action* action =  brain->chooseAction();
+
+    return action;
 }
 
 HerbivoreAnimal::~HerbivoreAnimal() = default;
