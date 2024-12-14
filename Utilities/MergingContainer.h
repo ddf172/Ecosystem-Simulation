@@ -30,6 +30,7 @@ void MergingContainer<T>::operator+=(T item) {
     for(Resource* resource : this->data) {
         if(resource->getType() == newResource->getType()) {
             resource->setAmount(resource->getAmount() + newResource->getAmount());
+            delete newResource;
             return;
         }
     }

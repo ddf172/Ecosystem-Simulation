@@ -22,6 +22,7 @@ public:
     Renderer(Grid *grid);
     void renderTurn();
     sf::RenderWindow* getWindow();
+    ~Renderer();
 };
 
 
