@@ -57,7 +57,6 @@ public:
      */
     std::vector<Tile*> getSurroundingTiles(int centerX, int centerY, int range);
     ~Grid();
-    void printGrid();
 };
 
 

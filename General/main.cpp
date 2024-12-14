@@ -35,7 +35,7 @@ int main() {
     Grid* grid = new Grid(20, 20, Grid::RANDOM);
     spawnHerbivoreAnimals(grid); // Random herbivoreAnimal spawn for testing
 
-    SimulationManager manager(grid);
+    SimulationManager manager(grid, true);
     manager.runSimulation();
 
     delete grid;
