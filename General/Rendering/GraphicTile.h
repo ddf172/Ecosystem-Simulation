@@ -16,7 +16,7 @@ class GraphicTile {
     sf::RenderWindow* window;
     sf::RectangleShape meatShape;
 public:
-    GraphicTile(std::shared_ptr<Tile> tile, sf::RenderWindow* window, float tileSize);
+    GraphicTile(const std::shared_ptr<Tile>& tile, sf::RenderWindow* window, float tileSize);
     void updateFillColor();
     std::shared_ptr<Tile> getTile();
 };

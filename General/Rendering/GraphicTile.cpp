@@ -3,7 +3,7 @@
 //
 
 #include "GraphicTile.h"
-GraphicTile::GraphicTile(std::shared_ptr<Tile> tile, sf::RenderWindow *window, float tileSize) {
+GraphicTile::GraphicTile(const std::shared_ptr<Tile>& tile, sf::RenderWindow *window, float tileSize) {
     this->tile = tile;
     this->window = window;
     this->tileShape = sf::RectangleShape(sf::Vector2f(tileSize, tileSize));
