@@ -20,7 +20,7 @@ public:
 
     EatActionChooserDefault();
 
-    Action* chooseAction(Animal* animal) override;
+    std::shared_ptr<Action> chooseAction(Animal* animal) override;
 
     ~EatActionChooserDefault() override = default;
 

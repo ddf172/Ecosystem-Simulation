@@ -9,7 +9,7 @@ MoveActionChooserNearestResourceTile::MoveActionChooserNearestResourceTile(std::
 
 MoveActionChooserNearestResourceTile::MoveActionChooserNearestResourceTile() : tilesWithResources(std::vector<Tile*>()) {}
 
-Action* MoveActionChooserNearestResourceTile::chooseAction(Animal* animal) {
+std::shared_ptr<Action> MoveActionChooserNearestResourceTile::chooseAction(Animal* animal) {
     assert (animal != nullptr);
 
     if (tilesWithResources.empty()) {
@@ -26,7 +26,7 @@ Action* MoveActionChooserNearestResourceTile::chooseAction(Animal* animal) {
         return distanceA < distanceB;
     });
 
-    return new ActionMove(nearestTile->getX(), nearestTile->getY());
+    return std::make_shared<ActionMove>(nearestTile->getX(), nearestTile->getY());
 }
 
 void MoveActionChooserNearestResourceTile::setTilesWithResources(std::vector<Tile*>& newTilesWithResources) {

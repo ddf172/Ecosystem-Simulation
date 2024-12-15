@@ -6,6 +6,7 @@
 
 #include <algorithm>
 #include <iostream>
+#include <memory>
 
 #include <SFML/Graphics.hpp>
 
@@ -45,29 +46,28 @@ void SimulationManager::manageTurn() {
                 Animal* animal = *it;
                 std::vector<Tile*> surroundingTiles = grid->getSurroundingTiles(j, i, animal->getSightRange());
 
-                Action* action = animal->chooseAction(surroundingTiles);
+                std::shared_ptr<Action> action = animal->chooseAction(surroundingTiles);
                 bool animalErased = false;
 
                 animal->executeAction(action);
 
-
                 if (action->getType() == MOVE) {
-                    ActionMove* actionMove = dynamic_cast<ActionMove*>(action);
+                    auto* actionMove = dynamic_cast<ActionMove*>(action.get());
                     animals->erase(it);
                     animalErased = true;
                     grid->getTile(actionMove->getX(), actionMove->getY())->addAnimalOnTile(animal);
-                }
-                else if (action-> getType() == EAT) {
-                    ActionEat* actionEat = dynamic_cast<ActionEat*>(action);
+
+                } else if (action->getType() == EAT) {
+                    auto* actionEat = dynamic_cast<ActionEat*>(action.get());
                     for (Resource* resource : *tile->getResourcesOnTile()) {
-                        if(resource->getType() == actionEat->getResourceType()) {
+                        if (resource->getType() == actionEat->getResourceType()) {
                             resource->setAmount(resource->getAmount() - actionEat->getAmount());
                         }
                     }
-                }
-                else if (action-> getType() == DIE) {
-                    ActionDie* actionDie = dynamic_cast<ActionDie*>(action);
-                    auto animal_it = std::find(animals->begin(),animals->end(), animal);
+
+                } else if (action->getType() == DIE) {
+                    auto* actionDie = dynamic_cast<ActionDie*>(action.get());
+                    auto animal_it = std::find(animals->begin(), animals->end(), animal);
                     animals->erase(animal_it);
                     animalErased = true;
 
@@ -75,7 +75,6 @@ void SimulationManager::manageTurn() {
                     delete animal;
                 }
                 if (!animalErased) it++;
-                delete action;
             }
         }
     }

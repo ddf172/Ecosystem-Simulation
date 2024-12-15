@@ -94,23 +94,23 @@ int Animal::calculateEnergyLoss(Action *action) {
     }
 }
 
-void Animal::executeAction(Action *action) {
+void Animal::executeAction(std::shared_ptr<Action> action) {
     switch (action->getType()) {
         case ActionType::NONE:
             break;
-        case ActionType::MOVE:{
-            auto* moveAction = dynamic_cast<ActionMove*>(action);
+        case ActionType::MOVE: {
+            auto* moveAction = dynamic_cast<ActionMove*>(action.get());
             move(moveAction->getX(), moveAction->getY());
-            currentEnergy -= calculateEnergyLoss(action);
+            currentEnergy -= calculateEnergyLoss(action.get());
             break;
         }
-        case ActionType::EAT:{
-            auto* eatAction = dynamic_cast<ActionEat*>(action);
+        case ActionType::EAT: {
+            auto* eatAction = dynamic_cast<ActionEat*>(action.get());
             eat(eatAction->getAmount());
             currentEnergy -= calculateEnergyLoss(eatAction);
             break;
         }
-        case ActionType::DIE:{
+        case ActionType::DIE: {
             health = 0;
             break;
         }

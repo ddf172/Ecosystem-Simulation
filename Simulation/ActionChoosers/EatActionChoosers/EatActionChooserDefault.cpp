@@ -6,7 +6,7 @@ EatActionChooserDefault::EatActionChooserDefault(Tile* currentTile) {
 
 EatActionChooserDefault::EatActionChooserDefault() : currentTile(nullptr) {}
 
-Action* EatActionChooserDefault::chooseAction(Animal* animal) {
+std::shared_ptr<Action> EatActionChooserDefault::chooseAction(Animal* animal) {
     assert(currentTile != nullptr);
 
     int resourceAmountThreshold = 20;
@@ -29,7 +29,7 @@ Action* EatActionChooserDefault::chooseAction(Animal* animal) {
     }
 
     if (bestResource.first != nullptr) {
-        return new ActionEat(
+        return std::make_shared<ActionEat>(
                 animal->calculateAmountToEat(*bestResource.first),
                 bestResource.first->getType()
         );
