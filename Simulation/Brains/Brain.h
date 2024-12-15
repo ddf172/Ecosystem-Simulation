@@ -22,7 +22,7 @@ public:
 
     void addActionChooser(IActionChooser* actionChooser);
 
-    Action* chooseAction();
+    std::shared_ptr<Action> chooseAction();
 
     void clearActionChoosers();
 

@@ -14,6 +14,7 @@
 #include "Simulation/Actions/ActionDie.h"
 #include "Utilities/Utilities.h"
 #include "../Brains/Brain.h"
+#include <memory>
 
 class Tile;
 class Brain;
@@ -52,12 +53,12 @@ public:
     int calculateAmountToEat(Resource& resource) const;
     bool isAlive() const;
 
-    virtual Action* chooseAction(std::vector<Tile*>& surroundingTiles) = 0;
+    virtual std::shared_ptr<Action> chooseAction(std::vector<Tile*>& surroundingTiles) = 0;
     virtual void move(int desX, int desY);
     virtual void eat(int increase);
 
     virtual int calculateEnergyLoss(Action *action);
-    virtual void executeAction(Action *action);
+    virtual void executeAction(std::shared_ptr<Action> action);
 
     virtual ~Animal();
 };

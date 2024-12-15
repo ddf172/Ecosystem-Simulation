@@ -10,14 +10,14 @@ void Brain::addActionChooser(IActionChooser* actionChooser) {
     actionChoosers.emplace_back(actionChooser);
 }
 
-Action* Brain::chooseAction() {
+std::shared_ptr<Action> Brain::chooseAction() {
     for (const auto& actionChooser : actionChoosers) {
-        Action* action(actionChooser->chooseAction(animal));
+        std::shared_ptr<Action> action(actionChooser->chooseAction(animal));
         if (action != nullptr) {
             return action;
         }
     }
-    return new ActionMove(0, 0);
+    return std::make_shared<ActionMove>(0, 0);
 }
 
 void Brain::clearActionChoosers() {
