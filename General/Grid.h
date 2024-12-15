@@ -6,6 +6,7 @@
 #define GRID_H
 
 #include "Tile.h"
+#include <memory>
 #include <vector>
 
 
@@ -13,7 +14,7 @@ class Grid {
 private:
     int width;
     int height;
-    std::vector<std::vector<Tile*>> tiles;
+    std::vector<std::vector<std::shared_ptr<Tile>>> tiles;
 
     /**
     * @brief Function that checks if the given coordinates are in bounds of the grid.
@@ -45,7 +46,7 @@ public:
      * @param y
      * @return Tile
      */
-    Tile* getTile(int x, int y);
+    std::shared_ptr<Tile> getTile(int x, int y);
     /**
      * @brief Function that returns tile addresses in the radius around the given coordinates.
      *
@@ -55,8 +56,7 @@ public:
      * @param range
      * @return vector of tile addresses in the range.
      */
-    std::vector<Tile*> getSurroundingTiles(int centerX, int centerY, int range);
-    ~Grid();
+    std::vector<std::shared_ptr<Tile>> getSurroundingTiles(int centerX, int centerY, int range);
 };
 
 

@@ -53,7 +53,7 @@ public:
     int calculateAmountToEat(Resource& resource) const;
     bool isAlive() const;
 
-    virtual std::shared_ptr<Action> chooseAction(std::vector<Tile*>& surroundingTiles) = 0;
+    virtual std::shared_ptr<Action> chooseAction(std::vector<std::shared_ptr<Tile>>& surroundingTiles) = 0;
     virtual void move(int desX, int desY);
     virtual void eat(int increase);
 

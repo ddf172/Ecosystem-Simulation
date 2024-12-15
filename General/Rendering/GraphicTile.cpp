@@ -3,7 +3,7 @@
 //
 
 #include "GraphicTile.h"
-GraphicTile::GraphicTile(Tile *tile, sf::RenderWindow *window, float tileSize) {
+GraphicTile::GraphicTile(std::shared_ptr<Tile> tile, sf::RenderWindow *window, float tileSize) {
     this->tile = tile;
     this->window = window;
     this->tileShape = sf::RectangleShape(sf::Vector2f(tileSize, tileSize));
@@ -57,6 +57,6 @@ void GraphicTile::updateFillColor() {
     this->window->draw(this->meatShape);
 }
 
-Tile *GraphicTile::getTile() {
+std::shared_ptr<Tile> GraphicTile::getTile() {
     return  this->tile;
 }

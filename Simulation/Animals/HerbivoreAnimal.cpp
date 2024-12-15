@@ -1,4 +1,5 @@
 #include "HerbivoreAnimal.h"
+#include "Utilities/Utilities.h"
 
 HerbivoreAnimal::HerbivoreAnimal(int id, int startX, int startY) :
         Animal(id, startX, startY, 5, 50, 100, 5, 1, AnimalType::HERBIVORE,
@@ -21,9 +22,9 @@ void HerbivoreAnimal::initializeBrain() {
     brain->addActionChooser(new MoveActionChooserNearestResourceTile());
 }
 
-std::shared_ptr<Action> HerbivoreAnimal::chooseAction(std::vector<Tile*> &surroundingTiles) {
-    Tile *currentTile = getCurrentPositionTile(surroundingTiles, getX(), getY());
-    std::vector<Tile*> tilesWithResources = getTilesWithResources(surroundingTiles, {GRASS}, 20);
+std::shared_ptr<Action> HerbivoreAnimal::chooseAction(std::vector<std::shared_ptr<Tile>> &surroundingTiles) {
+    std::shared_ptr<Tile> currentTile = getCurrentPositionTile(surroundingTiles, getX(), getY());
+    std::vector<std::shared_ptr<Tile>> tilesWithResources = getTilesWithResources(surroundingTiles, {ResourceType::GRASS}, 20);
 
     for (auto &actionChooser : brain->getActionChoosers()) {
         if (auto *eatActionChooser = dynamic_cast<EatActionChooserDefault*>(actionChooser.get())) {

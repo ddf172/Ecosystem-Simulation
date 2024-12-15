@@ -13,10 +13,10 @@ class Tile;
 
 class EatActionChooserDefault : public IActionChooser {
 private:
-    Tile* currentTile;
+    std::shared_ptr<Tile> currentTile;
 
 public:
-    explicit EatActionChooserDefault(Tile* currentTile);
+    explicit EatActionChooserDefault(std::shared_ptr<Tile>& currentTile);
 
     EatActionChooserDefault();
 
@@ -24,7 +24,7 @@ public:
 
     ~EatActionChooserDefault() override = default;
 
-    void setCurrentTile(Tile* newCurrentTile);
+    void setCurrentTile(std::shared_ptr<Tile>& newCurrentTile);
 };
 
 

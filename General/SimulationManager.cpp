@@ -24,7 +24,7 @@ void SimulationManager::manageTurn() {
     // Manage resources
     for(int i = 0; i < grid->getHeight(); i++) {
         for(int j = 0; j < grid->getWidth(); j++) {
-            Tile* tile = grid->getTile(j, i);
+            std::shared_ptr<Tile> tile = grid->getTile(j, i);
             std::vector<Resource*>* resources = tile->getResourcesOnTile();
             for(Resource* resource : *resources) {
                 if(resource->getType() == GRASS) {
@@ -38,13 +38,13 @@ void SimulationManager::manageTurn() {
     // Manage animal actions
     for(int i = 0; i < grid->getHeight(); i++) {
         for(int j = 0; j < grid->getWidth(); j++) {
-            Tile* tile = grid->getTile(j, i);
+            std::shared_ptr<Tile> tile = grid->getTile(j, i);
             std::vector<Animal*>* animals = tile->getAnimalsOnTile();
             std::vector<Animal*> toRemove;
 
             for(auto it = animals->begin(); it != animals->end();) {
                 Animal* animal = *it;
-                std::vector<Tile*> surroundingTiles = grid->getSurroundingTiles(j, i, animal->getSightRange());
+                std::vector<std::shared_ptr<Tile>> surroundingTiles = grid->getSurroundingTiles(j, i, animal->getSightRange());
 
                 std::shared_ptr<Action> action = animal->chooseAction(surroundingTiles);
                 bool animalErased = false;
