@@ -25,10 +25,10 @@ void SimulationManager::manageTurn() {
     for(int i = 0; i < grid->getHeight(); i++) {
         for(int j = 0; j < grid->getWidth(); j++) {
             std::shared_ptr<Tile> tile = grid->getTile(j, i);
-            std::vector<Resource*>* resources = tile->getResourcesOnTile();
-            for(Resource* resource : *resources) {
+            std::vector<std::shared_ptr<Resource>>* resources = tile->getResourcesOnTile();
+            for(std::shared_ptr<Resource> resource : *resources) {
                 if(resource->getType() == GRASS) {
-                    GrassResource* grass = dynamic_cast<GrassResource*>(resource);
+                    std::shared_ptr<GrassResource> grass = std::dynamic_pointer_cast<GrassResource>(resource);
                     grass->regenerate();
                 }
             }
@@ -59,7 +59,7 @@ void SimulationManager::manageTurn() {
 
                 } else if (action->getType() == EAT) {
                     auto* actionEat = dynamic_cast<ActionEat*>(action.get());
-                    for (Resource* resource : *tile->getResourcesOnTile()) {
+                    for (std::shared_ptr<Resource> resource : *tile->getResourcesOnTile()) {
                         if (resource->getType() == actionEat->getResourceType()) {
                             resource->setAmount(resource->getAmount() - actionEat->getAmount());
                         }
@@ -70,8 +70,7 @@ void SimulationManager::manageTurn() {
                     auto animal_it = std::find(animals->begin(), animals->end(), animal);
                     animals->erase(animal_it);
                     animalErased = true;
-
-                    tile->addResourceOnTile(new MeatResource(actionDie->getResourceAmount(), 3));
+                    tile->addResourceOnTile(std::make_shared<MeatResource>(actionDie->getResourceAmount(), 3));
                     delete animal;
                 }
                 if (!animalErased) it++;

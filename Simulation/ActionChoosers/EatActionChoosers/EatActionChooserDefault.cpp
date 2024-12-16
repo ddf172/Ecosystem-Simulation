@@ -10,10 +10,10 @@ std::shared_ptr<Action> EatActionChooserDefault::chooseAction(Animal* animal) {
     assert(currentTile != nullptr);
 
     int resourceAmountThreshold = 20;
-    std::vector<Resource*>* resourcesOnTile(currentTile->getResourcesOnTile());
+    std::vector<std::shared_ptr<Resource>>* resourcesOnTile(currentTile->getResourcesOnTile());
 
     std::vector<ResourceType> foodTypes = animal->getFoodTypes();
-    std::pair<Resource*, int> bestResource = std::make_pair(nullptr, 0);
+    std::pair<std::shared_ptr<Resource>, int> bestResource = std::make_pair(nullptr, 0);
 
     for (auto& resource : *resourcesOnTile) {
         if (std::find(foodTypes.begin(), foodTypes.end(), resource->getType()) != foodTypes.end()) {
