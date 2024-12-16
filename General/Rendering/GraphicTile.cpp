@@ -15,7 +15,7 @@ GraphicTile::GraphicTile(const std::shared_ptr<Tile>& tile, sf::RenderWindow *wi
 
     sf::Color fillColor = sf::Color::Black;
 
-    for(Resource* resource : *(tile->getResourcesOnTile())) {
+    for(std::shared_ptr<Resource> resource : *(tile->getResourcesOnTile())) {
 
         if (resource->getType() == GRASS) {
             fillColor = sf::Color::Green;
@@ -37,7 +37,7 @@ void GraphicTile::updateFillColor() {
     sf::Color grassColor = this->tileShape.getFillColor();
     sf::Color meatColor = this->meatShape.getFillColor();
 
-    for (Resource* resource : *(tile->getResourcesOnTile())) {
+    for (std::shared_ptr<Resource> resource : *(tile->getResourcesOnTile())) {
 
         if (resource->getType() == GRASS) {
             int alpha = ((float)resource->getAmount() / (float)resource->getMaxAmount()) * 255;

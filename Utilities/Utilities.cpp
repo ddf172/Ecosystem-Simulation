@@ -22,8 +22,8 @@ int calculateDistance(const std::shared_ptr<Tile>& t1, const std::shared_ptr<Til
 std::vector<std::shared_ptr<Tile>> getTilesWithResources(const std::vector<std::shared_ptr<Tile>> &tiles, const std::vector<ResourceType> &foodTypes, int threshold) {
     std::vector<std::shared_ptr<Tile>> result;
     for (const auto& tile : tiles) {
-        std::vector<Resource*>* tileResources = tile->getResourcesOnTile();
-        for (Resource *resource : *tileResources) {
+        std::vector<std::shared_ptr<Resource>>* tileResources = tile->getResourcesOnTile();
+        for (std::shared_ptr<Resource> resource : *tileResources) {
             if (std::find(foodTypes.begin(), foodTypes.end(), resource->getType()) != foodTypes.end()) {
                 if (resource->getAmount() > threshold) {
                     result.push_back(tile);

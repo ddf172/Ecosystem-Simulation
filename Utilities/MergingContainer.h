@@ -3,13 +3,14 @@
 
 #include <algorithm>
 #include <iostream>
+#include <memory>
 #include <vector>
 #include "Simulation/Resources/Resource.h"
 #include <type_traits>
 
 template <typename T>
 class MergingContainer {
-    static_assert(std::is_base_of<Resource, typename std::remove_pointer<T>::type>::value, "T must be or derive from Resource");
+    static_assert(std::is_base_of_v<std::shared_ptr<Resource>, T>, "T must be or derive from Resource");
     std::vector<T> data;
 public:
     T& operator[](std::size_t index);
@@ -26,11 +27,11 @@ public:
 
 template<typename T>
 void MergingContainer<T>::operator+=(T item) {
-    Resource* newResource = dynamic_cast<Resource*>(item);
-    for(Resource* resource : this->data) {
+    std::shared_ptr<Resource> newResource = std::dynamic_pointer_cast<Resource>(item);
+
+    for(const auto& resource : this->data) {
         if(resource->getType() == newResource->getType()) {
             resource->setAmount(resource->getAmount() + newResource->getAmount());
-            delete newResource;
             return;
         }
     }
@@ -39,10 +40,9 @@ void MergingContainer<T>::operator+=(T item) {
 
 template<typename T>
 std::vector<T>* MergingContainer<T>::getData() {
-    for (std::vector<Resource*>::iterator it = this->data.begin(); it != this->data.end();) {
-        Resource* resource = dynamic_cast<Resource*>(*it);
+    for (auto it = this->data.begin(); it != this->data.end();) {
+        std::shared_ptr<Resource> resource = std::dynamic_pointer_cast<Resource>(*it);
         if(resource->getType() == MEAT && resource->getAmount() == 0) {
-            delete resource;
             it = this->data.erase(it);
         }
         else {

@@ -16,14 +16,14 @@ private:
     int posX;
     int posY;
     std::vector<Animal*> animalsOnTile;
-    MergingContainer<Resource*> resourcesOnTile;
+    MergingContainer<std::shared_ptr<Resource>> resourcesOnTile;
 public:
     Tile(int posX, int posY);
     std::vector<Animal*>* getAnimalsOnTile();
     void addAnimalOnTile(Animal* animal);
     void removeAnimalOnTile(Animal* animal);
-    std::vector<Resource*>* getResourcesOnTile();
-    void addResourceOnTile(Resource* resource);
+    std::vector<std::shared_ptr<Resource>>* getResourcesOnTile();
+    void addResourceOnTile(std::shared_ptr<Resource> resource);
     int getX() const;
     int getY() const;
     ~Tile();

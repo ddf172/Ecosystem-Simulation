@@ -7,18 +7,18 @@
 #include <algorithm>
 #include <iostream>
 
-void Tile::addResourceOnTile(Resource* resource) {
+void Tile::addResourceOnTile(std::shared_ptr<Resource> resource) {
     this->resourcesOnTile += resource;
 }
 
-std::vector<Resource*>* Tile::getResourcesOnTile() {
+std::vector<std::shared_ptr<Resource>>* Tile::getResourcesOnTile() {
     return this->resourcesOnTile.getData();
 }
 
 Tile::Tile(int posX, int posY) {
     this->posX = posX;
     this->posY = posY;
-    this->resourcesOnTile = MergingContainer<Resource*>();
+    this->resourcesOnTile = MergingContainer<std::shared_ptr<Resource>>();
     this->animalsOnTile = std::vector<Animal*>();
 }
 
@@ -46,9 +46,7 @@ int Tile::getY() const {
 }
 
 Tile::~Tile() {
-    for(Resource* resource : this->resourcesOnTile) {
-        delete resource;
-    }
+    this->resourcesOnTile.getData()->clear();
     for(Animal* animal : this->animalsOnTile) {
         delete animal;
     }
