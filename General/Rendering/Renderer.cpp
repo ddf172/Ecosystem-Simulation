@@ -23,8 +23,8 @@ void Renderer::initRender() {
 
     for (int i = 0; i < this->grid->getHeight(); i++) {
         for (int j = 0; j < this->grid->getWidth(); j++) {
-            std::vector<Animal*>* animalsOnTile = this->grid->getTile(j, i)->getAnimalsOnTile();
-            for (Animal* animal : *animalsOnTile) {
+            std::vector<std::shared_ptr<Animal>>* animalsOnTile = this->grid->getTile(j, i)->getAnimalsOnTile();
+            for (std::shared_ptr<Animal> animal : *animalsOnTile) {
                 graphicAnimals.push_back(GraphicAnimal(animal, this->window, this->tileSize));
             }
         }

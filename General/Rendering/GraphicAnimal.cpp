@@ -6,7 +6,7 @@
 #include <random>
 #include <iostream>
 
-GraphicAnimal::GraphicAnimal(Animal *animal, sf::RenderWindow* window, float tileSize) {
+GraphicAnimal::GraphicAnimal(std::shared_ptr<Animal> animal, sf::RenderWindow* window, float tileSize) {
     this->animal = animal;
     this->window = window;
     this->tileSize = tileSize;
@@ -39,7 +39,7 @@ void GraphicAnimal::updatePosition() {
     this->window->draw(this->shape);
 }
 
-Animal *GraphicAnimal::getAnimal() {
+std::shared_ptr<Animal> GraphicAnimal::getAnimal() {
     return this->animal;
 }
 

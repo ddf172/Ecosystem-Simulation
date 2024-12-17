@@ -9,8 +9,8 @@ MoveActionChooserNearestResourceTile::MoveActionChooserNearestResourceTile(std::
 
 MoveActionChooserNearestResourceTile::MoveActionChooserNearestResourceTile() : tilesWithResources(std::vector<std::shared_ptr<Tile>>()) {}
 
-std::shared_ptr<Action> MoveActionChooserNearestResourceTile::chooseAction(Animal* animal) {
-    assert (animal != nullptr);
+std::shared_ptr<Action> MoveActionChooserNearestResourceTile::chooseAction(Animal* animal) {;
+    assert(animal != nullptr);
 
     if (tilesWithResources.empty()) {
         return nullptr;

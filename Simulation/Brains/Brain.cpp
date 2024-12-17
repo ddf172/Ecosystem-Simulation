@@ -27,3 +27,7 @@ void Brain::clearActionChoosers() {
 std::vector<std::shared_ptr<IActionChooser>>& Brain::getActionChoosers() {
     return actionChoosers;
 }
+
+Brain::~Brain(){
+    actionChoosers.clear();
+}

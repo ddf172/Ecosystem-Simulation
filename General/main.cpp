@@ -8,6 +8,7 @@
 #include "Simulation/Animals/HerbivoreAnimal.h"
 #include "General/SimulationManager.h"
 #include "Simulation/Resources/MeatResource.h"
+#include <memory>
 
 // Created purely to test rendering
 int getRandomNumber() {
@@ -24,7 +25,7 @@ void spawnHerbivoreAnimals(Grid* grid) {
             int n = getRandomNumber();
             switch (n) {
                 case 0:
-                    grid->getTile(j, i)->addAnimalOnTile(new HerbivoreAnimal(0, j, i));
+                    grid->getTile(j, i)->addAnimalOnTile(std::make_shared<HerbivoreAnimal>(0, j, i));
                     break;
             }
         }

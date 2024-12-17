@@ -19,21 +19,21 @@ Tile::Tile(int posX, int posY) {
     this->posX = posX;
     this->posY = posY;
     this->resourcesOnTile = MergingContainer<std::shared_ptr<Resource>>();
-    this->animalsOnTile = std::vector<Animal*>();
+    this->animalsOnTile = std::vector<std::shared_ptr<Animal>>();
 }
 
-void Tile::addAnimalOnTile(Animal *animal) {
+void Tile::addAnimalOnTile(std::shared_ptr<Animal> animal) {
     this->animalsOnTile.push_back(animal);
 }
 
-void Tile::removeAnimalOnTile(Animal *animal){
+void Tile::removeAnimalOnTile(std::shared_ptr<Animal> animal){
     auto it = std::find(this->animalsOnTile.begin(), this->animalsOnTile.end(), animal);
     if (it != this->animalsOnTile.end()) {
         this->animalsOnTile.erase(it);
     }
 }
 
-std::vector<Animal *>* Tile::getAnimalsOnTile() {
+std::vector<std::shared_ptr<Animal>>* Tile::getAnimalsOnTile() {
     return &this->animalsOnTile;
 }
 
@@ -47,9 +47,6 @@ int Tile::getY() const {
 
 Tile::~Tile() {
     this->resourcesOnTile.getData()->clear();
-    for(Animal* animal : this->animalsOnTile) {
-        delete animal;
-    }
 }
 
 

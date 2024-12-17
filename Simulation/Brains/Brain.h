@@ -28,7 +28,7 @@ public:
 
     std::vector<std::shared_ptr<IActionChooser>>& getActionChoosers();
 
-    ~Brain() = default;
+    ~Brain();
 };
 
 #endif //ECOSYSTEM_SIMULATION_BRAIN_H

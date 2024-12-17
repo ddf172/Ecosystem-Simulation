@@ -8,6 +8,9 @@ EatActionChooserDefault::EatActionChooserDefault() : currentTile(nullptr) {}
 
 std::shared_ptr<Action> EatActionChooserDefault::chooseAction(Animal* animal) {
     assert(currentTile != nullptr);
+    if (!animal) {
+        return nullptr;
+    }
 
     int resourceAmountThreshold = 20;
     std::vector<std::shared_ptr<Resource>>* resourcesOnTile(currentTile->getResourcesOnTile());

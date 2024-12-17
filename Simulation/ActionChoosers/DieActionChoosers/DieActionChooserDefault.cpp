@@ -5,9 +5,10 @@
 #include "DieActionChooserDefault.h"
 
 std::shared_ptr<Action> DieActionChooserDefault::chooseAction(Animal* animal) {
-    if (!animal->isAlive()) {
-        int resourceAmount = animal->getMaxHealth() / 2 + animal->getCurrentEnergy() / 2;
-        return std::make_shared<ActionDie>(resourceAmount);
+    if (!animal || animal->isAlive()) {
+        return nullptr;
     }
-    return nullptr;
+
+    int resourceAmount = animal->getMaxHealth() / 2 + animal->getCurrentEnergy() / 2;
+    return std::make_shared<ActionDie>(resourceAmount);
 }
