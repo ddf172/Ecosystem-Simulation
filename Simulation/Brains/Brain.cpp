@@ -4,7 +4,7 @@
 
 #include "Brain.h"
 
-Brain::Brain(Animal* animal) : animal(animal) {}
+Brain::Brain(std::weak_ptr<Animal> animal) : animal(animal) {}
 
 void Brain::addActionChooser(IActionChooser* actionChooser) {
     actionChoosers.emplace_back(actionChooser);
@@ -26,4 +26,8 @@ void Brain::clearActionChoosers() {
 
 std::vector<std::shared_ptr<IActionChooser>>& Brain::getActionChoosers() {
     return actionChoosers;
+}
+
+Brain::~Brain(){
+    actionChoosers.clear();
 }

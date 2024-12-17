@@ -9,14 +9,14 @@
 
 
 class GraphicAnimal {
-    Animal* animal;
+    std::shared_ptr<Animal> animal;
     sf::CircleShape shape;
     sf::RenderWindow* window;
     float tileSize;
 public:
-    GraphicAnimal(Animal* animal, sf::RenderWindow* window, float tileSize);
+    GraphicAnimal(std::shared_ptr<Animal> animal, sf::RenderWindow* window, float tileSize);
     void updatePosition();
-    Animal* getAnimal();
+    std::shared_ptr<Animal> getAnimal();
 };
 
 

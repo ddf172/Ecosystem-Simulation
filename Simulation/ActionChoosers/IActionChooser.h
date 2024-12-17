@@ -11,7 +11,7 @@ class Animal;
 
 class IActionChooser {
     public:
-    virtual std::shared_ptr<Action> chooseAction(Animal* animal) = 0;
+    virtual std::shared_ptr<Action> chooseAction(std::weak_ptr<Animal> animal) = 0;
     virtual ~IActionChooser() = default;
 };
 

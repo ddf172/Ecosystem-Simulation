@@ -19,7 +19,7 @@
 class Tile;
 class Brain;
 
-class Animal {
+class Animal : public std::enable_shared_from_this<Animal> {
 protected:
     int id;
     int posX;
@@ -34,7 +34,7 @@ protected:
     AnimalType type;
     int maxEatAmount;
     std::vector<ResourceType> foodTypes;
-    Brain* brain;
+    std::unique_ptr<Brain> brain;
     virtual void initializeBrain() = 0;
 public:
     Animal(int id, int startX, int startY, int speed, int currentEnergy, int maxEnergy,

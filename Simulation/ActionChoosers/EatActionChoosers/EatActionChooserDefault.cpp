@@ -6,13 +6,18 @@ EatActionChooserDefault::EatActionChooserDefault(std::shared_ptr<Tile>& currentT
 
 EatActionChooserDefault::EatActionChooserDefault() : currentTile(nullptr) {}
 
-std::shared_ptr<Action> EatActionChooserDefault::chooseAction(Animal* animal) {
+std::shared_ptr<Action> EatActionChooserDefault::chooseAction(std::weak_ptr<Animal> animal) {
     assert(currentTile != nullptr);
+
+    auto animalPtr = animal.lock();
+    if (!animalPtr) {
+        return nullptr;
+    }
 
     int resourceAmountThreshold = 20;
     std::vector<std::shared_ptr<Resource>>* resourcesOnTile(currentTile->getResourcesOnTile());
 
-    std::vector<ResourceType> foodTypes = animal->getFoodTypes();
+    std::vector<ResourceType> foodTypes = animalPtr->getFoodTypes();
     std::pair<std::shared_ptr<Resource>, int> bestResource = std::make_pair(nullptr, 0);
 
     for (auto& resource : *resourcesOnTile) {
@@ -21,7 +26,7 @@ std::shared_ptr<Action> EatActionChooserDefault::chooseAction(Animal* animal) {
                 continue;
             }
 
-            int eatAmount = animal->calculateAmountToEat(*resource);
+            int eatAmount = animalPtr->calculateAmountToEat(*resource);
             if (eatAmount * resource->getEnergyValue() > bestResource.second) {
                 bestResource = std::make_pair(resource, eatAmount * resource->getEnergyValue());
             }
@@ -30,7 +35,7 @@ std::shared_ptr<Action> EatActionChooserDefault::chooseAction(Animal* animal) {
 
     if (bestResource.first != nullptr) {
         return std::make_shared<ActionEat>(
-                animal->calculateAmountToEat(*bestResource.first),
+                animalPtr->calculateAmountToEat(*bestResource.first),
                 bestResource.first->getType()
         );
     }

@@ -39,11 +39,11 @@ void SimulationManager::manageTurn() {
     for(int i = 0; i < grid->getHeight(); i++) {
         for(int j = 0; j < grid->getWidth(); j++) {
             std::shared_ptr<Tile> tile = grid->getTile(j, i);
-            std::vector<Animal*>* animals = tile->getAnimalsOnTile();
-            std::vector<Animal*> toRemove;
+            std::vector<std::shared_ptr<Animal>>* animals = tile->getAnimalsOnTile();
+            std::vector<std::shared_ptr<Animal>> toRemove;
 
             for(auto it = animals->begin(); it != animals->end();) {
-                Animal* animal = *it;
+                std::shared_ptr<Animal> animal = *it;
                 std::vector<std::shared_ptr<Tile>> surroundingTiles = grid->getSurroundingTiles(j, i, animal->getSightRange());
 
                 std::shared_ptr<Action> action = animal->chooseAction(surroundingTiles);
@@ -71,7 +71,6 @@ void SimulationManager::manageTurn() {
                     animals->erase(animal_it);
                     animalErased = true;
                     tile->addResourceOnTile(std::make_shared<MeatResource>(actionDie->getResourceAmount(), 3));
-                    delete animal;
                 }
                 if (!animalErased) it++;
             }

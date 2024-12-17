@@ -9,20 +9,21 @@ MoveActionChooserNearestResourceTile::MoveActionChooserNearestResourceTile(std::
 
 MoveActionChooserNearestResourceTile::MoveActionChooserNearestResourceTile() : tilesWithResources(std::vector<std::shared_ptr<Tile>>()) {}
 
-std::shared_ptr<Action> MoveActionChooserNearestResourceTile::chooseAction(Animal* animal) {
-    assert (animal != nullptr);
+std::shared_ptr<Action> MoveActionChooserNearestResourceTile::chooseAction(std::weak_ptr<Animal> animal) {
+    auto animalPtr = animal.lock();
+    assert(animalPtr != nullptr);
 
     if (tilesWithResources.empty()) {
         return nullptr;
     }
 
-    tilesWithResources.erase(std::remove_if(tilesWithResources.begin(), tilesWithResources.end(), [animal](const std::shared_ptr<Tile>& tile) {
-        return tile->getX() == animal->getX() && tile->getY() == animal->getY();
+    tilesWithResources.erase(std::remove_if(tilesWithResources.begin(), tilesWithResources.end(), [animalPtr](const std::shared_ptr<Tile>& tile) {
+        return tile->getX() == animalPtr->getX() && tile->getY() == animalPtr->getY();
     }), tilesWithResources.end());
 
-    std::shared_ptr<Tile> nearestTile = *std::min_element(tilesWithResources.begin(), tilesWithResources.end(), [animal](const std::shared_ptr<Tile>& a, const std::shared_ptr<Tile>& b) {
-        int distanceA = calculateDistance(animal->getX(), animal->getY(), a->getX(), a->getY());
-        int distanceB = calculateDistance(animal->getX(), animal->getY(), b->getX(), b->getY());
+    std::shared_ptr<Tile> nearestTile = *std::min_element(tilesWithResources.begin(), tilesWithResources.end(), [animalPtr](const std::shared_ptr<Tile>& a, const std::shared_ptr<Tile>& b) {
+        int distanceA = calculateDistance(animalPtr->getX(), animalPtr->getY(), a->getX(), a->getY());
+        int distanceB = calculateDistance(animalPtr->getX(), animalPtr->getY(), b->getX(), b->getY());
         return distanceA < distanceB;
     });
 

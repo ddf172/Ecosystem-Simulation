@@ -15,10 +15,10 @@ class IActionChooser;
 class Brain {
 private:
     std::vector<std::shared_ptr<IActionChooser>> actionChoosers;
-    Animal* animal;
+    std::weak_ptr<Animal> animal;
 
 public:
-    explicit Brain(Animal* animal);
+    explicit Brain(std::weak_ptr<Animal> animal);
 
     void addActionChooser(IActionChooser* actionChooser);
 
@@ -28,7 +28,7 @@ public:
 
     std::vector<std::shared_ptr<IActionChooser>>& getActionChoosers();
 
-    ~Brain() = default;
+    ~Brain();
 };
 
 #endif //ECOSYSTEM_SIMULATION_BRAIN_H

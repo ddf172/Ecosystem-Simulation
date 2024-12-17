@@ -9,7 +9,7 @@
 
 class DieActionChooserDefault : public IActionChooser {
 public:
-    std::shared_ptr<Action> chooseAction(Animal* animal) override;
+    std::shared_ptr<Action> chooseAction(std::weak_ptr<Animal> animal) override;
     ~DieActionChooserDefault() override = default;
 };
 
