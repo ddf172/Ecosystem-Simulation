@@ -19,7 +19,7 @@
 class Tile;
 class Brain;
 
-class Animal : public std::enable_shared_from_this<Animal> {
+class Animal{
 protected:
     int id;
     int posX;
