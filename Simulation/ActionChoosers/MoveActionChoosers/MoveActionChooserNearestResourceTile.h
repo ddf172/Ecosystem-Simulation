@@ -20,7 +20,7 @@ public:
 
     MoveActionChooserNearestResourceTile();
 
-    std::shared_ptr<Action> chooseAction(std::weak_ptr<Animal> animal) override;
+    std::shared_ptr<Action> chooseAction(Animal* animal) override;
     ~MoveActionChooserNearestResourceTile() override;
 
     void setTilesWithResources(std::vector<std::shared_ptr<Tile>>& newTilesWithResources);

@@ -15,10 +15,10 @@ class IActionChooser;
 class Brain {
 private:
     std::vector<std::shared_ptr<IActionChooser>> actionChoosers;
-    std::weak_ptr<Animal> animal;
+    Animal* animal;
 
 public:
-    explicit Brain(std::weak_ptr<Animal> animal);
+    explicit Brain(Animal* animal);
 
     void addActionChooser(IActionChooser* actionChooser);
 

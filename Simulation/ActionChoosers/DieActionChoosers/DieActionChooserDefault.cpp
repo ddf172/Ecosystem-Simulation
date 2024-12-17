@@ -4,12 +4,11 @@
 
 #include "DieActionChooserDefault.h"
 
-std::shared_ptr<Action> DieActionChooserDefault::chooseAction(std::weak_ptr<Animal> animal) {
-    auto animalPtr = animal.lock();
-    if (!animalPtr || animalPtr->isAlive()) {
+std::shared_ptr<Action> DieActionChooserDefault::chooseAction(Animal* animal) {
+    if (!animal || animal->isAlive()) {
         return nullptr;
     }
 
-    int resourceAmount = animalPtr->getMaxHealth() / 2 + animalPtr->getCurrentEnergy() / 2;
+    int resourceAmount = animal->getMaxHealth() / 2 + animal->getCurrentEnergy() / 2;
     return std::make_shared<ActionDie>(resourceAmount);
 }

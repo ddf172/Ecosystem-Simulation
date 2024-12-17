@@ -4,7 +4,7 @@
 
 #include "Brain.h"
 
-Brain::Brain(std::weak_ptr<Animal> animal) : animal(animal) {}
+Brain::Brain(Animal* animal) : animal(animal) {}
 
 void Brain::addActionChooser(IActionChooser* actionChooser) {
     actionChoosers.emplace_back(actionChooser);

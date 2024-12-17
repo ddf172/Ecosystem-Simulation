@@ -15,7 +15,7 @@ HerbivoreAnimal::HerbivoreAnimal(int id, int startX, int startY, int speed, int 
 }
 
 void HerbivoreAnimal::initializeBrain() {
-    brain = std::make_unique<Brain>(weak_from_this());
+    brain = std::make_unique<Brain>(this);
 
     brain->addActionChooser(new DieActionChooserDefault());
     brain->addActionChooser(new EatActionChooserDefault());
