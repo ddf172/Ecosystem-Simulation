@@ -4,7 +4,9 @@
 
 #include "ReproduceActionChooserSoloDefault.h"
 
-std::shared_ptr<Action> BreedActionChooserSoloDefault::chooseAction(Animal* animal) {
+ReproduceActionChooserSoloDefault::ReproduceActionChooserSoloDefault() : currentTile(nullptr){};
+
+std::shared_ptr<Action> ReproduceActionChooserSoloDefault::chooseAction(Animal* animal) {
     if (!animal || !animal->isAlive()) {
         return nullptr;
     }
@@ -14,4 +16,8 @@ std::shared_ptr<Action> BreedActionChooserSoloDefault::chooseAction(Animal* anim
     }
 
     return std::make_shared<ActionReproduce>(1, animal->getMaxEnergy() / 2);
+}
+
+void ReproduceActionChooserSoloDefault::setCurrentTile(std::shared_ptr<Tile>& newCurrentTile) {
+    currentTile = newCurrentTile;
 }
