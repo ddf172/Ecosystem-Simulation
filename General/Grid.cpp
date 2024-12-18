@@ -21,8 +21,6 @@ Grid::Grid(int width, int height, GenType genType) {
     }
     if (genType == RANDOM) {
         randomGrassGeneration();
-    } else if (genType == PERLIN) {
-        perlinNoiseGrassGeneration();
     }
 }
 
@@ -76,8 +74,4 @@ void Grid::randomGrassGeneration() {
             }
         }
     }
-}
-
-void Grid::perlinNoiseGrassGeneration() {
-
 }
