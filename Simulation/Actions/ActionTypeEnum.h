@@ -8,7 +8,7 @@
 enum ActionType {
     EAT,
     MOVE,
-    REPRODUCE,
+    BREED,
     NONE,
     DIE
 };
