@@ -17,13 +17,13 @@ FetchContent_MakeAvailable(SFML)
 
 include_directories(.)
 
-add_executable(Ecosystem_Simulation
+# Create the library target
+add_library(Ecosystem_Simulation_lib
         General/Grid.cpp
         General/Grid.h
         General/Tile.h
         General/Tile.cpp
         General/SimulationManager.h
-        General/main.cpp
         General/SimulationManager.cpp
         Simulation/Animals/Animal.h
         Simulation/Animals/Animal.cpp
@@ -48,7 +48,6 @@ add_executable(Ecosystem_Simulation
         Simulation/Actions/ActionNone.h
         Simulation/Actions/ActionDie.cpp
         Simulation/Actions/ActionDie.h
-        Simulation/Actions/ActionDie.cpp
         General/Rendering/Renderer.cpp
         General/Rendering/Renderer.h
         General/Rendering/GraphicAnimal.cpp
@@ -77,7 +76,25 @@ add_executable(Ecosystem_Simulation
         Simulation/ActionChoosers/AttackActionChooser/AttackActionChooserDefault.h
 )
 
-target_link_libraries(Ecosystem_Simulation PRIVATE sfml-graphics sfml-system sfml-window)
+# Link SFML to the library
+target_link_libraries(Ecosystem_Simulation_lib
+        PUBLIC
+        sfml-graphics
+        sfml-system
+        sfml-window
+)
+
+# Create the main executable
+add_executable(Ecosystem_Simulation
+        General/main.cpp
+)
+
+# Link the main executable with the library
+target_link_libraries(Ecosystem_Simulation
+        PRIVATE
+        Ecosystem_Simulation_lib
+)
+
 target_compile_features(Ecosystem_Simulation PRIVATE cxx_std_17)
 
 if(WIN32)
@@ -87,3 +104,5 @@ if(WIN32)
             PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy ${SFML_SOURCE_DIR}/extlibs/bin/$<IF:$<EQUAL:${CMAKE_SIZEOF_VOID_P},8>,x64,x86>/openal32.dll $<TARGET_FILE_DIR:Ecosystem_Simulation>
             VERBATIM)
 endif()
+
+add_subdirectory(GTests)

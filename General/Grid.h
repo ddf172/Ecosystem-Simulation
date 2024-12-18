@@ -29,7 +29,7 @@ private:
 public:
     enum GenType {
         RANDOM,
-        PERLIN
+        NONE
     };
     /**
     * Constructor, which initializes empty grid
