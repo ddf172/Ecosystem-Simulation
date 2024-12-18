@@ -67,6 +67,10 @@ add_executable(Ecosystem_Simulation
         Simulation/ActionChoosers/DieActionChoosers/DieActionChooserDefault.h
         Simulation/Resources/MeatResource.cpp
         Simulation/Resources/MeatResource.h
+        Simulation/Actions/ActionReproduce.cpp
+        Simulation/Actions/ActionReproduce.h
+        Simulation/ActionChoosers/ReproduceActionChoosers/ReproduceActionChooserSoloDefault.cpp
+        Simulation/ActionChoosers/ReproduceActionChoosers/ReproduceActionChooserSoloDefault.h
 )
 
 target_link_libraries(Ecosystem_Simulation PRIVATE sfml-graphics sfml-system sfml-window)

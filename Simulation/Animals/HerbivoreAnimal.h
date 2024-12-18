@@ -11,6 +11,7 @@
 #include "../ActionChoosers/EatActionChoosers/EatActionChooserDefault.h"
 #include "../ActionChoosers/MoveActionChoosers/MoveActionChooserNearestResourceTile.h"
 #include "../ActionChoosers/DieActionChoosers/DieActionChooserDefault.h"
+#include "../ActionChoosers/ReproduceActionChoosers/ReproduceActionChooserSoloDefault.h"
 
 class HerbivoreAnimal: public Animal {
 private:
