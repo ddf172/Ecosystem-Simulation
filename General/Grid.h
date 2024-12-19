@@ -15,6 +15,7 @@ private:
     int width;
     int height;
     std::vector<std::vector<std::shared_ptr<Tile>>> tiles;
+    float grassProbability;
 
     /**
     * @brief Function that checks if the given coordinates are in bounds of the grid.
@@ -36,7 +37,7 @@ public:
     * @param width Width of the grid.
     * @param height Height of the grid
     */
-    Grid(int width, int height, GenType genType);
+    Grid(int width, int height, GenType genType, float grassProbability = 0);
     friend class EnvironmentHandler;
     int getWidth() const;
     int getHeight() const;
