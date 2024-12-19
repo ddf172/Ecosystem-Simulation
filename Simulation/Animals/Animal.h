@@ -15,7 +15,6 @@
 #include "Utilities/Utilities.h"
 #include "../Brains/Brain.h"
 #include <memory>
-#include "AnimalAttackTypeEnum.h"
 
 class Tile;
 class Brain;
