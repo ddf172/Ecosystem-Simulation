@@ -11,6 +11,8 @@
 #include <SFML/Graphics.hpp>
 
 #include "Rendering/Renderer.h"
+#include "Simulation/Actions/ActionAttack.h"
+#include "Simulation/Animals/HerbivoreAnimal.h"
 #include "Simulation/Resources/GrassResource.h"
 #include "Simulation/Resources/MeatResource.h"
 
@@ -40,7 +42,6 @@ void SimulationManager::manageTurn() {
         for(int j = 0; j < grid->getWidth(); j++) {
             std::shared_ptr<Tile> tile = grid->getTile(j, i);
             std::vector<std::shared_ptr<Animal>>* animals = tile->getAnimalsOnTile();
-            std::vector<std::shared_ptr<Animal>> toRemove;
 
             for(auto it = animals->begin(); it != animals->end();) {
                 std::shared_ptr<Animal> animal = *it;
@@ -70,6 +71,21 @@ void SimulationManager::manageTurn() {
                     tile->removeAnimalOnTile(animal);
                     animalErased = true;
                     tile->addResourceOnTile(std::make_shared<MeatResource>(actionDie->getResourceAmount(), 3));
+
+                } else if (action->getType() == REPRODUCE) {
+                    auto* actionReproduce = dynamic_cast<ActionReproduce*>(action.get());
+                    for(int i = 0; i < actionReproduce->getOffSpringNumber(); i++) {
+                        if (animal->getType() == HERBIVORE) {
+                            std::shared_ptr<Animal> newAnimal = std::make_shared<HerbivoreAnimal>(0, j, i);
+                            tile->addAnimalOnTile(newAnimal);
+
+                        } else if (animal->getType() == CARNIVORE) {
+                            // to implement
+                        }
+                    }
+                } else if (action->getType() == ATTACK) {
+                    auto* actionAttack = dynamic_cast<ActionAttack*>(action.get());
+                    actionAttack->getTargetAnimal()->setHealth(actionAttack->getTargetAnimal()->getHealth() - actionAttack->getType());
                 }
                 if (!animalErased) it++;
             }

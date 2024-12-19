@@ -61,6 +61,10 @@ int Animal::getHealth() const {
     return health;
 }
 
+void Animal::setHealth(int amount) {
+    this->health = std::clamp(amount, 0, this->maxHealth);
+}
+
 int Animal::getMaxHealth() const {
     return maxHealth;
 }

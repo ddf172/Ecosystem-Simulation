@@ -49,6 +49,7 @@ public:
     int getMaxEnergy() const;
     int getSpeed() const;
     int getHealth() const;
+    void setHealth(int amount);
     int getMaxHealth() const;
     int getSightRange() const;
     std::vector<ResourceType> getFoodTypes() const;

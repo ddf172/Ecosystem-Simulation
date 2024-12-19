@@ -6,16 +6,17 @@
 #define ECOSYSTEM_SIMULATION_ACTIONATTACK_H
 
 #include "Action.h"
+#include "Simulation/Animals/Animal.h"
 
 class ActionAttack : public Action{
 private:
     int damage;
-    int targetId;
+    std::shared_ptr<Animal> targetAnimal;
 
 public:
-    ActionAttack(int damage, int targetId);
+    ActionAttack(int damage, std::shared_ptr<Animal> targetAnimal);
     int getDamage() const;
-    int getTargetId() const;
+    std::shared_ptr<Animal> getTargetAnimal() const;
 };
 
 

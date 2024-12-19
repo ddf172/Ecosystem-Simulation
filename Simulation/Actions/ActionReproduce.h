@@ -14,7 +14,6 @@ public:
     ActionReproduce(int offSpringNumber, int energyCost);
 
     int getOffSpringNumber() const;
-    int getEnergyCost() const;
 };
 
 

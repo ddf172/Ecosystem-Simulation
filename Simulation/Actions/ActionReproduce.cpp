@@ -9,7 +9,3 @@ ActionReproduce::ActionReproduce(int offSpringNumber, int energyCost) : offSprin
 int ActionReproduce::getOffSpringNumber() const {
     return offSpringNumber;
 }
-
-int ActionReproduce::getEnergyCost() const {
-    return energyCost;
-}

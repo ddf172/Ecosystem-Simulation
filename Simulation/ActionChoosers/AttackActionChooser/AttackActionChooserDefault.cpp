@@ -19,7 +19,7 @@ std::shared_ptr<Action> AttackActionChooserDefault::chooseAction(Animal *animal)
     std::vector<std::shared_ptr<Animal>>* animalsOnTile = currentTile->getAnimalsOnTile();
     for (auto& animalOnTile : *animalsOnTile) {
         if (std::find(attackTypes.begin(), attackTypes.end(), animalOnTile->getType()) != attackTypes.end()) {
-            return std::make_shared<ActionAttack>(animalOnTile->getId(), animal->getStrength());
+            return std::make_shared<ActionAttack>(animal->getStrength(), animalOnTile);
         }
     }
 
