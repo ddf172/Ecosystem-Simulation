@@ -15,6 +15,7 @@
 #include "Utilities/Utilities.h"
 #include "../Brains/Brain.h"
 #include <memory>
+#include "AnimalAttackTypeEnum.h"
 
 class Tile;
 class Brain;
@@ -33,12 +34,15 @@ protected:
     int maxHealth;
     AnimalType type;
     int maxEatAmount;
+
     std::vector<ResourceType> foodTypes;
     std::unique_ptr<Brain> brain;
+    std::vector<AnimalType> attackTypes;
     virtual void initializeBrain() = 0;
 public:
     Animal(int id, int startX, int startY, int speed, int currentEnergy, int maxEnergy,
-           int sightRange, int strength, AnimalType type, int maxEatAmount, int health, int maxHealth, std::vector<ResourceType> foodTypes);
+           int sightRange, int strength, AnimalType type, int maxEatAmount, int health, int maxHealth, std::vector<ResourceType> foodTypes,
+           std::vector<AnimalType> attackTypes);
     int getId() const;
     int getX() const;
     int getY() const;

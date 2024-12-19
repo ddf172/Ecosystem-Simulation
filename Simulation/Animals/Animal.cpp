@@ -5,11 +5,23 @@
 #include "Animal.h"
 
 Animal::Animal(int id, int startX, int startY, int speed, int currentEnergy, int maxEnergy,
-               int sightRange, int strength, AnimalType type, int maxEatAmount, int health, int maxHealth, std::vector<ResourceType> foodTypes)
-        : id(id), posX(startX), posY(startY), currentEnergy(currentEnergy), maxEnergy(maxEnergy),
-          speed(speed), sightRange(sightRange), strength(strength), type(type), maxEatAmount(maxEatAmount),
-          health(health), maxHealth(maxHealth), foodTypes(std::move(foodTypes)), brain(nullptr) {
-}
+               int sightRange, int strength, AnimalType type, int maxEatAmount, int health, int maxHealth, std::vector<ResourceType> foodTypes,
+               std::vector<AnimalType> attackTypes):
+               id(id),
+               posX(startX),
+               posY(startY),
+               currentEnergy(currentEnergy),
+               maxEnergy(maxEnergy),
+               speed(speed),
+               sightRange(sightRange),
+               strength(strength),
+               type(type),
+               maxEatAmount(maxEatAmount),
+               health(health),
+               maxHealth(maxHealth),
+               foodTypes(std::move(foodTypes)),
+               brain(nullptr),
+               attackTypes(std::move(attackTypes)) {}
 
 int Animal::calculateAmountToEat(Resource &resource) const {
     int missingEnergy = maxEnergy - currentEnergy;
