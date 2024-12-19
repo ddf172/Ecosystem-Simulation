@@ -10,9 +10,10 @@
 #include "Simulation/Resources/GrassResource.h"
 
 
-Grid::Grid(int width, int height, GenType genType) {
+Grid::Grid(int width, int height, GenType genType, float grassProbability) {
     this->width = width;
     this->height = height;
+    this->grassProbability = grassProbability;
     for (int i = 0; i < height; i++) {
         this->tiles.push_back(std::vector<std::shared_ptr<Tile>>());
         for (int j = 0; j < width; j++) {
@@ -64,7 +65,7 @@ std::shared_ptr<Tile> Grid::getTile(int x, int y) {
 void Grid::randomGrassGeneration() {
     std::random_device rd;
     std::mt19937 gen(rd());
-    std::bernoulli_distribution distribution(0.3);
+    std::bernoulli_distribution distribution(this->grassProbability);
 
     for (int i = 0; i < this->height; i++) {
         for (int j = 0; j < this->width; j++) {

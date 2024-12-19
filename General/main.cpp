@@ -33,7 +33,7 @@ void spawnHerbivoreAnimals(Grid* grid) {
 }
 
 int main() {
-    Grid* grid = new Grid(20, 20, Grid::RANDOM);
+    Grid* grid = new Grid(20, 20, Grid::RANDOM, 0.3);
     spawnHerbivoreAnimals(grid); // Random herbivoreAnimal spawn for testing
 
     SimulationManager manager(grid, true);
