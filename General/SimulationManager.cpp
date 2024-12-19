@@ -67,8 +67,7 @@ void SimulationManager::manageTurn() {
 
                 } else if (action->getType() == DIE) {
                     auto* actionDie = dynamic_cast<ActionDie*>(action.get());
-                    auto animal_it = std::find(animals->begin(), animals->end(), animal);
-                    animals->erase(animal_it);
+                    tile->removeAnimalOnTile(animal);
                     animalErased = true;
                     tile->addResourceOnTile(std::make_shared<MeatResource>(actionDie->getResourceAmount(), 3));
                 }
