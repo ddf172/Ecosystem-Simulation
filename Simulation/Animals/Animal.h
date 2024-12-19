@@ -56,6 +56,8 @@ public:
     AnimalType getType();
     int calculateAmountToEat(Resource& resource) const;
     bool isAlive() const;
+    std::vector<AnimalType> getAttackTypes() const;
+    int getStrength() const;
 
     virtual std::shared_ptr<Action> chooseAction(std::vector<std::shared_ptr<Tile>>& surroundingTiles) = 0;
     virtual void move(int desX, int desY);

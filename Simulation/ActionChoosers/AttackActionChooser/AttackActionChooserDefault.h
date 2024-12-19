@@ -6,6 +6,9 @@
 #define ECOSYSTEM_SIMULATION_ATTACKACTIONCHOOSERDEFAULT_H
 
 #include "../IActionChooser.h"
+#include <cassert>
+#include "../../Actions/ActionAttack.h"
+#include <memory>
 
 class AttackActionChooserDefault : IActionChooser{
 private:

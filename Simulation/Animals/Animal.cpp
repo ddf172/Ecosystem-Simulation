@@ -73,6 +73,14 @@ AnimalType Animal::getType() {
     return type;
 }
 
+std::vector<AnimalType> Animal::getAttackTypes() const {
+    return attackTypes;
+}
+
+int Animal::getStrength() const {
+    return strength;
+}
+
 std::vector<ResourceType> Animal::getFoodTypes() const {
     return foodTypes;
 }
