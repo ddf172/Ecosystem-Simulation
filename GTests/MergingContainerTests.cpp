@@ -13,16 +13,20 @@ TEST(MergingContainerTest, MergingContainerCreation) {
 
 TEST(MergingContainerTest, MergingContainerAddOneTypeResource) {
     MergingContainer<std::shared_ptr<Resource>> container = MergingContainer<std::shared_ptr<Resource>>();
-    container += std::make_shared<Resource>(GRASS, 10, 1);
+    container += std::make_shared<Resource>(GRASS, 50, 1);
+
+    EXPECT_EQ(container.getData()->size(), 1);
+    EXPECT_EQ(container[0]->getAmount(), 50);
+
+    container[0]->setAmount(10);
 
     EXPECT_EQ(container.getData()->size(), 1);
     EXPECT_EQ(container[0]->getAmount(), 10);
-
-    // Note that GrassResource has max value set to its initial amount
-    container += std::make_shared<Resource>(GRASS, 10, 1);
+    
+    container += std::make_shared<Resource>(GRASS, 30, 1);
 
     EXPECT_EQ(container.getData()->size(), 1);
-    EXPECT_EQ(container[0]->getAmount(), 10);
+    EXPECT_EQ(container[0]->getAmount(), 40);
 }
 
 TEST(MergingContainerTest, MergingContainerAddDifferentTypeResources) {
@@ -52,7 +56,6 @@ TEST(MergingContainerTest, MergingContainerRemoveMeatResource) {
     EXPECT_EQ(container[0]->getAmount(), 10);
     EXPECT_EQ(container.getData()->size(), 1);
 
-    // Remember that deletion occurs when calling MergingContainer.getData()
     container[0]->setAmount(0);
 
     EXPECT_EQ(container.getData()->size(), 0);
