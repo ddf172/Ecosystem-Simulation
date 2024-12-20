@@ -6,26 +6,31 @@
 
 
 AttackActionChooserDefault::AttackActionChooserDefault() {
-    this->currentTile = nullptr;
+    this->targetTiles = new std::vector<std::shared_ptr<Tile>>();
 }
 
 std::shared_ptr<Action> AttackActionChooserDefault::chooseAction(Animal *animal) {
     if (!animal || !animal->isAlive()) {
         return nullptr;
     }
-    assert(currentTile != nullptr);
-
-    std::vector<AnimalType> attackTypes = animal->getAttackTypes();
-    std::vector<std::shared_ptr<Animal>>* animalsOnTile = currentTile->getAnimalsOnTile();
-    for (auto& animalOnTile : *animalsOnTile) {
-        if (std::find(attackTypes.begin(), attackTypes.end(), animalOnTile->getType()) != attackTypes.end()) {
-            return std::make_shared<ActionAttack>(animal->getStrength(), animalOnTile);
-        }
+    if (targetTiles->empty()) {
+        return nullptr;
     }
 
+    std::shared_ptr<Tile> closestTargetTile = *std::min_element(targetTiles->begin(), targetTiles->end(), [animal](const std::shared_ptr<Tile>& a, const std::shared_ptr<Tile>& b) {
+        int distanceA = calculateDistance(animal->getX(), animal->getY(), a->getX(), a->getY());
+        int distanceB = calculateDistance(animal->getX(), animal->getY(), b->getX(), b->getY());
+        return distanceA < distanceB;
+    });
+
+    std::vector<std::shared_ptr<Animal>>* animalsOnTile = closestTargetTile->getAnimalsOnTile();
+    if (!animalsOnTile->empty()) {
+        std::shared_ptr<Animal> targetAnimal = animalsOnTile->at(0);
+        return std::make_shared<ActionAttack>(closestTargetTile->getX(), closestTargetTile->getY(), animal->getStrength(), targetAnimal);
+    }
     return nullptr;
 }
 
-void AttackActionChooserDefault::setCurrentTile(std::shared_ptr<Tile>& tile) {
-    this->currentTile = tile;
+void AttackActionChooserDefault::setTargetTiles(std::vector<std::shared_ptr<Tile>> *newTargetTiles) {
+    this->targetTiles = newTargetTiles;
 }
