@@ -11,14 +11,14 @@
 #include <memory>
 #include "Utilities/Utilities.h"
 
-class AttackActionChooserDefault : IActionChooser{
+class AttackActionChooserDefault : public IActionChooser{
 private:
-    std::vector<std::shared_ptr<Tile>>* targetTiles;
+    std::vector<std::shared_ptr<Tile>> targetTiles;
 
 public:
     AttackActionChooserDefault();
     std::shared_ptr<Action> chooseAction(Animal* animal) override;
-    void setTargetTiles(std::vector<std::shared_ptr<Tile>>* targetTiles);
+    void setTargetTiles(std::vector<std::shared_ptr<Tile>> newTargetTiles);
 };
 
 

@@ -4,20 +4,22 @@
 
 #include "AttackActionChooserDefault.h"
 
+#include <utility>
+
 
 AttackActionChooserDefault::AttackActionChooserDefault() {
-    this->targetTiles = new std::vector<std::shared_ptr<Tile>>();
+    this->targetTiles = std::vector<std::shared_ptr<Tile>>();
 }
 
 std::shared_ptr<Action> AttackActionChooserDefault::chooseAction(Animal *animal) {
     if (!animal || !animal->isAlive()) {
         return nullptr;
     }
-    if (targetTiles->empty()) {
+    if (targetTiles.empty()) {
         return nullptr;
     }
 
-    std::shared_ptr<Tile> closestTargetTile = *std::min_element(targetTiles->begin(), targetTiles->end(), [animal](const std::shared_ptr<Tile>& a, const std::shared_ptr<Tile>& b) {
+    std::shared_ptr<Tile> closestTargetTile = *std::min_element(targetTiles.begin(), targetTiles.end(), [animal](const std::shared_ptr<Tile>& a, const std::shared_ptr<Tile>& b) {
         int distanceA = calculateDistance(animal->getX(), animal->getY(), a->getX(), a->getY());
         int distanceB = calculateDistance(animal->getX(), animal->getY(), b->getX(), b->getY());
         return distanceA < distanceB;
@@ -31,6 +33,6 @@ std::shared_ptr<Action> AttackActionChooserDefault::chooseAction(Animal *animal)
     return nullptr;
 }
 
-void AttackActionChooserDefault::setTargetTiles(std::vector<std::shared_ptr<Tile>> *newTargetTiles) {
+void AttackActionChooserDefault::setTargetTiles(std::vector<std::shared_ptr<Tile>> newTargetTiles){
     this->targetTiles = newTargetTiles;
 }

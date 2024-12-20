@@ -28,6 +28,6 @@ std::vector<std::shared_ptr<Tile>> getTilesWithResources(const std::vector<std::
 
 std::shared_ptr<Tile> getCurrentPositionTile(std::vector<std::shared_ptr<Tile>> &surroundingTiles, int x, int y);
 
-std::vector<std::shared_ptr<Tile>> getAnimalTargetTiles(const std::vector<std::shared_ptr<Tile>> &, std::vector<AnimalType> targetTypes, const std::shared_ptr<Animal>& currentAnimal);
+std::vector<std::shared_ptr<Tile>> getTilesWithAnimals(const std::vector<std::shared_ptr<Tile>>& tiles, const std::vector<AnimalType>& targetTypes, const Animal* currentAnimal);
 
 #endif //ECOSYSTEM_SIMULATION_UTILITIES_H
