@@ -44,7 +44,7 @@ std::shared_ptr<Tile> getCurrentPositionTile(std::vector<std::shared_ptr<Tile>> 
     return nullptr;
 }
 
-std::vector<std::shared_ptr<Tile>> getAnimalTargetTiles(const std::vector<std::shared_ptr<Tile>> &tiles, std::vector<AnimalType> targetTypes, Animal* currentAnimal) {
+std::vector<std::shared_ptr<Tile>> getTilesWithAnimals(const std::vector<std::shared_ptr<Tile>> &tiles, const std::vector<AnimalType>& targetTypes, const Animal* currentAnimal) {
     std::vector<std::shared_ptr<Tile>> result;
     for (const auto& tile : tiles) {
         const auto& animalsOnTile = tile->getAnimalsOnTile();
