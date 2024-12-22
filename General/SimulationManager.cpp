@@ -12,6 +12,7 @@
 
 #include "Rendering/Renderer.h"
 #include "Simulation/Actions/ActionAttack.h"
+#include "Simulation/Animals/CarnivoreAnimal.h"
 #include "Simulation/Animals/HerbivoreAnimal.h"
 #include "Simulation/Resources/GrassResource.h"
 #include "Simulation/Resources/MeatResource.h"
@@ -42,6 +43,7 @@ void SimulationManager::manageTurn() {
         for(int j = 0; j < grid->getWidth(); j++) {
             std::shared_ptr<Tile> tile = grid->getTile(j, i);
             std::vector<std::shared_ptr<Animal>>* animals = tile->getAnimalsOnTile();
+            std::vector<std::shared_ptr<Animal>> animalsToAdd;
 
             for(auto it = animals->begin(); it != animals->end();) {
                 std::shared_ptr<Animal> animal = *it;
@@ -68,19 +70,17 @@ void SimulationManager::manageTurn() {
 
                 } else if (action->getType() == DIE) {
                     auto* actionDie = dynamic_cast<ActionDie*>(action.get());
-                    tile->removeAnimalOnTile(animal);
+                    animals->erase(it);
                     animalErased = true;
                     tile->addResourceOnTile(std::make_shared<MeatResource>(actionDie->getResourceAmount(), 3));
 
                 } else if (action->getType() == REPRODUCE) {
                     auto* actionReproduce = dynamic_cast<ActionReproduce*>(action.get());
-                    for(int i = 0; i < actionReproduce->getOffSpringNumber(); i++) {
+                    for(int k = 0; k < actionReproduce->getOffSpringNumber(); k++) {
                         if (animal->getType() == HERBIVORE) {
-                            std::shared_ptr<Animal> newAnimal = std::make_shared<HerbivoreAnimal>(0, j, i);
-                            tile->addAnimalOnTile(newAnimal);
-
+                            animalsToAdd.push_back(std::make_shared<HerbivoreAnimal>(0, j, i));
                         } else if (animal->getType() == CARNIVORE) {
-                            // to implement
+                            //animalsToAdd.push_back(std::make_shared<CarnivoreAnimal>(0, j, i));
                         }
                     }
                 } else if (action->getType() == ATTACK) {
@@ -88,6 +88,9 @@ void SimulationManager::manageTurn() {
                     actionAttack->getTargetAnimal()->setHealth(actionAttack->getTargetAnimal()->getHealth() - actionAttack->getType());
                 }
                 if (!animalErased) it++;
+            }
+            for(auto toAdd : animalsToAdd) {
+                animals->push_back(toAdd);
             }
         }
     }
