@@ -72,7 +72,7 @@ void SimulationManager::manageTurn() {
                     auto* actionDie = dynamic_cast<ActionDie*>(action.get());
                     animals->erase(it);
                     animalErased = true;
-                    tile->addResourceOnTile(std::make_shared<MeatResource>(actionDie->getResourceAmount(), 3));
+                    tile->addResourceOnTile(std::make_shared<MeatResource>(actionDie->getResourceAmount(), 1));
 
                 } else if (action->getType() == REPRODUCE) {
                     auto* actionReproduce = dynamic_cast<ActionReproduce*>(action.get());
@@ -80,12 +80,12 @@ void SimulationManager::manageTurn() {
                         if (animal->getType() == HERBIVORE) {
                             animalsToAdd.push_back(std::make_shared<HerbivoreAnimal>(0, j, i));
                         } else if (animal->getType() == CARNIVORE) {
-                            //animalsToAdd.push_back(std::make_shared<CarnivoreAnimal>(0, j, i));
+                            animalsToAdd.push_back(std::make_shared<CarnivoreAnimal>(0, j, i));
                         }
                     }
                 } else if (action->getType() == ATTACK) {
                     auto* actionAttack = dynamic_cast<ActionAttack*>(action.get());
-                    actionAttack->getTargetAnimal()->setHealth(actionAttack->getTargetAnimal()->getHealth() - actionAttack->getType());
+                    actionAttack->getTargetAnimal()->setHealth(actionAttack->getTargetAnimal()->getHealth() - actionAttack->getDamage());
                 }
                 if (!animalErased) it++;
             }

@@ -25,7 +25,7 @@ Animal::Animal(int id, int startX, int startY, int speed, int currentEnergy, int
 
 int Animal::calculateAmountToEat(Resource &resource) const {
     int missingEnergy = maxEnergy - currentEnergy;
-    int maxEatAmountLocal = int(missingEnergy/resource.getEnergyValue());
+    int maxEatAmountLocal = std::ceil(missingEnergy / resource.getEnergyValue());
     return std::min(std::min(maxEatAmountLocal, maxEatAmount), resource.getAmount());
 }
 
@@ -134,6 +134,10 @@ void Animal::executeAction(std::shared_ptr<Action> action) {
         }
         case ActionType::DIE: {
             health = 0;
+            break;
+        }
+        case ActionType::REPRODUCE: {
+            currentEnergy -= 40;
             break;
         }
         default:

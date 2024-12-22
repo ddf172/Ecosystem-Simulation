@@ -16,7 +16,7 @@
 int getRandomNumber() {
     std::random_device rd; // Seed for the random number engine
     std::mt19937 gen(rd()); // Mersenne Twister random number engine
-    std::uniform_int_distribution<int> dist(0, 8); // Range: 0 to 8
+    std::uniform_int_distribution<int> dist(0, 16); // Range: 0 to 8
     return dist(gen);
 }
 

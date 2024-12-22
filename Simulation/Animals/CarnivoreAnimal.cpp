@@ -15,7 +15,7 @@ void CarnivoreAnimal::initializeBrain() {
 }
 
 CarnivoreAnimal::CarnivoreAnimal(int id, int startX, int startY) :
-        Animal(id, startX, startY, 5, 50, 100, 5, 1, AnimalType::CARNIVORE,
+        Animal(id, startX, startY, 5, 50, 100, 5, 100, AnimalType::CARNIVORE,
                25, 100, 100, {ResourceType::MEAT}, {HERBIVORE}) {
     initializeBrain();
 }
