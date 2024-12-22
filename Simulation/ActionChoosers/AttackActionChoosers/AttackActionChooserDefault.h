@@ -9,15 +9,16 @@
 #include <cassert>
 #include "../../Actions/ActionAttack.h"
 #include <memory>
+#include "Utilities/Utilities.h"
 
-class AttackActionChooserDefault : IActionChooser{
+class AttackActionChooserDefault : public IActionChooser{
 private:
-    std::shared_ptr<Tile> currentTile;
+    std::vector<std::shared_ptr<Tile>> targetTiles;
 
 public:
     AttackActionChooserDefault();
     std::shared_ptr<Action> chooseAction(Animal* animal) override;
-    void setCurrentTile(std::shared_ptr<Tile>& tile);
+    void setTargetTiles(std::vector<std::shared_ptr<Tile>> newTargetTiles);
 };
 
 

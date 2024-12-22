@@ -71,6 +71,37 @@ void Renderer::renderTurn() {
         }
     }
 
+
+    for(int i = 0; i < this->grid->getHeight(); i++) {
+        for(int j = 0; j < this->grid->getWidth(); j++) {
+            std::shared_ptr<Tile> tile = this->grid->getTile(j, i);
+            for(std::shared_ptr<Animal> animal : *(tile->getAnimalsOnTile())) {
+                sf::CircleShape shape = sf::CircleShape(tileSize * 0.2f);
+                switch (animal->getType()) {
+                    case HERBIVORE:
+                        shape.setFillColor(sf::Color::Yellow);
+                    break;
+                    case CARNIVORE:
+                        shape.setFillColor(sf::Color::Cyan);
+                    break;
+                    case OMNIVORE:
+                        shape.setFillColor(sf::Color::Magenta);
+                    break;
+                }
+                std::random_device rd;
+                std::mt19937 gen(rd());
+                std::uniform_real_distribution<float> dist(0.0f, 0.8f);
+
+                float randomOffsetX = dist(gen) * tileSize;
+                float randomOffsetY = dist(gen) * tileSize;
+                shape.setPosition(animal->getX() * tileSize + randomOffsetX, animal->getY() * tileSize + randomOffsetY);
+                this->window->draw(shape);
+            }
+        }
+    }
+
+    /*  version using graphic animals
+
     for (auto it = graphicAnimals.begin(); it != graphicAnimals.end(); ) {
         if (it->getAnimal() == nullptr || it->getAnimal()->getHealth() == 0) {
             it = graphicAnimals.erase(it);
@@ -79,6 +110,7 @@ void Renderer::renderTurn() {
             ++it;
         }
     }
+    */
     window->display();
 }
 

@@ -72,8 +72,10 @@ add_library(Ecosystem_Simulation_lib
         Simulation/ActionChoosers/ReproduceActionChoosers/ReproduceActionChooserSoloDefault.h
         Simulation/Actions/ActionAttack.cpp
         Simulation/Actions/ActionAttack.h
-        Simulation/ActionChoosers/AttackActionChooser/AttackActionChooserDefault.cpp
-        Simulation/ActionChoosers/AttackActionChooser/AttackActionChooserDefault.h
+        Simulation/ActionChoosers/AttackActionChoosers/AttackActionChooserDefault.cpp
+        Simulation/ActionChoosers/AttackActionChoosers/AttackActionChooserDefault.h
+        Simulation/Animals/CarnivoreAnimal.cpp
+        Simulation/Animals/CarnivoreAnimal.h
 )
 
 # Link SFML to the library

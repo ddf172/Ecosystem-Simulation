@@ -18,10 +18,9 @@ void HerbivoreAnimal::initializeBrain() {
     brain = std::make_unique<Brain>(this);
 
     brain->addActionChooser(new DieActionChooserDefault());
-    // brain->addActionChooser(new ReproduceActionChooserSoloDefault());
+    brain->addActionChooser(new ReproduceActionChooserSoloDefault());
     brain->addActionChooser(new EatActionChooserDefault());
     brain->addActionChooser(new MoveActionChooserNearestResourceTile());
-    // Uncomment above ReproduceActionChooserSoloDefault
 }
 
 std::shared_ptr<Action> HerbivoreAnimal::chooseAction(std::vector<std::shared_ptr<Tile>> &surroundingTiles) {
@@ -35,10 +34,9 @@ std::shared_ptr<Action> HerbivoreAnimal::chooseAction(std::vector<std::shared_pt
         if (auto *moveActionChooser = dynamic_cast<MoveActionChooserNearestResourceTile*>(actionChooser.get())) {
             moveActionChooser->setTilesWithResources(tilesWithResources);
         }
-//        if (auto *reproduceActionChooser = dynamic_cast<ReproduceActionChooserSoloDefault*>(actionChooser.get())) {
-//            reproduceActionChooser->setCurrentTile(currentTile);
-//        }
-// Uncomment above if
+        if (auto *reproduceActionChooser = dynamic_cast<ReproduceActionChooserSoloDefault*>(actionChooser.get())) {
+            reproduceActionChooser->setCurrentTile(currentTile);
+        }
     }
 
     return brain->chooseAction();

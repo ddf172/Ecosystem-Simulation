@@ -4,15 +4,16 @@
 
 #include "ActionAttack.h"
 
-ActionAttack::ActionAttack(int damage, int targetId) : Action(ATTACK) {
+ActionAttack::ActionAttack(int x, int y, int damage, std::shared_ptr<Animal> targetAnimal) : ActionMove(x, y) {
     this->damage = damage;
-    this->targetId = targetId;
+    this->targetAnimal = targetAnimal;
+    this->type = ActionType::ATTACK;
 }
 
 int ActionAttack::getDamage() const {
     return this->damage;
 }
 
-int ActionAttack::getTargetId() const {
-    return this->targetId;
+std::shared_ptr<Animal> ActionAttack::getTargetAnimal() const {
+    return this->targetAnimal;
 }
