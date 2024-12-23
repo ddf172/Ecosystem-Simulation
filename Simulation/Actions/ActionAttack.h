@@ -7,6 +7,9 @@
 
 #include "ActionMove.h"
 #include "Simulation/Animals/Animal.h"
+#include <memory>
+
+class Animal;
 
 class ActionAttack : public ActionMove{
 private:

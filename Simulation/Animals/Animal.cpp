@@ -111,6 +111,13 @@ int Animal::calculateEnergyLoss(Action *action) {
             int val = int(calculateDistance(posX, posY, moveAction->getX(), moveAction->getY()) * 0.1);
             return val;
         }
+        case ActionType::REPRODUCE: {
+            if (getType() == AnimalType::HERBIVORE) return 60;
+            else return 40;
+        }
+        case ActionType::ATTACK:{
+            return 10;
+        }
         default:
             return 0;
     }
@@ -137,7 +144,13 @@ void Animal::executeAction(std::shared_ptr<Action> action) {
             break;
         }
         case ActionType::REPRODUCE: {
-            currentEnergy -= 40;
+            auto* reproduceAction = dynamic_cast<ActionReproduce*>(action.get());
+            currentEnergy -= calculateEnergyLoss(reproduceAction);
+            break;
+        }
+        case ActionType::ATTACK: {
+            auto* attackAction = dynamic_cast<ActionAttack*>(action.get());
+            currentEnergy -= calculateEnergyLoss(attackAction);
             break;
         }
         default:

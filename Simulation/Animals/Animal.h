@@ -12,6 +12,8 @@
 #include "Simulation/Actions/ActionMove.h"
 #include "Simulation/Actions/ActionEat.h"
 #include "Simulation/Actions/ActionDie.h"
+#include "Simulation/Actions/ActionAttack.h"
+#include "Simulation/Actions/ActionReproduce.h"
 #include "Utilities/Utilities.h"
 #include "../Brains/Brain.h"
 #include <memory>
