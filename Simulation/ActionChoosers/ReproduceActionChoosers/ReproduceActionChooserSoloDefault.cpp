@@ -15,7 +15,7 @@ std::shared_ptr<Action> ReproduceActionChooserSoloDefault::chooseAction(Animal* 
         return nullptr;
     }
 
-    return std::make_shared<ActionReproduce>(1, animal->getMaxEnergy() / 2);
+    return std::make_shared<ActionReproduce>(1);
 }
 
 void ReproduceActionChooserSoloDefault::setCurrentTile(std::shared_ptr<Tile>& newCurrentTile) {

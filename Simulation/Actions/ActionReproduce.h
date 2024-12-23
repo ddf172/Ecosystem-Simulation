@@ -9,9 +9,8 @@
 
 class ActionReproduce : public Action {
     int offSpringNumber;
-    int energyCost;
 public:
-    ActionReproduce(int offSpringNumber, int energyCost);
+    explicit ActionReproduce(int offSpringNumber);
 
     int getOffSpringNumber() const;
 };
