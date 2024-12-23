@@ -76,6 +76,8 @@ add_library(Ecosystem_Simulation_lib
         Simulation/ActionChoosers/AttackActionChoosers/AttackActionChooserDefault.h
         Simulation/Animals/CarnivoreAnimal.cpp
         Simulation/Animals/CarnivoreAnimal.h
+        Utilities/FileHandling/SettingsCSVReader.cpp
+        Utilities/FileHandling/SettingsCSVReader.h
 )
 
 # Link SFML to the library
