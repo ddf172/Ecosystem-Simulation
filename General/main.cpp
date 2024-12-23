@@ -10,11 +10,13 @@
 #include "Simulation/Resources/MeatResource.h"
 #include <memory>
 
+#include "Simulation/Animals/CarnivoreAnimal.h"
+
 // Created purely to test rendering
 int getRandomNumber() {
     std::random_device rd; // Seed for the random number engine
     std::mt19937 gen(rd()); // Mersenne Twister random number engine
-    std::uniform_int_distribution<int> dist(0, 2); // Range: 0 to 4
+    std::uniform_int_distribution<int> dist(0, 16); // Range: 0 to 8
     return dist(gen);
 }
 
@@ -27,6 +29,9 @@ void spawnHerbivoreAnimals(Grid* grid) {
                 case 0:
                     grid->getTile(j, i)->addAnimalOnTile(std::make_shared<HerbivoreAnimal>(0, j, i));
                     break;
+                case 1:
+                    grid->getTile(j, i)->addAnimalOnTile(std::make_shared<CarnivoreAnimal>(0, j, i));
+                break;
             }
         }
     }
