@@ -30,8 +30,9 @@ CarnivoreAnimal::CarnivoreAnimal(int id, int startX, int startY, int speed, int 
 
 std::shared_ptr<Action> CarnivoreAnimal::chooseAction(std::vector<std::shared_ptr<Tile>> &surroundingTiles) {
     std::shared_ptr<Tile> currentTile = getCurrentPositionTile(surroundingTiles, getX(), getY());
-    std::vector<std::shared_ptr<Tile>> tilesWithResources = getTilesWithResources(surroundingTiles, foodTypes, 20);
-    std::vector<std::shared_ptr<Tile>> tilesWithTargetAnimals = getTilesWithAnimals(surroundingTiles, attackTypes, this);
+    std::vector<std::shared_ptr<Tile>> reachableTiles = getReachableTiles(surroundingTiles, speed, getX(), getY());
+    std::vector<std::shared_ptr<Tile>> tilesWithResources = getTilesWithResources(reachableTiles, foodTypes, 20);
+    std::vector<std::shared_ptr<Tile>> tilesWithTargetAnimals = getTilesWithAnimals(reachableTiles, attackTypes, this);
 
     for (auto &actionChooser : brain->getActionChoosers()) {
         if (auto *eatActionChooser = dynamic_cast<EatActionChooserDefault*>(actionChooser.get())) {

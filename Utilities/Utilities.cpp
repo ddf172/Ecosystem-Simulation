@@ -57,3 +57,17 @@ std::vector<std::shared_ptr<Tile>> getTilesWithAnimals(const std::vector<std::sh
     }
     return result;
 }
+
+std::vector<std::shared_ptr<Tile>> getReachableTiles(const std::vector<std::shared_ptr<Tile>>& surroundingTiles, int numberOfMoves, int x, int y) {
+    std::vector<std::shared_ptr<Tile>> result;
+    for (const auto& tile : surroundingTiles) {
+        if (canReach(x, y, tile->getX(), tile->getY(), numberOfMoves)) {
+            result.push_back(tile);
+        }
+    }
+    return result;
+}
+
+std::vector<std::shared_ptr<Tile>> getReachableTiles(const std::vector<std::shared_ptr<Tile>>& surroundingTiles, int numberOfMoves, const std::shared_ptr<Tile>& currentTile) {
+    return getReachableTiles(surroundingTiles, numberOfMoves, currentTile->getX(), currentTile->getY());
+}

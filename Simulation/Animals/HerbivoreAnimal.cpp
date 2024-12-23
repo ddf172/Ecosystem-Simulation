@@ -25,7 +25,8 @@ void HerbivoreAnimal::initializeBrain() {
 
 std::shared_ptr<Action> HerbivoreAnimal::chooseAction(std::vector<std::shared_ptr<Tile>> &surroundingTiles) {
     std::shared_ptr<Tile> currentTile = getCurrentPositionTile(surroundingTiles, getX(), getY());
-    std::vector<std::shared_ptr<Tile>> tilesWithResources = getTilesWithResources(surroundingTiles, {ResourceType::GRASS}, 20);
+    std::vector<std::shared_ptr<Tile>> reachableTiles = getReachableTiles(surroundingTiles, speed, getX(), getY());
+    std::vector<std::shared_ptr<Tile>> tilesWithResources = getTilesWithResources(reachableTiles, {ResourceType::GRASS}, 20);
 
     for (auto &actionChooser : brain->getActionChoosers()) {
         if (auto *eatActionChooser = dynamic_cast<EatActionChooserDefault*>(actionChooser.get())) {
