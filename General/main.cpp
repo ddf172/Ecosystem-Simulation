@@ -4,6 +4,7 @@
 
 #include <random>
 #include <iostream>
+#include "FileManager.h"
 #include "Grid.h"
 #include "Simulation/Animals/HerbivoreAnimal.h"
 #include "General/SimulationManager.h"
@@ -38,7 +39,8 @@ void spawnHerbivoreAnimals(Grid* grid) {
 }
 
 int main() {
-    Grid* grid = new Grid(20, 20, Grid::RANDOM, 0.3);
+    FileManager* SettingsManager = new FileManager("Files/settings.txt");
+    Grid* grid = new Grid(SettingsManager, Grid::RANDOM);
     spawnHerbivoreAnimals(grid); // Random herbivoreAnimal spawn for testing
 
     SimulationManager manager(grid, true);
