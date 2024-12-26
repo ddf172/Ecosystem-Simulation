@@ -6,6 +6,7 @@
 #define GRID_H
 
 #include "Tile.h"
+#include "FileManager.h"
 #include <memory>
 #include <vector>
 
@@ -37,7 +38,7 @@ public:
     * @param width Width of the grid.
     * @param height Height of the grid
     */
-    Grid(int width, int height, GenType genType, float grassProbability = 0);
+    Grid();
     friend class EnvironmentHandler;
     int getWidth() const;
     int getHeight() const;

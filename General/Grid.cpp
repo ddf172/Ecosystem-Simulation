@@ -3,24 +3,26 @@
 //
 
 #include "Grid.h"
-
 #include <iostream>
 #include <vector>
 #include <random>
 #include "Simulation/Resources/GrassResource.h"
 
 
-Grid::Grid(int width, int height, GenType genType, float grassProbability) {
-    this->width = width;
-    this->height = height;
-    this->grassProbability = grassProbability;
+Grid::Grid() {
+    
+    std::shared_ptr<FileManager> SettingsManager = FileManager::getInstance();
+
+    this->width = SettingsManager->getInt("width");
+    this->height = SettingsManager->getInt("height");
+    this->grassProbability = SettingsManager->getFloat("grassProbability");
     for (int i = 0; i < height; i++) {
         this->tiles.push_back(std::vector<std::shared_ptr<Tile>>());
         for (int j = 0; j < width; j++) {
             this->tiles[i].push_back(std::make_shared<Tile>(j, i));
         }
     }
-    if (genType == RANDOM) {
+    if (SettingsManager->getBool("GenTypeRandom") == true) {
         randomGrassGeneration();
     }
 }

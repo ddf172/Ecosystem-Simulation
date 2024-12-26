@@ -1,0 +1,3 @@
+C:\mingw64\bin\cmake.exe -E rm -f CMakeFiles\Ecosystem_Simulation.dir/objects.a
+C:\mingw64\bin\ar.exe qc CMakeFiles\Ecosystem_Simulation.dir/objects.a @CMakeFiles\Ecosystem_Simulation.dir\objects1.rsp
+C:\mingw64\bin\g++.exe -O3 -DNDEBUG -Wl,--whole-archive CMakeFiles\Ecosystem_Simulation.dir/objects.a -Wl,--no-whole-archive -o bin\Ecosystem_Simulation.exe -Wl,--out-implib,libEcosystem_Simulation.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\Ecosystem_Simulation.dir\linkLibs.rsp

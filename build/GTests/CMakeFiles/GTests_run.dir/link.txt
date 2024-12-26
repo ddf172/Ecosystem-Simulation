@@ -1,0 +1,3 @@
+C:\mingw64\bin\cmake.exe -E rm -f CMakeFiles\GTests_run.dir/objects.a
+C:\mingw64\bin\ar.exe qc CMakeFiles\GTests_run.dir/objects.a @CMakeFiles\GTests_run.dir\objects1.rsp
+C:\mingw64\bin\g++.exe -O3 -DNDEBUG -Wl,--whole-archive CMakeFiles\GTests_run.dir/objects.a -Wl,--no-whole-archive -o ..\bin\GTests_run.exe -Wl,--out-implib,libGTests_run.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\GTests_run.dir\linkLibs.rsp
