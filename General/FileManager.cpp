@@ -2,24 +2,38 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
+#include <string>
 
-FileManager::FileManager(const std::string& settingsFileName) : settingsFileName(settingsFileName) {
-    readFile();
+std::shared_ptr<FileManager> FileManager::instance = nullptr;
+
+FileManager::FileManager(){
+    FileManager::readFile("Files/settings.txt");
 }
 
-bool FileManager::readFile() {
-    std::ifstream file(settingsFileName);
+std::shared_ptr<FileManager> FileManager::getInstance() {
+    if (!instance) {
+        instance = std::make_shared<FileManager>();
+    }
+
+    if (instance == nullptr) {
+        throw std::invalid_argument("FileManager instance is null");
+    }
+    return instance;
+}
+
+const bool FileManager::readFile(const std::string& fileName) {
+    std::ifstream file(fileName);
     if (!file.is_open()) {
-        std::cerr << "Error: Could not open the file " << settingsFileName << std::endl;
+        std::cerr << "Error: Could not open the file " << fileName << std::endl;
         return false;
     }
 
     std::string line;
     while (std::getline(file, line)) {
         std::istringstream iss(line);
-        std::string key; std::string value;
+        std::string key, value;
         if (std::getline(iss, key, ':') && std::getline(iss, value)) {
-            settings[key] = value;
+            data[key] = value;
         }
     }
 
@@ -28,25 +42,36 @@ bool FileManager::readFile() {
 }
 
 std::string FileManager::get(const std::string& key) const {
-    auto it = settings.find(key);
-    if (it != settings.end()) {
+    auto it = data.find(key);
+    if (it != data.end()) {
         return it->second;
     }
-    return "";  // Return empty string if setting not found
+    return "";
 }
 
 int FileManager::getInt(const std::string& key) const {
-    auto it = settings.find(key);
-    if (it != settings.end()) {
+    auto it = data.find(key);
+    if (it != data.end()) {
         return std::stoi(it->second);
     }
     return 0;
 }
 
 float FileManager::getFloat(const std::string& key) const {
-    auto it = settings.find(key);
-    if (it != settings.end()) {
+    auto it = data.find(key);
+    if (it != data.end()) {
         return std::stof(it->second);
     }
     return 0.0;
+}
+
+bool FileManager::getBool(const std::string& key) const {
+    auto it = data.find(key);
+    if (it != data.end()) {
+        if(it->second == "true")
+        {
+            return true;
+        }
+    }
+    return false;
 }

@@ -39,8 +39,7 @@ void spawnHerbivoreAnimals(Grid* grid) {
 }
 
 int main() {
-    FileManager* SettingsManager = new FileManager("Files/settings.txt");
-    Grid* grid = new Grid(SettingsManager, Grid::RANDOM);
+    Grid* grid = new Grid();
     spawnHerbivoreAnimals(grid); // Random herbivoreAnimal spawn for testing
 
     SimulationManager manager(grid, true);

@@ -9,10 +9,10 @@
 #include "Simulation/Resources/GrassResource.h"
 
 
-Grid::Grid(FileManager *SettingsManager, GenType genType) {
-    if (SettingsManager == nullptr) {
-        throw std::invalid_argument("SettingsManager is null");
-    };
+Grid::Grid() {
+    
+    std::shared_ptr<FileManager> SettingsManager = FileManager::getInstance();
+
     this->width = SettingsManager->getInt("width");
     this->height = SettingsManager->getInt("height");
     this->grassProbability = SettingsManager->getFloat("grassProbability");
@@ -22,7 +22,7 @@ Grid::Grid(FileManager *SettingsManager, GenType genType) {
             this->tiles[i].push_back(std::make_shared<Tile>(j, i));
         }
     }
-    if (genType == RANDOM) {
+    if (SettingsManager->getBool("GenTypeRandom") == true) {
         randomGrassGeneration();
     }
 }

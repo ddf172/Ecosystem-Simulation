@@ -38,7 +38,7 @@ public:
     * @param width Width of the grid.
     * @param height Height of the grid
     */
-    Grid(FileManager *SettingsManager, GenType genType);
+    Grid();
     friend class EnvironmentHandler;
     int getWidth() const;
     int getHeight() const;
