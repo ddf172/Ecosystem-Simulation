@@ -1,1 +1,0 @@
- libEcosystem_Simulation_lib.a "_deps/sfml-build/lib/libsfml-graphics-s.a" "_deps/sfml-src/extlibs/libs-mingw/x64/libfreetype.a" "_deps/sfml-build/lib/libsfml-window-s.a" "_deps/sfml-build/lib/libsfml-system-s.a" -lwinmm -lopengl32 -lgdi32 -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 
