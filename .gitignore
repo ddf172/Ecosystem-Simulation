@@ -36,3 +36,8 @@ cmake-build-debug/
 
 # Clion files
 .idea/
+
+# VScode files
+.vscode/
+build/
+
