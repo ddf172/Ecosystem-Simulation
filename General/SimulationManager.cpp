@@ -10,6 +10,7 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "Utilities/StatisticsManager.h"
 #include "Rendering/Renderer.h"
 #include "Simulation/Actions/ActionAttack.h"
 #include "Simulation/Animals/CarnivoreAnimal.h"
@@ -24,6 +25,8 @@ SimulationManager::SimulationManager(Grid *grid, bool renderGame, int maxTurns) 
 }
 
 void SimulationManager::manageTurn() {
+    std::shared_ptr<StatisticsManager> stats = StatisticsManager::getInstance();
+    stats->incrementTurn();
     // Manage resources
     for(int i = 0; i < grid->getHeight(); i++) {
         for(int j = 0; j < grid->getWidth(); j++) {
@@ -69,12 +72,38 @@ void SimulationManager::manageTurn() {
                     }
 
                 } else if (action->getType() == DIE) {
+                    std::string animalTypeStr;
+                    switch(animal->getType()) {
+                        case AnimalType::CARNIVORE:
+                            animalTypeStr = "carnivore";
+                            break;
+                        case AnimalType::HERBIVORE:
+                            animalTypeStr = "herbivore";
+                            break;
+                        case AnimalType::OMNIVORE:
+                            animalTypeStr = "omnivore";
+                            break;
+                    }
+                    stats->recordDeath(animalTypeStr);
                     auto* actionDie = dynamic_cast<ActionDie*>(action.get());
                     animals->erase(it);
                     animalErased = true;
                     tile->addResourceOnTile(std::make_shared<MeatResource>(actionDie->getResourceAmount(), 1));
 
                 } else if (action->getType() == REPRODUCE) {
+                    std::string animalTypeStr;
+                    switch(animal->getType()) {
+                        case AnimalType::CARNIVORE:
+                            animalTypeStr = "carnivore";
+                            break;
+                        case AnimalType::HERBIVORE:
+                            animalTypeStr = "herbivore";
+                            break;
+                        case AnimalType::OMNIVORE:
+                            animalTypeStr = "omnivore";
+                            break;
+                    }
+                    stats->recordBirth(animalTypeStr);
                     auto* actionReproduce = dynamic_cast<ActionReproduce*>(action.get());
                     for(int k = 0; k < actionReproduce->getOffSpringNumber(); k++) {
                         if (animal->getType() == HERBIVORE) {
@@ -133,4 +162,6 @@ void SimulationManager::runSimulation() {
             manageTurn();
         }
     }
+    std::shared_ptr<StatisticsManager> stats = StatisticsManager::getInstance();
+    stats->saveToFile();
 }

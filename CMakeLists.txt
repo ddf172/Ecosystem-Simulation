@@ -80,6 +80,8 @@ add_library(Ecosystem_Simulation_lib
         Simulation/Animals/CarnivoreAnimal.h
         Utilities/FileHandling/SettingsCSVReader.cpp
         Utilities/FileHandling/SettingsCSVReader.h
+        Utilities/StatisticsManager.cpp
+        Utilities/StatisticsManager.h
 )
 
 # Link SFML to the library

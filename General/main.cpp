@@ -5,6 +5,7 @@
 #include <random>
 #include <iostream>
 #include "FileManager.h"
+#include "Utilities/StatisticsManager.h"
 #include "Grid.h"
 #include "Simulation/Animals/HerbivoreAnimal.h"
 #include "General/SimulationManager.h"
@@ -23,14 +24,17 @@ int getRandomNumber() {
 
 // Created for testing
 void spawnHerbivoreAnimals(Grid* grid) {
+    std::shared_ptr<StatisticsManager> stats = StatisticsManager::getInstance();
     for(int i = 0; i < grid->getHeight(); i++) {
         for(int j = 0; j < grid->getWidth(); j++) {
             int n = getRandomNumber();
             switch (n) {
                 case 0:
+                    stats->recordBirth("herbivore");
                     grid->getTile(j, i)->addAnimalOnTile(std::make_shared<HerbivoreAnimal>(0, j, i));
                     break;
                 case 1:
+                    stats->recordBirth("carnivore");
                     grid->getTile(j, i)->addAnimalOnTile(std::make_shared<CarnivoreAnimal>(0, j, i));
                 break;
             }
@@ -42,7 +46,7 @@ int main() {
     Grid* grid = new Grid();
     spawnHerbivoreAnimals(grid); // Random herbivoreAnimal spawn for testing
 
-    SimulationManager manager(grid, true);
+    SimulationManager manager(grid, true, 1000);
     manager.runSimulation();
 
     delete grid;
