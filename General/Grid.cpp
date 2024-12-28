@@ -9,19 +9,19 @@
 #include "Simulation/Resources/GrassResource.h"
 
 
-Grid::Grid() {
+Grid::Grid(std::string settingsSection) {
     
     std::shared_ptr<SettingsCSVReader> reader = SettingsCSVReader::getInstance();
-    this->width = std::stoi(reader->readSettings("Grid", "width"));
-    this->height = std::stoi(reader->readSettings("Grid", "height"));
-    this->grassProbability = std::stof(reader->readSettings("Grid", "grassProbability"));
+    this->width = std::stoi(reader->readSettings(settingsSection, "width"));
+    this->height = std::stoi(reader->readSettings(settingsSection, "height"));
+    this->grassProbability = std::stof(reader->readSettings(settingsSection, "grassProbability"));
     for (int i = 0; i < height; i++) {
         this->tiles.push_back(std::vector<std::shared_ptr<Tile>>());
         for (int j = 0; j < width; j++) {
             this->tiles[i].push_back(std::make_shared<Tile>(j, i));
         }
     }
-    if (reader->readSettings("Grid","GenTypeRandom") == "true") {
+    if (reader->readSettings(settingsSection,"GenTypeRandom") == "true") {
         randomGrassGeneration();
     }
 }

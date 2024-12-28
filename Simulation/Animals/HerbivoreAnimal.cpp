@@ -3,7 +3,7 @@
 
 HerbivoreAnimal::HerbivoreAnimal(int id, int startX, int startY) :
         Animal(id, startX, startY, 5, 50, 100, 5, 1, AnimalType::HERBIVORE,
-               25, 100, 100, {ResourceType::GRASS}, {}) {
+               25, 100, 100, {ResourceType::GRASS}, {}) {   
     initializeBrain();
 }
 

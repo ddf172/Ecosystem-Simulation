@@ -1,0 +1,53 @@
+GridTest1
+width: 5
+height: 4
+GenTypeRandom: false
+grassProbability: 0.3
+
+GridTest2
+width: 0
+height: 0
+GenTypeRandom: false
+grassProbability: 0.3
+
+GridTest3
+width: 3
+height: 3
+GenTypeRandom: false
+grassProbability: 0.3
+
+GridTest4
+width: 3
+height: 3
+GenTypeRandom: false
+grassProbability: 0.3
+
+GridTest5
+width: 5
+height: 5
+GenTypeRandom: false
+grassProbability: 0.3
+
+GridTest6
+width: 4
+height: 4
+GenTypeRandom: true
+grassProbability: 0.3
+
+GridTest7
+width: 3
+height: 3
+GenTypeRandom: false
+grassProbability: 0.3
+
+GridTest8
+width: 100
+height: 100
+GenTypeRandom: false
+grassProbability: 0.3
+
+GridTest9
+width: 1000
+height: 1000
+GenTypeRandom: true
+grassProbability: 0.3
