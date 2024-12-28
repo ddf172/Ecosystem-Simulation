@@ -41,7 +41,7 @@ TEST(TileTest, TileAddingResources) {
 
     EXPECT_EQ(tile.getResourcesOnTile()->size(), 0);
 
-    std::shared_ptr<Resource> firstResource = std::make_shared<Resource>(GRASS, 0, 0); // Assuming Resource takes an amount parameter
+    std::shared_ptr<Resource> firstResource = std::make_shared<Resource>(GRASS, 0, 0);
     tile.addResourceOnTile(firstResource);
     EXPECT_EQ(tile.getResourcesOnTile()->size(), 1);
 

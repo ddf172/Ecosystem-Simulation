@@ -5,10 +5,10 @@
 #include "Utilities/FileHandling/SettingsCSVReader.h"
 
 Spawner::Spawner(Grid* grid, std::shared_ptr<StatisticsManager> stats)
-    : grid(grid), stats(std::move(stats)) {
-        this->carnivorePercent = std::stof(SettingsCSVReader::getInstance()->readSettings("Spawner","herbivoresPercent"));
-        this->herbivorePercent = std::stof(SettingsCSVReader::getInstance()->readSettings("Spawner","carnivoresPercent"));
-    }
+: grid(grid), stats(std::move(stats)) {
+    this->carnivorePercent = std::stof(SettingsCSVReader::getInstance()->readSettings("Spawner","herbivoresPercent"));
+    this->herbivorePercent = std::stof(SettingsCSVReader::getInstance()->readSettings("Spawner","carnivoresPercent"));
+}
 
 float Spawner::getRandomNumber() {
     std::random_device rd;
