@@ -15,6 +15,9 @@ std::shared_ptr<StatisticsManager> StatisticsManager::getInstance() {
     if (!instance) {
         instance = std::shared_ptr<StatisticsManager>(new StatisticsManager());
     }
+    if (!instance) {
+        throw std::runtime_error("Failed to create StatisticsManager instance");
+    }
     return instance;
 }
 
@@ -51,7 +54,6 @@ void StatisticsManager::saveToFile() const {
         throw std::runtime_error("Could not open file for writing: " + outputFilePath);
     }
 
-    // Write CSV headers
     file << "Turn,CarnivoreDeaths,HerbivoreDeaths,CarnivoresAlive,HerbivoresAlive\n";
 
     for (const auto& [turn, stats] : turnStatistics) {
@@ -68,11 +70,13 @@ void StatisticsManager::saveToFile() const {
 int StatisticsManager::getCurrentTurnDeaths(const std::string& type) const {
     if (type == "carnivore") return turnStatistics.at(currentTurn).carnivoreDeaths;
     if (type == "herbivore") return turnStatistics.at(currentTurn).herbivoreDeaths;
+    throw std::invalid_argument("Invalid animal type: " + type);
     return 0;
 }
 
 int StatisticsManager::getAliveCount(const std::string& type) const {
     if (type == "carnivore") return turnStatistics.at(currentTurn).carnivoresAlive;
     if (type == "herbivore") return turnStatistics.at(currentTurn).herbivoresAlive;
+    throw std::invalid_argument("Invalid animal type: " + type);
     return 0;
 }

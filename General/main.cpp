@@ -7,13 +7,9 @@
 #include "Utilities/FileHandling/SettingsCSVReader.h"
 #include "Utilities/StatisticsManager.h"
 #include "Grid.h"
-#include "Simulation/Animals/HerbivoreAnimal.h"
 #include "General/SimulationManager.h"
-#include "Simulation/Resources/MeatResource.h"
 #include "Simulation/Spawners/Spawner.h"
 #include <memory>
-
-#include "Simulation/Animals/CarnivoreAnimal.h"
 
 int main() {
     std::shared_ptr<SettingsCSVReader> reader = SettingsCSVReader::overrideInstance("Files/settings.csv");
