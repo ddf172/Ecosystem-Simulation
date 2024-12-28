@@ -1,9 +1,20 @@
 #include "HerbivoreAnimal.h"
 #include "Utilities/Utilities.h"
+#include "Utilities/FileHandling/SettingsCSVReader.h"
 
 HerbivoreAnimal::HerbivoreAnimal(int id, int startX, int startY) :
-        Animal(id, startX, startY, 5, 50, 100, 5, 1, AnimalType::HERBIVORE,
-               25, 100, 100, {ResourceType::GRASS}, {}) {
+    Animal(id, startX, startY,
+           std::stoi(SettingsCSVReader::getInstance()->readSettings("HerbivoreAnimal", "speed")),
+           std::stoi(SettingsCSVReader::getInstance()->readSettings("HerbivoreAnimal", "currentEnergy")),
+           std::stoi(SettingsCSVReader::getInstance()->readSettings("HerbivoreAnimal", "maxEnergy")),
+           std::stoi(SettingsCSVReader::getInstance()->readSettings("HerbivoreAnimal", "sightRange")),
+           std::stoi(SettingsCSVReader::getInstance()->readSettings("HerbivoreAnimal", "strength")),
+           AnimalType::HERBIVORE,
+           std::stoi(SettingsCSVReader::getInstance()->readSettings("HerbivoreAnimal", "maxEatAmount")),
+           std::stoi(SettingsCSVReader::getInstance()->readSettings("HerbivoreAnimal", "health")),
+           std::stoi(SettingsCSVReader::getInstance()->readSettings("HerbivoreAnimal", "maxHealth")),
+           {ResourceType::GRASS},
+           {}) {
     initializeBrain();
 }
 

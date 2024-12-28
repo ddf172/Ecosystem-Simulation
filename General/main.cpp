@@ -43,9 +43,9 @@ void spawnHerbivoreAnimals(Grid* grid) {
 }
 
 int main() {
+    std::shared_ptr<SettingsCSVReader> reader = SettingsCSVReader::overrideInstance("Files/settings.csv");
     Grid* grid = new Grid();
     spawnHerbivoreAnimals(grid); // Random herbivoreAnimal spawn for testing
-    std::shared_ptr<SettingsCSVReader> reader = SettingsCSVReader::getInstance("Files/settings.csv");
     SimulationManager manager(grid, true, 1000);
     manager.runSimulation();
 

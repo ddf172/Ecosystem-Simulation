@@ -3,6 +3,7 @@
 //
 
 #include "CarnivoreAnimal.h"
+#include "Utilities/FileHandling/SettingsCSVReader.h"
 
 void CarnivoreAnimal::initializeBrain() {
     brain = std::make_unique<Brain>(this);
@@ -14,12 +15,21 @@ void CarnivoreAnimal::initializeBrain() {
     brain->addActionChooser(new AttackActionChooserDefault());
 }
 
-CarnivoreAnimal::CarnivoreAnimal(int id, int startX, int startY) :
-        Animal(id, startX, startY, 5, 50, 100, 5, 100, AnimalType::CARNIVORE,
-               25, 100, 100, {ResourceType::MEAT}, {HERBIVORE}) {
+CarnivoreAnimal::CarnivoreAnimal(int id, int startX, int startY) : 
+    Animal(id, startX, startY,
+           std::stoi(SettingsCSVReader::getInstance()->readSettings("CarnivoreAnimal", "speed")),
+           std::stoi(SettingsCSVReader::getInstance()->readSettings("CarnivoreAnimal", "currentEnergy")),
+           std::stoi(SettingsCSVReader::getInstance()->readSettings("CarnivoreAnimal", "maxEnergy")),
+           std::stoi(SettingsCSVReader::getInstance()->readSettings("CarnivoreAnimal", "sightRange")),
+           std::stoi(SettingsCSVReader::getInstance()->readSettings("CarnivoreAnimal", "strength")),
+           AnimalType::CARNIVORE,
+           std::stoi(SettingsCSVReader::getInstance()->readSettings("CarnivoreAnimal", "maxEatAmount")),
+           std::stoi(SettingsCSVReader::getInstance()->readSettings("CarnivoreAnimal", "health")),
+           std::stoi(SettingsCSVReader::getInstance()->readSettings("CarnivoreAnimal", "maxHealth")),
+           {ResourceType::MEAT},
+           {AnimalType::HERBIVORE}) {
     initializeBrain();
 }
-
 
 CarnivoreAnimal::CarnivoreAnimal(int id, int startX, int startY, int speed, int currentEnergy, int maxEnergy,
                                  int sightRange, int strength, int maxEatAmount, int health, int maxHealth) :
