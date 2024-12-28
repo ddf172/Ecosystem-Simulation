@@ -20,15 +20,6 @@ void Renderer::initRender() {
             this->graphicTiles.push_back(GraphicTile(this->grid->getTile(j, i), this->window, this->tileSize));
         }
     }
-
-    for (int i = 0; i < this->grid->getHeight(); i++) {
-        for (int j = 0; j < this->grid->getWidth(); j++) {
-            std::vector<std::shared_ptr<Animal>>* animalsOnTile = this->grid->getTile(j, i)->getAnimalsOnTile();
-            for (std::shared_ptr<Animal> animal : *animalsOnTile) {
-                graphicAnimals.push_back(GraphicAnimal(animal, this->window, this->tileSize));
-            }
-        }
-    }
     this->window->display();
 }
 
@@ -56,12 +47,19 @@ Renderer::Renderer(Grid *grid) {
     this->tileSize = std::min(maxTileWidth, maxTileHeight);
     window = new sf::RenderWindow(sf::VideoMode(width, height), "Ecosystem simulation", sf::Style::Titlebar | sf::Style::Close);
     this->grid = grid;
+    this->gen = std::mt19937();
+    this->dist = std::uniform_real_distribution<float>(0.0f, 0.8f);
     initRender();
 }
 
 void Renderer::renderTurn() {
     window->clear(sf::Color::Black);
+    renderTiles();
+    renderAnimals();
+    window->display();
+}
 
+void Renderer::renderTiles() {
     for (auto it = graphicTiles.begin(); it != graphicTiles.end(); ) {
         if (it->getTile() == nullptr) {
             it = graphicTiles.erase(it);
@@ -70,8 +68,9 @@ void Renderer::renderTurn() {
             ++it;
         }
     }
+}
 
-
+void Renderer::renderAnimals() {
     for(int i = 0; i < this->grid->getHeight(); i++) {
         for(int j = 0; j < this->grid->getWidth(); j++) {
             std::shared_ptr<Tile> tile = this->grid->getTile(j, i);
@@ -84,35 +83,17 @@ void Renderer::renderTurn() {
                     case CARNIVORE:
                         shape.setFillColor(sf::Color::Cyan);
                     break;
-                    case OMNIVORE:
-                        shape.setFillColor(sf::Color::Magenta);
-                    break;
                 }
-                std::random_device rd;
-                std::mt19937 gen(rd());
-                std::uniform_real_distribution<float> dist(0.0f, 0.8f);
 
-                float randomOffsetX = dist(gen) * tileSize;
-                float randomOffsetY = dist(gen) * tileSize;
-                shape.setPosition(animal->getX() * tileSize + randomOffsetX, animal->getY() * tileSize + randomOffsetY);
+                float randomOffsetX = this->dist(this->gen) * this->tileSize;
+                float randomOffsetY = this->dist(this->gen) * this->tileSize;
+                shape.setPosition(animal->getX() * this->tileSize + randomOffsetX, animal->getY() * this->tileSize + randomOffsetY);
                 this->window->draw(shape);
             }
         }
     }
-
-    /*  version using graphic animals
-
-    for (auto it = graphicAnimals.begin(); it != graphicAnimals.end(); ) {
-        if (it->getAnimal() == nullptr || it->getAnimal()->getHealth() == 0) {
-            it = graphicAnimals.erase(it);
-        } else {
-            it->updatePosition();
-            ++it;
-        }
-    }
-    */
-    window->display();
 }
+
 
 sf::RenderWindow *Renderer::getWindow() {
     return this->window;

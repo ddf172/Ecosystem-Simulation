@@ -50,8 +50,6 @@ add_library(Ecosystem_Simulation_lib
         Simulation/Actions/ActionDie.h
         General/Rendering/Renderer.cpp
         General/Rendering/Renderer.h
-        General/Rendering/GraphicAnimal.cpp
-        General/Rendering/GraphicAnimal.h
         General/Rendering/GraphicTile.cpp
         General/Rendering/GraphicTile.h
         Utilities/MergingContainer.h

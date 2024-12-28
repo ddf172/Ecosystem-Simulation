@@ -7,7 +7,6 @@
 
 enum AnimalType {
     CARNIVORE,
-    OMNIVORE,
     HERBIVORE
 };
 

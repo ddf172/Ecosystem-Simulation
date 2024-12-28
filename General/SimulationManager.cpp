@@ -24,10 +24,7 @@ SimulationManager::SimulationManager(Grid *grid, bool renderGame, int maxTurns) 
     this->maxTurns = maxTurns;
 }
 
-void SimulationManager::manageTurn() {
-    std::shared_ptr<StatisticsManager> stats = StatisticsManager::getInstance();
-    stats->incrementTurn();
-    // Manage resources
+void SimulationManager::regenerateGrassTiles() {
     for(int i = 0; i < grid->getHeight(); i++) {
         for(int j = 0; j < grid->getWidth(); j++) {
             std::shared_ptr<Tile> tile = grid->getTile(j, i);
@@ -40,6 +37,14 @@ void SimulationManager::manageTurn() {
             }
         }
     }
+}
+
+
+void SimulationManager::manageTurn() {
+    std::shared_ptr<StatisticsManager> stats = StatisticsManager::getInstance();
+    stats->incrementTurn();
+
+    regenerateGrassTiles();
 
     // Manage animal actions
     for(int i = 0; i < grid->getHeight(); i++) {
@@ -80,9 +85,6 @@ void SimulationManager::manageTurn() {
                         case AnimalType::HERBIVORE:
                             animalTypeStr = "herbivore";
                             break;
-                        case AnimalType::OMNIVORE:
-                            animalTypeStr = "omnivore";
-                            break;
                     }
                     stats->recordDeath(animalTypeStr);
                     auto* actionDie = dynamic_cast<ActionDie*>(action.get());
@@ -98,9 +100,6 @@ void SimulationManager::manageTurn() {
                             break;
                         case AnimalType::HERBIVORE:
                             animalTypeStr = "herbivore";
-                            break;
-                        case AnimalType::OMNIVORE:
-                            animalTypeStr = "omnivore";
                             break;
                     }
                     stats->recordBirth(animalTypeStr);

@@ -14,6 +14,8 @@ private:
     Grid *grid;
     bool renderGame;
     int maxTurns;
+
+    void regenerateGrassTiles();
 public:
     SimulationManager(Grid *grid, bool renderGame = true, int maxTurns = INT_MAX);
     void runSimulation();

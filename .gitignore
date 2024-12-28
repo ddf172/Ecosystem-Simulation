@@ -33,6 +33,7 @@
 
 # CMake files
 cmake-build-debug/
+CMakeCache.txt
 
 # Clion files
 .idea/
