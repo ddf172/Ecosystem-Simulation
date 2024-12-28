@@ -31,3 +31,11 @@ strength: 1
 maxEatAmount: 25
 health: 100
 maxHealth: 100
+
+Grass
+energyValue: 1
+regrowAmount: 30
+regrowCooldown: 3
+
+Meat
+energyValue: 1

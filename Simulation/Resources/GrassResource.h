@@ -14,6 +14,7 @@ private:
     int regrowAmount;
 
 public:
+    GrassResource(int amount);
     GrassResource(int amount, int energyValue, int regrowAmount, int regrowCooldown);
     ~GrassResource() override = default;
     int getCurrentRegrowCooldown() const;

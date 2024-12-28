@@ -72,7 +72,7 @@ void Grid::randomGrassGeneration() {
         for (int j = 0; j < this->width; j++) {
             int randNum = distribution(gen);
             if (randNum == 1) {
-                this->tiles[i][j]->addResourceOnTile(std::make_shared<GrassResource>(100, 1, 30, 3));
+                this->tiles[i][j]->addResourceOnTile(std::make_shared<GrassResource>(100));
             }
         }
     }

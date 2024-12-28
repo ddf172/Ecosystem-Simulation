@@ -51,3 +51,8 @@ width: 1000
 height: 1000
 GenTypeRandom: true
 grassProbability: 0.3
+
+Grass
+energyValue: 1
+regrowAmount: 30
+regrowCooldown: 3
