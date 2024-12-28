@@ -22,9 +22,8 @@ void StatisticsManager::incrementTurn() {
     currentTurn++;
     if (turnStatistics.find(currentTurn) == turnStatistics.end()) {
         turnStatistics[currentTurn] = TurnStats();
-        turnStatistics[currentTurn].carnivoresAlive= turnStatistics[currentTurn-1].carnivoresAlive;
-        turnStatistics[currentTurn].omnivoresAlive= turnStatistics[currentTurn-1].omnivoresAlive;
-        turnStatistics[currentTurn].herbivoresAlive= turnStatistics[currentTurn-1].herbivoresAlive;
+        turnStatistics[currentTurn].carnivoresAlive = turnStatistics[currentTurn-1].carnivoresAlive;
+        turnStatistics[currentTurn].herbivoresAlive = turnStatistics[currentTurn-1].herbivoresAlive;
     }
 }
 
@@ -35,9 +34,6 @@ void StatisticsManager::recordDeath(const std::string& type) {
     } else if (type == "herbivore") {
         turnStatistics[currentTurn].herbivoreDeaths++;
         turnStatistics[currentTurn].herbivoresAlive--;
-    } else if (type == "omnivore") {
-        turnStatistics[currentTurn].omnivoreDeaths++;
-        turnStatistics[currentTurn].omnivoresAlive--;
     }
 }
 
@@ -46,8 +42,6 @@ void StatisticsManager::recordBirth(const std::string& type) {
         turnStatistics[currentTurn].carnivoresAlive++;
     } else if (type == "herbivore") {
         turnStatistics[currentTurn].herbivoresAlive++;
-    } else if (type == "omnivore") {
-        turnStatistics[currentTurn].omnivoresAlive++;
     }
 }
 
@@ -58,16 +52,14 @@ void StatisticsManager::saveToFile() const {
     }
 
     // Write CSV headers
-    file << "Turn,CarnivoreDeaths,HerbivoreDeaths,OmnivoreDeaths,CarnivoresAlive,HerbivoresAlive,OmnivoresAlive\n";
+    file << "Turn,CarnivoreDeaths,HerbivoreDeaths,CarnivoresAlive,HerbivoresAlive\n";
 
     for (const auto& [turn, stats] : turnStatistics) {
         file << turn << ","
              << stats.carnivoreDeaths << ","
              << stats.herbivoreDeaths << ","
-             << stats.omnivoreDeaths << ","
              << stats.carnivoresAlive << ","
-             << stats.herbivoresAlive << ","
-             << stats.omnivoresAlive << "\n";
+             << stats.herbivoresAlive << "\n";
     }
 
     std::cout << "Statistics saved to " << outputFilePath << std::endl;
@@ -76,13 +68,11 @@ void StatisticsManager::saveToFile() const {
 int StatisticsManager::getCurrentTurnDeaths(const std::string& type) const {
     if (type == "carnivore") return turnStatistics.at(currentTurn).carnivoreDeaths;
     if (type == "herbivore") return turnStatistics.at(currentTurn).herbivoreDeaths;
-    if (type == "omnivore") return turnStatistics.at(currentTurn).omnivoreDeaths;
     return 0;
 }
 
 int StatisticsManager::getAliveCount(const std::string& type) const {
     if (type == "carnivore") return turnStatistics.at(currentTurn).carnivoresAlive;
     if (type == "herbivore") return turnStatistics.at(currentTurn).herbivoresAlive;
-    if (type == "omnivore") return turnStatistics.at(currentTurn).omnivoresAlive;
     return 0;
 }

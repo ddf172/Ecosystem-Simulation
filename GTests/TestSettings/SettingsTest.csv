@@ -1,3 +1,11 @@
+General
+key1: value1
+key2: value2
+
+Network
+keyA: valueA
+keyB: valueB
+
 Grid
 width: 30
 height: 30

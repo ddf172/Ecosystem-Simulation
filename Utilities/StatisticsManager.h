@@ -10,10 +10,8 @@ private:
     struct TurnStats {
         int carnivoreDeaths = 0;
         int herbivoreDeaths = 0;
-        int omnivoreDeaths = 0;
         int carnivoresAlive = 0;
         int herbivoresAlive = 0;
-        int omnivoresAlive = 0;
     };
 
     static std::shared_ptr<StatisticsManager> instance;
