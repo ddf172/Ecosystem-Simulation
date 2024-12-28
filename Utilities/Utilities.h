@@ -6,11 +6,11 @@
 #define ECOSYSTEM_SIMULATION_UTILITIES_H
 
 #include <cmath>
-#include <General/Tile.h>
 #include <vector>
 #include <algorithm>
 #include <memory>
 #include "Simulation/Animals/Animal.h"
+#include <General/SimulationEngine/Tile.h>
 
 class Tile;
 

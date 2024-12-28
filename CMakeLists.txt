@@ -19,12 +19,14 @@ include_directories(.)
 
 # Create the library target
 add_library(Ecosystem_Simulation_lib
-        General/Grid.cpp
-        General/Grid.h
-        General/Tile.h
-        General/Tile.cpp
-        General/SimulationManager.h
-        General/SimulationManager.cpp
+        General/Application.h
+        General/Application.cpp
+        General/SimulationEngine/Grid.cpp
+        General/SimulationEngine/Grid.h
+        General/SimulationEngine/Tile.h
+        General/SimulationEngine/Tile.cpp
+        General/SimulationEngine/SimulationManager.h
+        General/SimulationEngine/SimulationManager.cpp
         Simulation/Animals/Animal.h
         Simulation/Animals/Animal.cpp
         Simulation/Resources/GrassResource.h

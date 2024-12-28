@@ -2,8 +2,11 @@
 #define SPAWNER_H
 
 #include <memory>
-#include "General/Grid.h"
+#include "General/SimulationEngine/Grid.h"
 #include "Utilities/StatisticsManager.h"
+#include "Simulation/Animals/HerbivoreAnimal.h"
+#include "Simulation/Animals/CarnivoreAnimal.h"
+#include "Utilities/FileHandling/SettingsCSVReader.h"
 
 class Spawner {
 private:

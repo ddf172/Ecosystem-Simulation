@@ -1,8 +1,5 @@
 #include "Spawner.h"
 #include <random>
-#include "Simulation/Animals/HerbivoreAnimal.h"
-#include "Simulation/Animals/CarnivoreAnimal.h"
-#include "Utilities/FileHandling/SettingsCSVReader.h"
 
 Spawner::Spawner(Grid* grid, std::shared_ptr<StatisticsManager> stats)
 : grid(grid), stats(std::move(stats)) {

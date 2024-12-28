@@ -2,17 +2,16 @@
 // Created by Piotrek on 29.10.2024.
 //
 
-#include "SimulationManager.h"
+#include "General/SimulationEngine/SimulationManager.h"
 
 #include <algorithm>
 #include <iostream>
 #include <memory>
 
 #include <SFML/Graphics.hpp>
-
+#include "General/Rendering/Renderer.h"
 #include "Utilities/StatisticsManager.h"
 #include "Utilities/FileHandling/SettingsCSVReader.h"
-#include "Rendering/Renderer.h"
 #include "Simulation/Actions/ActionAttack.h"
 #include "Simulation/Animals/CarnivoreAnimal.h"
 #include "Simulation/Animals/HerbivoreAnimal.h"

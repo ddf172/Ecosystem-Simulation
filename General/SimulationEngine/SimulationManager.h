@@ -7,7 +7,7 @@
 
 #include <limits.h>
 
-#include "Grid.h"
+#include "General/SimulationEngine/Grid.h"
 
 class SimulationManager {
 private:

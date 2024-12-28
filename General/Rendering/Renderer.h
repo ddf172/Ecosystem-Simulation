@@ -8,7 +8,7 @@
 #include <SFML/Graphics.hpp>
 #include <random>
 #include "GraphicTile.h"
-#include "General/Grid.h"
+#include "General/SimulationEngine/Grid.h"
 
 class Renderer {
     sf::RenderWindow* window;

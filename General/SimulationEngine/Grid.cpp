@@ -2,7 +2,7 @@
 // Created by Piotrek on 29.10.2024.
 //
 
-#include "Grid.h"
+#include "General/SimulationEngine/Grid.h"
 #include <iostream>
 #include <vector>
 #include <random>

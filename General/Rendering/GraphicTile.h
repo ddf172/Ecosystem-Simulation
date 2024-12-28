@@ -5,7 +5,7 @@
 #ifndef GRAPHICTILE_H
 #define GRAPHICTILE_H
 
-#include "General/Tile.h"
+#include "General/SimulationEngine/Tile.h"
 #include <SFML/Graphics.hpp>
 #include <memory>
 

@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "General/Grid.h"
+#include "General/SimulationEngine/Grid.h"
 
 TEST(GridTest, ConstructorValidDimensions) {
     std::shared_ptr<SettingsCSVReader> reader = SettingsCSVReader::overrideInstance("GTests/TestSettings/GridTests.csv");

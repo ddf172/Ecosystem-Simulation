@@ -5,7 +5,7 @@
 #define ANIMAL_H
 
 #include <vector>
-#include "General/Tile.h"
+#include "General/SimulationEngine/Tile.h"
 #include "Simulation/Actions/Action.h"
 #include "AnimalTypeEnum.h"
 #include "Simulation/Actions/ActionTypeEnum.h"

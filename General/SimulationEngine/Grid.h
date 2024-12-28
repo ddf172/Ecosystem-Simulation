@@ -5,7 +5,7 @@
 #ifndef GRID_H
 #define GRID_H
 
-#include "Tile.h"
+#include "General/SimulationEngine/Tile.h"
 #include "Utilities/FileHandling/SettingsCSVReader.h"
 #include <memory>
 #include <vector>
