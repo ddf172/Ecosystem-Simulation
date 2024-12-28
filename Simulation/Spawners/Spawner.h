@@ -9,8 +9,11 @@ class Spawner {
 private:
     Grid* grid;
     std::shared_ptr<StatisticsManager> stats;
-
-    int getRandomNumber(int min, int max);
+    void spawnHerbivore(int i, int j);
+    void spawnCarnivore(int i, int j);
+    float getRandomNumber();
+    float herbivorePercent;
+    float carnivorePercent;
 
 public:
     Spawner(Grid* grid, std::shared_ptr<StatisticsManager> stats);

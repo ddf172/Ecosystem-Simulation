@@ -4,7 +4,7 @@ intervals: 0.1
 Grid
 width: 30
 height: 30
-grassProbability: 0.4
+grassProbability: 0.3
 GenTypeRandom: true
 
 CarnivoreAnimal
@@ -39,3 +39,7 @@ decomposingRate: 2
 SimulationManager
 maxTurns: 200
 renderGame: true
+
+Spawner
+herbivoresPercent: 0.07
+carnivoresPercent: 0.07
