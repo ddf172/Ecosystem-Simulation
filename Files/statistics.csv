@@ -1,7 +1,7 @@
-Turn,CarnivoreDeaths,HerbivoreDeaths,OmnivoreDeaths,CarnivoresAlive,HerbivoresAlive,OmnivoresAlive
-0,0,0,0,4,7,0
-1,0,1,0,4,6,0
-2,0,2,0,4,4,0
-3,0,0,0,4,6,0
-4,0,1,0,5,6,0
-5,0,1,0,5,5,0
+Turn,CarnivoreDeaths,HerbivoreDeaths,CarnivoresAlive,HerbivoresAlive
+0,0,0,68,42
+1,1,19,67,23
+2,4,2,63,21
+3,7,6,56,22
+4,5,6,58,21
+5,11,5,50,16

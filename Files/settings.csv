@@ -1,6 +1,6 @@
 Grid
-width: 10
-height: 10
+width: 30
+height: 30
 grassProbability: 0.3
 GenTypeRandom: true
 
