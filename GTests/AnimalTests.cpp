@@ -2,7 +2,10 @@
 #include "Simulation/Animals/Animal.h"
 #include "Simulation/Animals/CarnivoreAnimal.h"
 #include "Simulation/Animals/HerbivoreAnimal.h"
+#include "Simulation/Actions/Action.h"
+#include "Simulation/Actions/ActionDie.h"
 #include "Utilities/FileHandling/SettingsCSVReader.h"
+#include "Simulation/Resources/ResourceTypeEnum.h"
 
 TEST(AnimalTest, InitializeAnimal) {
     std::shared_ptr<SettingsCSVReader> reader = SettingsCSVReader::getInstance("GTests/TestSettings/SettingsTest.csv");
@@ -43,3 +46,22 @@ TEST(AnimalTest, getAdvancedDataButCarnivore) {
     EXPECT_EQ(animal->getFoodTypes().size(), 1);
     SettingsCSVReader::releaseInstance();
 }
+
+TEST(AnimalTest, playDead) {
+    std::shared_ptr<SettingsCSVReader> reader = SettingsCSVReader::getInstance("GTests/TestSettings/SettingsTest.csv");
+    std::shared_ptr<Animal> animal = std::make_shared<CarnivoreAnimal>(42, 0, 0);
+    EXPECT_EQ(animal->getHealth(), 100);
+    animal->executeAction(std::make_shared<ActionDie>(0));
+    EXPECT_EQ(animal->getHealth(), 0);
+    SettingsCSVReader::releaseInstance();
+}
+
+TEST(AnimalTest, eat) {
+    std::shared_ptr<SettingsCSVReader> reader = SettingsCSVReader::getInstance("GTests/TestSettings/SettingsTest.csv");
+    std::shared_ptr<Animal> animal = std::make_shared<HerbivoreAnimal>(42, 0, 0);
+    EXPECT_EQ(animal->getCurrentEnergy(), 50);
+    animal->executeAction(std::make_shared<ActionEat>(30,GRASS)); //eating takes 10 energy here
+    EXPECT_EQ(animal->getCurrentEnergy(), 70);
+    SettingsCSVReader::releaseInstance();
+}
+
