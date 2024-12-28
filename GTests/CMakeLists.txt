@@ -8,6 +8,7 @@ add_executable(GTests_run
         AnimalBehaviourTests.cpp
         MergingContainerTests.cpp
         SettingsCSVReaderTests.cpp
+        AnimalTests.cpp
 )
 
 target_link_libraries(GTests_run Ecosystem_Simulation_lib)

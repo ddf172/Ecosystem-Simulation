@@ -5,3 +5,29 @@ key2: value2
 Network
 keyA: valueA
 keyB: valueB
+
+Grid
+width: 30
+height: 30
+grassProbability: 0.3
+GenTypeRandom: true
+
+CarnivoreAnimal
+speed: 5
+currentEnergy: 50
+maxEnergy: 100
+sightRange: 5
+strength: 100
+maxEatAmount: 25
+health: 100
+maxHealth: 100
+
+HerbivoreAnimal
+speed: 5
+currentEnergy: 50
+maxEnergy: 100
+sightRange: 5
+strength: 1
+maxEatAmount: 25
+health: 100
+maxHealth: 100
