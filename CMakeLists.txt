@@ -25,8 +25,6 @@ add_library(Ecosystem_Simulation_lib
         General/Tile.cpp
         General/SimulationManager.h
         General/SimulationManager.cpp
-        General/FileManager.cpp
-        General/FileManager.cpp
         Simulation/Animals/Animal.h
         Simulation/Animals/Animal.cpp
         Simulation/Resources/GrassResource.h

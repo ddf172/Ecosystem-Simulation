@@ -4,7 +4,7 @@
 
 #include <random>
 #include <iostream>
-#include "FileManager.h"
+#include "Utilities/FileHandling/SettingsCSVReader.h"
 #include "Utilities/StatisticsManager.h"
 #include "Grid.h"
 #include "Simulation/Animals/HerbivoreAnimal.h"
@@ -45,7 +45,7 @@ void spawnHerbivoreAnimals(Grid* grid) {
 int main() {
     Grid* grid = new Grid();
     spawnHerbivoreAnimals(grid); // Random herbivoreAnimal spawn for testing
-
+    std::shared_ptr<SettingsCSVReader> reader = SettingsCSVReader::getInstance("Files/settings.csv");
     SimulationManager manager(grid, true, 1000);
     manager.runSimulation();
 

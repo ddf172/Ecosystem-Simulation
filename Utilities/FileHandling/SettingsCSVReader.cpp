@@ -1,4 +1,11 @@
 #include "SettingsCSVReader.h"
+#include <stdexcept>
+#include <fstream>
+#include <sstream>
+#include <memory>
+#include <map>
+
+std::shared_ptr<SettingsCSVReader> SettingsCSVReader::instance = nullptr;
 
 SettingsCSVReader::SettingsCSVReader(const std::string& path) {
     assert(!path.empty());
@@ -9,7 +16,7 @@ SettingsCSVReader::SettingsCSVReader(const std::string& path) {
         throw std::runtime_error("Cannot open file: " + path);
     }
 
-    mapSections();
+    loadFile();
 }
 
 SettingsCSVReader::~SettingsCSVReader() {
@@ -18,28 +25,35 @@ SettingsCSVReader::~SettingsCSVReader() {
     }
 }
 
-void SettingsCSVReader::mapSections() {
+void SettingsCSVReader::loadFile() {
     std::string line;
+    std::string currentSection;
+
     while (std::getline(file, line)) {
-        if (line.find(':') == std::string::npos && !line.empty()) {
-            line = trim(line);
-            if (line.empty()) {
-                continue;
+        line = trim(line);
+
+        if (line.empty()) {
+            continue;
+        }
+
+        if (line.find(':') == std::string::npos) {
+            currentSection = trim(line);
+            sections[currentSection];
+        } else {
+            size_t colonPos = line.find(':');
+            std::string key = trim(line.substr(0, colonPos));
+            std::string value = trim(line.substr(colonPos + 1));
+
+            if (!currentSection.empty()) {
+                sections[currentSection][key] = value;
+            } else {
+                throw std::runtime_error("Found key-value pair before a section header.");
             }
-            sectionPositions[line] = file.tellg();
         }
     }
 
     file.clear();
-    file.seekg(0);
-}
-
-std::streampos SettingsCSVReader::findSection(const std::string& section) {
-    auto it = sectionPositions.find(section);
-    if (it == sectionPositions.end()) {
-        throw std::runtime_error("Section not found: " + section);
-    }
-    return it->second;
+    file.seekg(0, std::ios::beg);
 }
 
 std::string SettingsCSVReader::trim(const std::string& text) {
@@ -50,35 +64,26 @@ std::string SettingsCSVReader::trim(const std::string& text) {
 }
 
 std::string SettingsCSVReader::readSettings(const std::string& section, const std::string& key) {
-    assert(file.is_open());
-    assert(!section.empty());
-    assert(!key.empty());
-
-
     try {
-        std::streampos sectionPos = findSection(section);
-        file.seekg(sectionPos);
-
-        std::string line;
-        while (std::getline(file, line) && !line.empty() && line.find(':') != std::string::npos) {
-            size_t colonPos = line.find(':');
-            std::string currentKey = line.substr(0, colonPos);
-
-            currentKey = trim(currentKey);
-
-            if (currentKey == key) {
-                std::string value = line.substr(colonPos + 1);
-                value = trim(value);
-                return value;
-            }
+        auto sectionIt = sections.find(section);
+        if (sectionIt == sections.end()) {
+            throw std::runtime_error("Section not found: " + section);
         }
 
-        file.clear();
-        file.seekg(0);
-        throw std::runtime_error("Key not found: " + key);
+        auto keyIt = sectionIt->second.find(key);
+        if (keyIt == sectionIt->second.end()) {
+            throw std::runtime_error("Key not found: " + key);
+        }
+
+        return keyIt->second;
     } catch (const std::exception& e) {
-        file.clear();
-        file.seekg(0);
-        throw std::runtime_error(std::string("Error while reading settings: ") + e.what());
+        throw std::runtime_error("Error while reading settings: " + std::string(e.what()));
     }
+}
+
+std::shared_ptr<SettingsCSVReader> SettingsCSVReader::getInstance(const std::string& path) {
+    if (!instance) {
+        instance = std::shared_ptr<SettingsCSVReader>(new SettingsCSVReader(path));
+    }
+    return instance;
 }

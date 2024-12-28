@@ -1,11 +1,5 @@
-Test
-key1: abc
-key2: def
-
-Section1
-abc: 123
-def: 456
-
-Section2
-abc: 789
-def: 012
+Grid
+width: 100
+height: 50
+grassProbability: 0.3
+GenTypeRandom: true

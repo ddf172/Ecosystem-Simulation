@@ -11,18 +11,17 @@
 
 Grid::Grid() {
     
-    std::shared_ptr<FileManager> SettingsManager = FileManager::getInstance();
-
-    this->width = SettingsManager->getInt("width");
-    this->height = SettingsManager->getInt("height");
-    this->grassProbability = SettingsManager->getFloat("grassProbability");
+    std::shared_ptr<SettingsCSVReader> reader = SettingsCSVReader::getInstance();
+    this->width = std::stoi(reader->readSettings("Grid", "width"));
+    this->height = std::stoi(reader->readSettings("Grid", "height"));
+    this->grassProbability = std::stof(reader->readSettings("Grid", "grassProbability"));
     for (int i = 0; i < height; i++) {
         this->tiles.push_back(std::vector<std::shared_ptr<Tile>>());
         for (int j = 0; j < width; j++) {
             this->tiles[i].push_back(std::make_shared<Tile>(j, i));
         }
     }
-    if (SettingsManager->getBool("GenTypeRandom") == true) {
+    if (reader->readSettings("Grid","GenTypeRandom") == "true") {
         randomGrassGeneration();
     }
 }
