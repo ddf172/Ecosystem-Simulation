@@ -3,11 +3,17 @@
 //
 
 #include "GrassResource.h"
+#include "Utilities/FileHandling/SettingsCSVReader.h"
 
-
+GrassResource::GrassResource(int amount)
+: Resource(GRASS, amount, std::stoi(SettingsCSVReader::getInstance()->readSettings("Grass", "energyValue"))) {
+    this->regrowAmount = std::stoi(SettingsCSVReader::getInstance()->readSettings("Grass", "regrowAmount"));
+    this->currentRegrowCooldown = std::stoi(SettingsCSVReader::getInstance()->readSettings("Grass", "regrowCooldown"));
+    this->maxRegrowCooldown = std::stoi(SettingsCSVReader::getInstance()->readSettings("Grass", "regrowCooldown"));
+}
 
 GrassResource::GrassResource(int amount, int energyValue, int regrowAmount, int regrowCooldown)
-: Resource(GRASS, amount, energyValue) {
+: Resource(GRASS, amount, std::stoi(SettingsCSVReader::getInstance()->readSettings("Grass", "energyValue"))) {
     this->regrowAmount = regrowAmount;
     this->currentRegrowCooldown = regrowCooldown;
     this->maxRegrowCooldown = regrowCooldown;

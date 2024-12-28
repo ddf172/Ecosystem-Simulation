@@ -65,3 +65,24 @@ TEST(AnimalTest, eat) {
     SettingsCSVReader::releaseInstance();
 }
 
+TEST(AnimalTest, movement) {
+    std::shared_ptr<SettingsCSVReader> reader = SettingsCSVReader::getInstance("GTests/TestSettings/SettingsTest.csv");
+    std::shared_ptr<Animal> animal = std::make_shared<HerbivoreAnimal>(42, 10, 10);
+    animal->executeAction(std::make_shared<ActionMove>(30,30));
+    EXPECT_EQ(animal->getX(), 30);
+    EXPECT_EQ(animal->getY(), 30);
+    SettingsCSVReader::releaseInstance();
+}
+
+TEST(AnimalTest, checkAbstraction) {
+    std::shared_ptr<SettingsCSVReader> reader = SettingsCSVReader::getInstance("GTests/TestSettings/SettingsTest.csv");
+    std::shared_ptr<Animal> animal = std::make_shared<HerbivoreAnimal>(42, 10, 10);
+    animal->executeAction(std::make_shared<ActionMove>(30,30));
+    EXPECT_EQ(animal->getX(), 30);
+    EXPECT_EQ(animal->getY(), 30);
+    animal = std::make_shared<CarnivoreAnimal>(42, 10, 10);
+    EXPECT_EQ(animal->getHealth(), 100);
+    animal->executeAction(std::make_shared<ActionDie>(0));
+    EXPECT_EQ(animal->getHealth(), 0);
+    SettingsCSVReader::releaseInstance();
+}
