@@ -23,7 +23,7 @@ Animal::Animal(int id, int startX, int startY, int speed, int currentEnergy, int
                brain(nullptr),
                attackTypes(std::move(attackTypes)) {}
 
-int Animal::calculateAmountToEat(Resource &resource) const {
+int Animal::calculateAmountToEat(Resource &resource) const {    
     int missingEnergy = maxEnergy - currentEnergy;
     int maxEatAmountLocal = std::ceil(missingEnergy / resource.getEnergyValue());
     return std::min(std::min(maxEatAmountLocal, maxEatAmount), resource.getAmount());

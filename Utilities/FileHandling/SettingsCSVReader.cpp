@@ -87,3 +87,16 @@ std::shared_ptr<SettingsCSVReader> SettingsCSVReader::getInstance(const std::str
     }
     return instance;
 }
+
+std::shared_ptr<SettingsCSVReader> SettingsCSVReader::releaseInstance() {
+    instance.reset();
+    return instance;
+}
+
+std::shared_ptr<SettingsCSVReader> SettingsCSVReader::overrideInstance(const std::string& path) {
+    SettingsCSVReader::releaseInstance();
+    if (!instance) {
+        instance = std::shared_ptr<SettingsCSVReader>(new SettingsCSVReader(path));
+    }
+    return instance;
+}

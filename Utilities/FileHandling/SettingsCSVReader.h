@@ -26,6 +26,8 @@ private:
 
 public:
     static std::shared_ptr<SettingsCSVReader> getInstance(const std::string& path = "Files/settings.csv");
+    static std::shared_ptr<SettingsCSVReader> releaseInstance();
+    static std::shared_ptr<SettingsCSVReader> overrideInstance(const std::string& path = "Files/settings.csv");
 
     ~SettingsCSVReader();
 

@@ -2,42 +2,42 @@
 #include "General/Grid.h"
 
 TEST(GridTest, ConstructorValidDimensions) {
-    std::shared_ptr<SettingsCSVReader> reader = SettingsCSVReader::getInstance("GTests/TestSettings/GridTests.csv");
+    std::shared_ptr<SettingsCSVReader> reader = SettingsCSVReader::overrideInstance("GTests/TestSettings/GridTests.csv");
     Grid* grid = new Grid("GridTest1");
     EXPECT_EQ(grid->getWidth(), 5);
     EXPECT_EQ(grid->getHeight(), 4);
 }
 
 TEST(GridTest, ConstructorZeroDimensions) {
-    std::shared_ptr<SettingsCSVReader> reader = SettingsCSVReader::getInstance("GTests/TestSettings/GridTests.csv");
+    std::shared_ptr<SettingsCSVReader> reader = SettingsCSVReader::overrideInstance("GTests/TestSettings/GridTests.csv");
     Grid* grid = new Grid("GridTest2");
     EXPECT_EQ(grid->getWidth(), 0);
     EXPECT_EQ(grid->getHeight(), 0);
 }
 
 TEST(GridTest, GetTileValidCoordinates) {
-    std::shared_ptr<SettingsCSVReader> reader = SettingsCSVReader::getInstance("GTests/TestSettings/GridTests.csv");
+    std::shared_ptr<SettingsCSVReader> reader = SettingsCSVReader::overrideInstance("GTests/TestSettings/GridTests.csv");
     Grid* grid = new Grid("GridTest3");
     auto tile = grid->getTile(1, 1);
     EXPECT_NE(tile, nullptr);
 }
 
 TEST(GridTest, GetTileInvalidCoordinates) {
-    std::shared_ptr<SettingsCSVReader> reader = SettingsCSVReader::getInstance("GTests/TestSettings/GridTests.csv");
+    std::shared_ptr<SettingsCSVReader> reader = SettingsCSVReader::overrideInstance("GTests/TestSettings/GridTests.csv");
     Grid* grid = new Grid("GridTest4");
     EXPECT_THROW(grid->getTile(-1, -1), std::invalid_argument);
     EXPECT_THROW(grid->getTile(3, 3), std::invalid_argument);
 }
 
 TEST(GridTest, GetSurroundingTiles) {
-    std::shared_ptr<SettingsCSVReader> reader = SettingsCSVReader::getInstance("GTests/TestSettings/GridTests.csv");
+    std::shared_ptr<SettingsCSVReader> reader = SettingsCSVReader::overrideInstance("GTests/TestSettings/GridTests.csv");
     Grid* grid = new Grid("GridTest5");
     auto surroundingTiles = grid->getSurroundingTiles(2, 2, 1);
     EXPECT_EQ(surroundingTiles.size(), 9);
 }
 
 TEST(GridTest, RandomGeneration) {
-    std::shared_ptr<SettingsCSVReader> reader = SettingsCSVReader::getInstance("GTests/TestSettings/GridTests.csv");
+    std::shared_ptr<SettingsCSVReader> reader = SettingsCSVReader::overrideInstance("GTests/TestSettings/GridTests.csv");
     Grid* grid = new Grid("GridTest6");
     bool hasNonNullTiles = false;
 
@@ -53,14 +53,14 @@ TEST(GridTest, RandomGeneration) {
 }
 
 TEST(GridTest, GetSurroundingTilesBoundary) {
-    std::shared_ptr<SettingsCSVReader> reader = SettingsCSVReader::getInstance("GTests/TestSettings/GridTests.csv");
+    std::shared_ptr<SettingsCSVReader> reader = SettingsCSVReader::overrideInstance("GTests/TestSettings/GridTests.csv");
     Grid* grid = new Grid("GridTest7");
     auto surroundingTiles = grid->getSurroundingTiles(1, 1, 5);
     EXPECT_LE(surroundingTiles.size(), 9);
 }
 
 TEST(GridTest, LargeGridCreation) {
-    std::shared_ptr<SettingsCSVReader> reader = SettingsCSVReader::getInstance("GTests/TestSettings/GridTests.csv");
+    std::shared_ptr<SettingsCSVReader> reader = SettingsCSVReader::overrideInstance("GTests/TestSettings/GridTests.csv");
     Grid* grid = new Grid("GridTest8");
     EXPECT_EQ(grid->getWidth(), 100);
     EXPECT_EQ(grid->getHeight(), 100);
@@ -70,7 +70,7 @@ TEST(GridTest, LargeGridCreation) {
 }
 
 TEST(GridTest, RandomGrassGeneration) {
-    std::shared_ptr<SettingsCSVReader> reader = SettingsCSVReader::getInstance("GTests/TestSettings/GridTests.csv");
+    std::shared_ptr<SettingsCSVReader> reader = SettingsCSVReader::overrideInstance("GTests/TestSettings/GridTests.csv");
     Grid* grid = new Grid("GridTest9");
     int grassCount = 0;
     const int size = 1000;
