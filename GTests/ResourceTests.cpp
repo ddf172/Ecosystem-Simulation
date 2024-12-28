@@ -40,3 +40,14 @@ TEST(ResourceTest, CheckGrowing) {
     EXPECT_EQ(grass->getCurrentRegrowCooldown(), 0);
     SettingsCSVReader::releaseInstance();
 }
+
+TEST(ResourceTest, CheckDecomposing) {
+    std::shared_ptr<SettingsCSVReader> reader = SettingsCSVReader::getInstance("GTests/TestSettings/SettingsTest.csv");
+    std::shared_ptr<MeatResource> meat = std::make_shared<MeatResource>(42);
+    for(int i=0;i<10;i++)
+    {
+        meat->decompose();
+    }
+    EXPECT_EQ(meat->getAmount(), 32);
+    SettingsCSVReader::releaseInstance();
+}
