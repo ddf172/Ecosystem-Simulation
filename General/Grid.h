@@ -6,7 +6,7 @@
 #define GRID_H
 
 #include "Tile.h"
-#include "FileManager.h"
+#include "Utilities/FileHandling/SettingsCSVReader.h"
 #include <memory>
 #include <vector>
 
