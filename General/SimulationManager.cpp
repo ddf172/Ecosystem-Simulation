@@ -11,6 +11,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "Utilities/StatisticsManager.h"
+#include "Utilities/FileHandling/SettingsCSVReader.h"
 #include "Rendering/Renderer.h"
 #include "Simulation/Actions/ActionAttack.h"
 #include "Simulation/Animals/CarnivoreAnimal.h"
@@ -18,13 +19,13 @@
 #include "Simulation/Resources/GrassResource.h"
 #include "Simulation/Resources/MeatResource.h"
 
-SimulationManager::SimulationManager(Grid *grid, bool renderGame, int maxTurns) {
+SimulationManager::SimulationManager(Grid *grid) {
     this->grid = grid;
-    this->renderGame = renderGame;
-    this->maxTurns = maxTurns;
+    this->renderGame = SettingsCSVReader::getInstance()->readSettings("SimulationManager", "renderGame") == "true";
+    this->maxTurns = std::stoi(SettingsCSVReader::getInstance()->readSettings("SimulationManager", "maxTurns"));
 }
 
-void SimulationManager::regenerateGrassTiles() {
+void SimulationManager::updateTiles() {
     for(int i = 0; i < grid->getHeight(); i++) {
         for(int j = 0; j < grid->getWidth(); j++) {
             std::shared_ptr<Tile> tile = grid->getTile(j, i);
@@ -33,6 +34,10 @@ void SimulationManager::regenerateGrassTiles() {
                 if(resource->getType() == GRASS) {
                     std::shared_ptr<GrassResource> grass = std::dynamic_pointer_cast<GrassResource>(resource);
                     grass->regenerate();
+                }
+                if(resource->getType() == MEAT) {
+                    std::shared_ptr<MeatResource> meat = std::dynamic_pointer_cast<MeatResource>(resource);
+                    meat->decompose();
                 }
             }
         }
@@ -44,7 +49,7 @@ void SimulationManager::manageTurn() {
     std::shared_ptr<StatisticsManager> stats = StatisticsManager::getInstance();
     stats->incrementTurn();
 
-    regenerateGrassTiles();
+    updateTiles();
 
     // Manage animal actions
     for(int i = 0; i < grid->getHeight(); i++) {
@@ -132,7 +137,7 @@ void SimulationManager::runSimulation() {
         sf::RenderWindow* window = renderer.getWindow();
 
         sf::Clock clock;
-        sf::Time renderInterval = sf::seconds(0.3f);
+        sf::Time renderInterval = sf::seconds(std::stof(SettingsCSVReader::getInstance()->readSettings("Clock", "intervals")));
         sf::Time elapsedTime = sf::Time::Zero;
 
         while (window->isOpen()) {
