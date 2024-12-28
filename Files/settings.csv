@@ -1,7 +1,10 @@
+Clock
+intervals: 0.1
+
 Grid
-width: 70
-height: 70
-grassProbability: 0.3
+width: 30
+height: 30
+grassProbability: 0.4
 GenTypeRandom: true
 
 CarnivoreAnimal
@@ -31,3 +34,8 @@ regrowCooldown: 10
 
 Meat
 energyValue: 1
+decomposingRate: 2
+
+SimulationManager
+maxTurns: 200
+renderGame: true

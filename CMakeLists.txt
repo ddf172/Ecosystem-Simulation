@@ -78,6 +78,8 @@ add_library(Ecosystem_Simulation_lib
         Utilities/FileHandling/SettingsCSVReader.h
         Utilities/StatisticsManager.cpp
         Utilities/StatisticsManager.h
+        Simulation/Spawners/Spawner.cpp
+        Simulation/Spawners/Spawner.h
 )
 
 # Link SFML to the library

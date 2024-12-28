@@ -8,10 +8,14 @@
 
 
 class MeatResource: public Resource  {
+private:
+    int decomposingRate;
 
 public:
     MeatResource(int amount);
     MeatResource(int amount, int energyValue);
+    void decompose();
+    int getDecomposingRate();
     ~MeatResource() override = default;
 };
 
