@@ -27,6 +27,6 @@ After specified number of turns the simulation ends and statistics are written t
 
 ### Creators
 - Jakub Adamski 160291
-- Piotr Franc ehm 160306
+- Piotr Franc 160306
 - Piotr Foltyniewicz 160295
 
