@@ -4,8 +4,7 @@
 #include "Action.h"
 
 
-class ActionNone : Action{
-
+class ActionNone : public Action{
 public:
     ActionNone();
     ~ActionNone() override;

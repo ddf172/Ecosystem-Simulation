@@ -1,3 +1,6 @@
+//
+// Created by Piotrek on 29.12.2024.
+//
 #ifndef SPAWNER_H
 #define SPAWNER_H
 

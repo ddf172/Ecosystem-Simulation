@@ -13,7 +13,7 @@ private:
 public:
     ActionEat(int number, ResourceType resourceType);
     int getAmount() const;
-    ResourceType getResourceType();
+    ResourceType getResourceType() const;
 };
 
 

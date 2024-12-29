@@ -42,5 +42,5 @@ std::shared_ptr<Action> EatActionChooserDefault::chooseAction(Animal* animal) {
 }
 
 void EatActionChooserDefault::setCurrentTile(std::shared_ptr<Tile>& newCurrentTile) {
-    currentTile = newCurrentTile;
+    this->currentTile = newCurrentTile;
 }

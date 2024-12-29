@@ -4,6 +4,6 @@ Action::Action(ActionType type) {
     this->type = type;
 }
 
-ActionType Action::getType() {
+ActionType Action::getType() const {
     return this->type;
 }
