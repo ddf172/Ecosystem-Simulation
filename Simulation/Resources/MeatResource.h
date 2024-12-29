@@ -1,7 +1,3 @@
-//
-// Created by Piotrek on 11.12.2024.
-//
-
 #ifndef MEATRESOURCE_H
 #define MEATRESOURCE_H
 #include "Resource.h"

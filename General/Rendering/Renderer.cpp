@@ -1,7 +1,3 @@
-//
-// Created by Piotrek on 08.12.2024.
-//
-
 #include "Renderer.h"
 #include <random>
 #include <iostream>

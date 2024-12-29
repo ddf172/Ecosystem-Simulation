@@ -1,7 +1,3 @@
-//
-// Created by ddf on 18.12.2024.
-//
-
 #include "ActionAttack.h"
 
 ActionAttack::ActionAttack(int x, int y, int damage, std::shared_ptr<Animal> targetAnimal) : ActionMove(x, y) {

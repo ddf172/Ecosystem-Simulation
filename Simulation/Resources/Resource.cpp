@@ -1,7 +1,3 @@
-//
-// Created by Piotrek on 29.10.2024.
-//
-
 #include "Resource.h"
 
 Resource::Resource(ResourceType type, int amount, int energyValue) {

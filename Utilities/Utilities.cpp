@@ -1,6 +1,3 @@
-//
-// Created by jakub on 17.11.2024.
-//
 #include "Utilities.h"
 
 bool canReach(int x1, int y1, int x2, int y2, int numberOfMoves) {

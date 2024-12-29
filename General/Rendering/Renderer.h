@@ -1,7 +1,3 @@
-//
-// Created by Piotrek on 08.12.2024.
-//
-
 #ifndef RENDERER_H
 #define RENDERER_H
 

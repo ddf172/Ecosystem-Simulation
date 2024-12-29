@@ -1,7 +1,3 @@
-//
-// Created by jakub on 17.11.2024.
-//
-
 #ifndef ECOSYSTEM_SIMULATION_ACTIONMOVE_H
 #define ECOSYSTEM_SIMULATION_ACTIONMOVE_H
 
