@@ -37,7 +37,7 @@ energyValue: 1
 decomposingRate: 2
 
 SimulationManager
-maxTurns: 200
+maxTurns: 1000
 renderGame: true
 
 Spawner
