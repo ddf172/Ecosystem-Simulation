@@ -13,6 +13,6 @@ int ActionEat::getAmount() const {
     return this->amount;
 }
 
-ResourceType ActionEat::getResourceType() {
+ResourceType ActionEat::getResourceType() const {
     return this->resourceType;
 }

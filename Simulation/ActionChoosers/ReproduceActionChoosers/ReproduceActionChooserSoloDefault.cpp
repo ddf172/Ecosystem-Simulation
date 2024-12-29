@@ -19,5 +19,5 @@ std::shared_ptr<Action> ReproduceActionChooserSoloDefault::chooseAction(Animal* 
 }
 
 void ReproduceActionChooserSoloDefault::setCurrentTile(std::shared_ptr<Tile>& newCurrentTile) {
-    currentTile = newCurrentTile;
+    this->currentTile = newCurrentTile;
 }

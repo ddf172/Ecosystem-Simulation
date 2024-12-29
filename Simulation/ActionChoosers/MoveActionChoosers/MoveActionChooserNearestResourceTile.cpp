@@ -30,7 +30,7 @@ std::shared_ptr<Action> MoveActionChooserNearestResourceTile::chooseAction(Anima
 }
 
 void MoveActionChooserNearestResourceTile::setTilesWithResources(std::vector<std::shared_ptr<Tile>>& newTilesWithResources) {
-    tilesWithResources = newTilesWithResources;
+    this->tilesWithResources = newTilesWithResources;
 }
 
 MoveActionChooserNearestResourceTile::~MoveActionChooserNearestResourceTile() = default;

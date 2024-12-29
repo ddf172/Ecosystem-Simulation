@@ -14,7 +14,7 @@ protected:
 public:
     Action(ActionType type);
     virtual ~Action() = default;
-    ActionType getType();
+    ActionType getType() const;
 };
 
 
