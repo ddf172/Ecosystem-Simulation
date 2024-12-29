@@ -1,6 +1,3 @@
-//
-// Created by Piotr on 19.12.2024.
-//
 #include <gtest/gtest.h>
 #include "Utilities/MergingContainer.h"
 #include "Simulation/Resources/GrassResource.h"

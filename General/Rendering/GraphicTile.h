@@ -1,7 +1,3 @@
-//
-// Created by Piotrek on 09.12.2024.
-//
-
 #ifndef GRAPHICTILE_H
 #define GRAPHICTILE_H
 

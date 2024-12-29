@@ -1,7 +1,3 @@
-//
-// Created by Piotrek on 09.12.2024.
-//
-
 #include "GraphicTile.h"
 GraphicTile::GraphicTile(const std::shared_ptr<Tile>& tile, sf::RenderWindow *window, float tileSize) {
     this->tile = tile;

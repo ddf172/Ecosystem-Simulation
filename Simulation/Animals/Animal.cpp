@@ -1,7 +1,3 @@
-//
-// Created by Piotrek on 29.10.2024.
-//
-
 #include "Animal.h"
 
 Animal::Animal(int id, int startX, int startY, int speed, int currentEnergy, int maxEnergy,

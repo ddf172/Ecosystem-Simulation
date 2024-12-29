@@ -1,7 +1,3 @@
-//
-// Created by ddf on 20.12.2024.
-//
-
 #include "CarnivoreAnimal.h"
 #include "Utilities/FileHandling/SettingsCSVReader.h"
 

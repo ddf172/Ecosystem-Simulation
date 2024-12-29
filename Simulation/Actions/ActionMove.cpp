@@ -1,7 +1,3 @@
-//
-// Created by jakub on 17.11.2024.
-//
-
 #include "ActionMove.h"
 
 ActionMove::ActionMove(int x, int y) : Action(MOVE) {

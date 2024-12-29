@@ -1,7 +1,3 @@
-//
-// Created by ddf on 11.12.2024.
-//
-
 #include "DieActionChooserDefault.h"
 
 std::shared_ptr<Action> DieActionChooserDefault::chooseAction(Animal* animal) {

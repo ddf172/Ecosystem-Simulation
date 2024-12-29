@@ -1,7 +1,3 @@
-//
-// Created by Piotrek on 11.12.2024.
-//
-
 #include "MeatResource.h"
 #include "Utilities/FileHandling/SettingsCSVReader.h"
 #include <climits>

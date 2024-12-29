@@ -1,7 +1,3 @@
-//
-// Created by jakub on 30.11.2024.
-//
-
 #include "ActionDie.h"
 
 ActionDie::ActionDie(int resourceAmount) : Action(ActionType::DIE) {

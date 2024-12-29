@@ -1,7 +1,3 @@
-//
-// Created by ddf on 18.12.2024.
-//
-
 #include "AttackActionChooserDefault.h"
 
 #include <utility>
