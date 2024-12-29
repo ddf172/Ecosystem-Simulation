@@ -16,7 +16,7 @@ Simulation is based on a grid map with turn based movement.
 
 ### Statistics
 After specified number of turns the simulation ends and statistics are written to the statistics.csv file
-##### Plot we have generated with acquired data
+### Plot we have generated with acquired data
 ![statistics_plot](https://github.com/user-attachments/assets/e7335ee5-30f4-4f23-a5c7-cea5942cb57c)
 
 
